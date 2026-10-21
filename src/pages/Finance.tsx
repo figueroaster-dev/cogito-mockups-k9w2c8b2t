@@ -83,21 +83,6 @@ export default function Finance() {
         </span>
       </div>
 
-      {/* Target feeling banner */}
-      <div className="bg-white/80 border border-blue-100 p-3.5 rounded-xl flex items-center justify-between text-xs text-blue-900">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-blue-600" />
-          <span className="font-semibold text-[#0E1B3D]">Sensação Cogito:</span>
-          <span className="text-gray-700 italic">
-            &quot;Não preciso montar relatório nem navegar por várias telas para entender o que está
-            acontecendo.&quot;
-          </span>
-        </div>
-        <span className="text-[11px] font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 hidden md:inline">
-          Ambiente demonstrativo
-        </span>
-      </div>
-
       {/* ========================================================= */}
       {/* 1. CAIXA PRINCIPAL DE CONSULTA (Wide prompt + 6 Suggestions) */}
       {/* ========================================================= */}
@@ -252,7 +237,7 @@ export default function Finance() {
         {/* Card 3: 7,8% */}
         <div className="bg-white rounded-2xl p-5 border border-gray-200 border-l-4 border-l-[#F59E0B] shadow-subtle hover:shadow-elevation transition-all hover:-translate-y-0.5">
           <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-            <span className="font-semibold text-amber-600">Taxa Relativa</span>
+            <span className="font-semibold text-amber-600">Taxa de inadimplência</span>
             <TrendingUp className="w-4 h-4 text-amber-600" />
           </div>
           <div className="text-2xl sm:text-3xl font-extrabold text-[#0E1B3D] tabular-nums tracking-tight">
@@ -392,8 +377,8 @@ export default function Finance() {
 
           <div className="pt-2">
             <span className="text-[11px] text-amber-800 font-medium">
-              Recomendação demonstrativa Cogito: disparar régua preventiva de cobrança via WhatsApp
-              antes do 15º dia.
+              Recomendação demonstrativa Cogito: priorizar uma ação de cobrança para associados
+              nesta faixa de atraso.
             </span>
           </div>
         </div>
@@ -429,7 +414,7 @@ export default function Finance() {
               title="Ação demonstrativa"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0E1B3D] text-white text-xs sm:text-sm font-semibold hover:bg-purple-700 transition-colors shadow-sm"
             >
-              <span>Analisar contratos (demonstrativo)</span>
+              <span>Analisar contratos</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>

@@ -129,7 +129,7 @@ export default function Sales() {
         <div>
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-[#EF4444] border border-rose-200">
-              17 Prioridades Críticas
+              17 oportunidades priorizadas
             </span>
             <span className="text-xs text-gray-400">Proteção Veicular & Frotas</span>
           </div>
@@ -155,7 +155,7 @@ export default function Sales() {
             className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0E1B3D] text-white text-xs sm:text-sm font-semibold hover:bg-blue-600 active:scale-95 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-75"
           >
             <RefreshCw className={cn('w-4 h-4', isUpdating && 'animate-spin')} />
-            <span>{isUpdating ? 'Atualizando...' : 'Atualizar análise (demonstrativo)'}</span>
+            <span>{isUpdating ? 'Atualizando...' : 'Atualizar análise'}</span>
           </button>
         </div>
       </div>

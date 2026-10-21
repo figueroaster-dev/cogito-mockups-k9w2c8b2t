@@ -35,8 +35,8 @@ export default function Help() {
   const steps = [
     {
       num: 1,
-      title: 'Acesse Associados > Novo Cadastro',
-      desc: 'Exemplo ilustrativo: no menu principal do CRM/ERP I3Tech, localize o módulo de Associados e selecione novo cadastro.',
+      title: 'Acesse o módulo de Associados e inicie um novo cadastro',
+      desc: 'Exemplo ilustrativo de início do fluxo de cadastro no CRM/ERP I3Tech.',
     },
     {
       num: 2,
@@ -99,20 +99,6 @@ export default function Help() {
         </span>
       </div>
 
-      {/* Target feeling banner */}
-      <div className="bg-white/80 border border-purple-100 p-3.5 rounded-xl flex items-center justify-between text-xs text-purple-950">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-[#8B5CF6]" />
-          <span className="font-semibold text-[#0E1B3D]">Sensação Cogito:</span>
-          <span className="text-gray-700 italic">
-            &quot;Não preciso pedir ajuda para outra pessoa nem procurar manual.&quot;
-          </span>
-        </div>
-        <span className="text-[11px] font-semibold text-[#8B5CF6] bg-purple-50 px-2 py-0.5 rounded border border-purple-100 hidden md:inline">
-          Ambiente demonstrativo
-        </span>
-      </div>
-
       {/* ========================================================= */}
       {/* 1. DIFERENCIAL CONTEXTUAL (Aviso com ícone de pin/localização) */}
       {/* ========================================================= */}
@@ -140,9 +126,7 @@ export default function Help() {
           }
           className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-blue-200 text-blue-700 text-xs font-semibold hover:bg-blue-50 transition-colors shrink-0 shadow-xs"
         >
-          <span>
-            Precisa de ajuda para cadastrar ou validar dados de associado? (demonstrativo)
-          </span>
+          <span>Precisa de ajuda para cadastrar ou validar dados de associado?</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </section>
@@ -222,7 +206,7 @@ export default function Help() {
                 className="px-4 py-2.5 rounded-xl bg-[#0E1B3D] text-white text-xs sm:text-sm font-semibold hover:bg-blue-600 transition-colors shadow-sm flex items-center gap-1.5"
               >
                 <UserPlus className="w-4 h-4" />
-                <span>Abrir cadastro de associado (demonstrativo)</span>
+                <span>Abrir cadastro de associado</span>
               </button>
 
               <button
@@ -232,7 +216,7 @@ export default function Help() {
                 className="px-4 py-2.5 rounded-xl bg-white border border-gray-300 text-gray-700 text-xs sm:text-sm font-semibold hover:bg-gray-50 transition-colors flex items-center gap-1.5"
               >
                 <BookOpen className="w-4 h-4 text-gray-500" />
-                <span>Ver passo a passo completo (demonstrativo)</span>
+                <span>Ver passo a passo completo</span>
               </button>
 
               <button

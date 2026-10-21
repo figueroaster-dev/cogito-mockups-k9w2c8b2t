@@ -60,7 +60,7 @@ export default function Layout() {
         return {
           title: 'Cogito',
           subtitle: 'Inteligência integrada ao CRM e ERP da I3Tech',
-          tag: 'Camada de IA Ativa',
+          tag: 'Inteligência para CRM & ERP',
         }
     }
   }

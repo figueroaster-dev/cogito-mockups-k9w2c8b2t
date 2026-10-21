@@ -271,7 +271,7 @@ export default function Index() {
                   </div>
                 </div>
                 <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  87% Autonomia (ilustrativa)
+                  87% resolvidas sem escalonamento (ilustrativo)
                 </span>
               </div>
 
@@ -280,7 +280,7 @@ export default function Index() {
                   26 dúvidas respondidas (exemplo)
                 </p>
                 <p className="text-sm font-semibold text-emerald-600">
-                  87% de autonomia estimada (dados ilustrativos)
+                  87% resolvidas sem escalonamento (ilustrativo)
                 </p>
               </div>
 
