@@ -36,7 +36,7 @@ export default function Help() {
     {
       num: 1,
       title: 'Acesse Associados > Novo Cadastro',
-      desc: 'No menu principal do CRM/ERP I3Tech, localize o módulo de Associados e selecione a opção de novo cadastro.',
+      desc: 'Exemplo ilustrativo: no menu principal do CRM/ERP I3Tech, localize o módulo de Associados e selecione novo cadastro.',
     },
     {
       num: 2,
@@ -61,28 +61,44 @@ export default function Help() {
     {
       num: 6,
       title: 'Finalize o cadastro',
-      desc: 'Confirme para gerar o termo de adesão eletrônico e acionar o faturamento inicial no ERP.',
+      desc: 'Confirmação para emissão do termo de adesão eletrônico e acionamento do faturamento no ERP.',
     },
   ]
 
   const handleChipClick = (q: string) => {
     setCurrentQuestion(q)
     setUserQuery(q)
-    toast.success(`Assistente carregou instruções para: "${q}"`)
+    toast.success(`Orientações demonstrativas carregadas para: "${q}"`)
   }
 
   const handleAction = (name: string) => {
-    toast.info(`Ação acionada: ${name}`)
+    toast.info(`${name} (ação demonstrativa do protótipo)`)
   }
 
   const handleFutureChange = () => {
-    toast('Supervisão Humana: esta ação prepara a minuta no ERP e exige sua aprovação final.', {
-      description: 'Nenhum dado é modificado sem validação prévia.',
-    })
+    toast(
+      'Supervisão Humana (conceito demonstrativo): esta ação prepararia a minuta no ERP e exigiria aprovação final.',
+      {
+        description: 'Protótipo — nenhum dado é modificado.',
+      },
+    )
   }
 
   return (
     <div className="space-y-8 animate-fade-in">
+      {/* Aviso de Protótipo */}
+      <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs text-blue-900 shadow-xs">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+          <span className="font-semibold text-[#0E1B3D]">
+            Protótipo — dados ilustrativos, sem conexão ativa
+          </span>
+        </div>
+        <span className="text-[11px] font-medium text-blue-700 bg-blue-100/70 px-2 py-0.5 rounded hidden sm:inline">
+          Ambiente demonstrativo
+        </span>
+      </div>
+
       {/* Target feeling banner */}
       <div className="bg-white/80 border border-purple-100 p-3.5 rounded-xl flex items-center justify-between text-xs text-purple-950">
         <div className="flex items-center gap-2">
@@ -93,7 +109,7 @@ export default function Help() {
           </span>
         </div>
         <span className="text-[11px] font-semibold text-[#8B5CF6] bg-purple-50 px-2 py-0.5 rounded border border-purple-100 hidden md:inline">
-          Assistente Contextual I3Tech
+          Ambiente demonstrativo
         </span>
       </div>
 
@@ -107,21 +123,26 @@ export default function Help() {
           </div>
           <div>
             <p className="text-xs sm:text-sm font-semibold text-[#0E1B3D]">
-              Cogito detectou que você está na tela de faturamento.
+              Você está na área de cadastro de associados.
             </p>
             <p className="text-xs text-gray-600 mt-0.5">
-              O assistente acompanha sua localização no sistema para oferecer respostas
-              instantâneas.
+              Exemplo de assistência contextual baseada na tela atual do sistema.
             </p>
           </div>
         </div>
 
         <button
           type="button"
-          onClick={() => handleChipClick('Precisa de ajuda para gerar uma nova cobrança?')}
+          onClick={() =>
+            handleChipClick(
+              'Precisa de ajuda para cadastrar ou validar os dados de um novo associado?',
+            )
+          }
           className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-blue-200 text-blue-700 text-xs font-semibold hover:bg-blue-50 transition-colors shrink-0 shadow-xs"
         >
-          <span>Precisa de ajuda para gerar uma nova cobrança?</span>
+          <span>
+            Precisa de ajuda para cadastrar ou validar dados de associado? (demonstrativo)
+          </span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </section>
@@ -153,10 +174,10 @@ export default function Help() {
                   Passo a Passo Guiado pelo Cogito
                 </span>
                 <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-purple-100 text-[#8B5CF6]">
-                  CRM I3Tech
+                  Exemplo de orientação
                 </span>
               </div>
-              <span className="text-xs text-gray-500">Fluxo Validado</span>
+              <span className="text-xs text-gray-500">Fluxo demonstrativo</span>
             </div>
 
             {/* Numbered Steps */}
@@ -185,9 +206,11 @@ export default function Help() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-purple-50 rounded-xl border border-purple-100 text-xs">
               <div className="flex items-center gap-2 text-purple-900 font-medium">
                 <Clock className="w-4 h-4 text-[#8B5CF6]" />
-                <span>Tempo médio do processo: aproximadamente 3 minutos</span>
+                <span>Tempo estimado (ilustrativo): ~3 min</span>
               </div>
-              <span className="text-[10px] text-gray-400 italic">Dado ilustrativo do mockup.</span>
+              <span className="text-[10px] text-gray-400 italic">
+                Estimativa ilustrativa, sem medição real.
+              </span>
             </div>
 
             {/* Action buttons below response */}
@@ -195,19 +218,21 @@ export default function Help() {
               <button
                 type="button"
                 onClick={() => handleAction('Abrir cadastro de associado')}
+                title="Ação demonstrativa"
                 className="px-4 py-2.5 rounded-xl bg-[#0E1B3D] text-white text-xs sm:text-sm font-semibold hover:bg-blue-600 transition-colors shadow-sm flex items-center gap-1.5"
               >
                 <UserPlus className="w-4 h-4" />
-                <span>Abrir cadastro de associado</span>
+                <span>Abrir cadastro de associado (demonstrativo)</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleAction('Ver passo a passo completo')}
+                title="Ação demonstrativa"
                 className="px-4 py-2.5 rounded-xl bg-white border border-gray-300 text-gray-700 text-xs sm:text-sm font-semibold hover:bg-gray-50 transition-colors flex items-center gap-1.5"
               >
                 <BookOpen className="w-4 h-4 text-gray-500" />
-                <span>Ver passo a passo completo</span>
+                <span>Ver passo a passo completo (demonstrativo)</span>
               </button>
 
               <button

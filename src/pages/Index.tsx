@@ -66,6 +66,19 @@ export default function Index() {
 
   return (
     <div className="space-y-8 animate-fade-in">
+      {/* Aviso de Protótipo */}
+      <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs text-blue-900 shadow-xs">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+          <span className="font-semibold text-[#0E1B3D]">
+            Protótipo — dados ilustrativos, sem conexão ativa
+          </span>
+        </div>
+        <span className="text-[11px] font-medium text-blue-700 bg-blue-100/70 px-2 py-0.5 rounded hidden sm:inline">
+          Ambiente demonstrativo
+        </span>
+      </div>
+
       {/* ========================================================= */}
       {/* 1. GREETING BLOCK & VALUE PIPELINE */}
       {/* ========================================================= */}
@@ -93,7 +106,7 @@ export default function Index() {
             <div className="flex items-center justify-between text-[11px] font-semibold text-[#6B7280] uppercase tracking-wider mb-2">
               <span className="flex items-center gap-1 text-[#0E1B3D]">
                 <Activity className="w-3.5 h-3.5 text-blue-600" />
-                Ciclo Contínuo de IA
+                Ciclo de IA (Demonstração)
               </span>
               <span className="text-[10px] text-gray-400">CRM & ERP I3Tech</span>
             </div>
@@ -132,11 +145,11 @@ export default function Index() {
               O que o Cogito encontrou
             </h2>
             <p className="text-xs sm:text-sm text-[#6B7280]">
-              O Cogito observa CRM e ERP continuamente e mostra onde agir.
+              Exemplos de como o Cogito analisa dados de CRM e ERP para orientar decisões.
             </p>
           </div>
           <span className="text-xs text-gray-400 hidden sm:inline-flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5" /> Atualizado há 12 min
+            <Clock className="w-3.5 h-3.5" /> Dados ilustrativos
           </span>
         </div>
 
@@ -167,7 +180,7 @@ export default function Index() {
                   17 oportunidades precisam de atenção
                 </p>
                 <p className="text-sm font-semibold text-blue-600">
-                  R$ 248.600 em potencial comercial
+                  R$ 248.600 em potencial comercial (exemplo)
                 </p>
               </div>
 
@@ -186,7 +199,7 @@ export default function Index() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <p className="text-[11px] text-center text-gray-400">
-                Dados ilustrativos para demonstração.
+                Protótipo — dados ilustrativos, sem conexão ativa
               </p>
             </div>
           </div>
@@ -214,10 +227,10 @@ export default function Index() {
 
               <div className="space-y-1 my-3">
                 <p className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight">
-                  Inadimplência aumentou para 7,8%
+                  Inadimplência de 7,8% (ilustrativa)
                 </p>
                 <p className="text-sm font-semibold text-rose-600">
-                  R$ 184 mil em cobranças vencidas
+                  R$ 184 mil em cobranças vencidas (exemplo)
                 </p>
               </div>
 
@@ -258,16 +271,16 @@ export default function Index() {
                   </div>
                 </div>
                 <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  87% Autonomia
+                  87% Autonomia (ilustrativa)
                 </span>
               </div>
 
               <div className="space-y-1 my-3">
                 <p className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight">
-                  26 dúvidas respondidas hoje
+                  26 dúvidas respondidas (exemplo)
                 </p>
                 <p className="text-sm font-semibold text-emerald-600">
-                  87% resolvidas sem necessidade de suporte humano
+                  87% de autonomia estimada (dados ilustrativos)
                 </p>
               </div>
 
@@ -305,11 +318,13 @@ export default function Index() {
             <div>
               <h2 className="text-base sm:text-lg font-bold text-[#0E1B3D]">Insights para você</h2>
               <p className="text-xs text-[#6B7280]">
-                Prioridades identificadas cruzando CRM e ERP da I3Tech
+                Exemplos demonstrativos de prioridades identificadas a partir de dados de CRM e ERP
               </p>
             </div>
           </div>
-          <span className="text-[11px] text-gray-400 hidden sm:inline">3 recomendações ativas</span>
+          <span className="text-[11px] text-gray-400 hidden sm:inline">
+            3 recomendações demonstrativas
+          </span>
         </div>
 
         <div className="divide-y divide-gray-100">

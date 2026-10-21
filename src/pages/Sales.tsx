@@ -85,7 +85,7 @@ export default function Sales() {
     setIsUpdating(true)
     setTimeout(() => {
       setIsUpdating(false)
-      toast.success('Análise atualizada com sucesso.')
+      toast.success('Simulação de análise atualizada (ambiente demonstrativo).')
     }, 800)
   }
 
@@ -95,7 +95,7 @@ export default function Sales() {
   }
 
   const handleActionClick = (actionName: string) => {
-    toast.success(`${actionName} iniciada com sucesso.`)
+    toast.info(`${actionName} (ação demonstrativa — não altera registros no CRM)`)
   }
 
   const handleUseMessage = () => {
@@ -103,12 +103,25 @@ export default function Sales() {
     navigator.clipboard?.writeText(
       'Olá, Carlos! Tudo bem? Vi que encaminhamos sua proposta há alguns dias e gostaria de saber se conseguiu analisá-la. Posso ajudar com alguma dúvida ou verificar alguma condição para avançarmos?',
     )
-    toast.success('Mensagem copiada para a área de transferência!')
+    toast.success('Mensagem copiada! (ação demonstrativa — nenhum envio real realizado)')
     setTimeout(() => setCopiedMessage(false), 2000)
   }
 
   return (
     <div className="space-y-8 animate-fade-in relative">
+      {/* Aviso de Protótipo */}
+      <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs text-blue-900 shadow-xs">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+          <span className="font-semibold text-[#0E1B3D]">
+            Protótipo — dados ilustrativos, sem conexão ativa
+          </span>
+        </div>
+        <span className="text-[11px] font-medium text-blue-700 bg-blue-100/70 px-2 py-0.5 rounded hidden sm:inline">
+          Ambiente demonstrativo
+        </span>
+      </div>
+
       {/* ========================================================= */}
       {/* 1. HEADER CONTROLS (Period selector & Atualizar análise) */}
       {/* ========================================================= */}
@@ -129,7 +142,7 @@ export default function Sales() {
           {/* Period selector */}
           <div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-gray-300 text-xs sm:text-sm font-medium text-gray-700 shadow-sm cursor-pointer hover:bg-gray-50">
             <Calendar className="w-4 h-4 text-gray-500" />
-            <span>Hoje</span>
+            <span>Hoje (demonstrativo)</span>
             <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
           </div>
 
@@ -138,10 +151,11 @@ export default function Sales() {
             type="button"
             onClick={handleRefresh}
             disabled={isUpdating}
+            title="Ação demonstrativa — não altera registros"
             className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0E1B3D] text-white text-xs sm:text-sm font-semibold hover:bg-blue-600 active:scale-95 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-75"
           >
             <RefreshCw className={cn('w-4 h-4', isUpdating && 'animate-spin')} />
-            <span>{isUpdating ? 'Atualizando...' : 'Atualizar análise'}</span>
+            <span>{isUpdating ? 'Atualizando...' : 'Atualizar análise (demonstrativo)'}</span>
           </button>
         </div>
       </div>
@@ -210,8 +224,7 @@ export default function Sales() {
             <Sparkles className="w-4 h-4" />
           </div>
           <p className="text-xs sm:text-sm font-medium leading-relaxed">
-            <strong className="font-bold text-blue-950">Cogito identificou 17 oportunidades</strong>{' '}
-            em que uma ação comercial hoje pode aumentar a chance de conversão.
+            O Cogito identificou 17 oportunidades que merecem atenção.
           </p>
         </div>
       </section>
@@ -226,11 +239,11 @@ export default function Sales() {
               Prioridades recomendadas pelo Cogito
             </h3>
             <span className="text-xs text-gray-400">
-              Clique em uma linha para abrir a análise de IA
+              Exemplo demonstrativo — clique em uma linha para abrir a análise de IA
             </span>
           </div>
           <p className="text-xs text-[#6B7280] mt-0.5">
-            O Cogito analisa automaticamente a inércia do funil e sugere a melhor abordagem de
+            Exemplo ilustrativo de como o Cogito analisa a inércia do funil e sugere a abordagem de
             contato.
           </p>
         </div>
@@ -562,23 +575,25 @@ export default function Sales() {
                     <button
                       type="button"
                       onClick={() => handleActionClick('Geração de mensagem')}
+                      title="Demonstrativo: não altera dados nem envia mensagens"
                       className="px-3.5 py-2 rounded-lg bg-[#0E1B3D] text-white text-xs font-semibold hover:bg-blue-600 transition-colors shadow-sm"
                     >
-                      Gerar mensagem
+                      Gerar mensagem (demonstrativo)
                     </button>
                     <button
                       type="button"
                       onClick={() => handleActionClick('Criação de tarefa')}
+                      title="Demonstrativo: não altera dados nem cria registros no CRM"
                       className="px-3.5 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 text-xs font-semibold hover:bg-gray-50 transition-colors"
                     >
-                      Criar tarefa
+                      Criar tarefa (demonstrativo)
                     </button>
                     <button
                       type="button"
                       onClick={() => handleActionClick('Histórico da oportunidade')}
                       className="px-3.5 py-2 rounded-lg text-gray-600 hover:text-gray-900 text-xs font-medium hover:bg-gray-100 transition-colors"
                     >
-                      Ver histórico
+                      Ver histórico (demonstrativo)
                     </button>
                   </div>
                 </div>
@@ -602,6 +617,7 @@ export default function Sales() {
                     <button
                       type="button"
                       onClick={handleUseMessage}
+                      title="Demonstrativo: copia o texto, não envia mensagem real"
                       className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors shadow-sm"
                     >
                       {copiedMessage ? (
@@ -609,21 +625,21 @@ export default function Sales() {
                       ) : (
                         <MessageSquare className="w-3.5 h-3.5" />
                       )}
-                      <span>{copiedMessage ? 'Copiado!' : 'Usar mensagem'}</span>
+                      <span>{copiedMessage ? 'Copiado!' : 'Usar mensagem (demonstrativo)'}</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => handleActionClick('Edição de mensagem')}
                       className="px-3.5 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 text-xs font-semibold hover:bg-gray-50 transition-colors"
                     >
-                      Editar
+                      Editar (demonstrativo)
                     </button>
                     <button
                       type="button"
                       onClick={() => handleActionClick('Nova abordagem sugerida')}
                       className="px-3.5 py-2 rounded-lg text-gray-600 hover:text-gray-900 text-xs font-medium hover:bg-gray-100 transition-colors"
                     >
-                      Gerar outra abordagem
+                      Gerar outra abordagem (demonstrativo)
                     </button>
                   </div>
                 </div>
@@ -631,7 +647,7 @@ export default function Sales() {
 
               {/* Panel Footer */}
               <div className="p-4 border-t border-gray-200 bg-gray-50 flex items-center justify-between text-xs text-gray-500">
-                <span>Origem: CRM I3Tech</span>
+                <span>Origem: CRM I3Tech (dados ilustrativos)</span>
                 <button
                   type="button"
                   onClick={() => setDetailOpen(false)}

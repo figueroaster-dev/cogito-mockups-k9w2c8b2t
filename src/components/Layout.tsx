@@ -181,10 +181,10 @@ export default function Layout() {
               <div className="mt-6 p-3 rounded-lg bg-white/5 border border-white/10 text-xs text-gray-300 space-y-1">
                 <div className="flex items-center gap-1.5 text-blue-300 font-medium">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>Ambiente Ativo</span>
+                  <span>Ambiente demonstrativo</span>
                 </div>
                 <p className="text-[11px] text-gray-400 leading-relaxed">
-                  Conectado à Proteção Veicular I3Tech (Associações).
+                  Dados ilustrativos para associações e proteção veicular.
                 </p>
               </div>
             </div>
@@ -296,11 +296,11 @@ export default function Layout() {
           {/* Subtle ERP/CRM badge */}
           <div className="hidden lg:block p-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-xs">
             <div className="flex items-center gap-1.5 text-blue-300 font-medium mb-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Conexão I3Tech Ativa</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+              <span>Ambiente demonstrativo</span>
             </div>
             <p className="text-[11px] text-gray-400 leading-snug">
-              Monitorando CRM & ERP em tempo real para proteção veicular.
+              Dados ilustrativos para CRM & ERP de proteção veicular.
             </p>
           </div>
 
@@ -390,11 +390,11 @@ export default function Layout() {
         <footer className="border-t border-[#E5E7EB] bg-white py-4 px-4 sm:px-6 text-center text-xs text-[#6B7280]">
           <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
             <div className="flex items-center gap-2 text-gray-500">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" />
-              <span>Cogito Mockups — Camada de IA integrada ao CRM e ERP da I3Tech</span>
+              <span className="inline-block w-2 h-2 rounded-full bg-blue-500" />
+              <span>Cogito Mockups — Protótipo de camada de IA para CRM e ERP da I3Tech</span>
             </div>
             <p className="text-[11px] text-gray-400">
-              Dados ilustrativos para demonstração de produto para associações e proteção veicular.
+              Protótipo — dados ilustrativos, sem conexão ativa.
             </p>
           </div>
         </footer>

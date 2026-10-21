@@ -44,18 +44,18 @@ export default function Finance() {
   const handleSuggestionClick = (text: string) => {
     setActiveQuestion(text)
     setQueryInput(text)
-    toast.success(`Análise carregada para: "${text}"`)
+    toast.success(`Simulação carregada para: "${text}"`)
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!queryInput.trim()) return
     setActiveQuestion(queryInput)
-    toast.success(`Cogito consolidou os números para: "${queryInput}"`)
+    toast.success(`Simulação demonstrativa para: "${queryInput}"`)
   }
 
   const handleAnalyseContracts = () => {
-    toast.info('Abrindo visualizador de auditoria dos 12 contratos sem cobrança...')
+    toast.info('Visualização demonstrativa dos 12 contratos de exemplo...')
   }
 
   // Monthly data for vertical bar chart
@@ -70,6 +70,19 @@ export default function Finance() {
 
   return (
     <div className="space-y-8 animate-fade-in">
+      {/* Aviso de Protótipo */}
+      <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs text-blue-900 shadow-xs">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+          <span className="font-semibold text-[#0E1B3D]">
+            Protótipo — dados ilustrativos, sem conexão ativa
+          </span>
+        </div>
+        <span className="text-[11px] font-medium text-blue-700 bg-blue-100/70 px-2 py-0.5 rounded hidden sm:inline">
+          Ambiente demonstrativo
+        </span>
+      </div>
+
       {/* Target feeling banner */}
       <div className="bg-white/80 border border-blue-100 p-3.5 rounded-xl flex items-center justify-between text-xs text-blue-900">
         <div className="flex items-center gap-2">
@@ -81,7 +94,7 @@ export default function Finance() {
           </span>
         </div>
         <span className="text-[11px] font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 hidden md:inline">
-          ERP I3Tech Sincronizado
+          Ambiente demonstrativo
         </span>
       </div>
 
@@ -98,8 +111,8 @@ export default function Finance() {
               Consulta Financeira Inteligente
             </h2>
             <p className="text-xs text-[#6B7280]">
-              Pergunte qualquer métrica sobre arrecadação, fluxo, títulos ou inadimplência da sua
-              associação.
+              Exemplo de consulta sobre arrecadação, fluxo, títulos ou inadimplência com dados
+              ilustrativos.
             </p>
           </div>
         </div>
@@ -176,30 +189,30 @@ export default function Finance() {
               <div className="flex items-center gap-2">
                 <span className="font-bold text-sm text-[#0E1B3D]">Resposta Cogito</span>
                 <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-blue-100 text-blue-700">
-                  Consolidação I3Tech ERP
+                  Exemplo demonstrativo
                 </span>
               </div>
-              <span className="text-[11px] text-gray-500">Hoje, 14:32</span>
+              <span className="text-[11px] text-gray-500">Simulação ilustrativa</span>
             </div>
 
             {/* Answer Content */}
             <div className="space-y-2 text-sm sm:text-base text-gray-800 leading-relaxed">
               <p className="font-semibold text-gray-900">
                 A inadimplência de setembro foi de{' '}
-                <strong className="text-[#EF4444] font-bold">7,8%</strong>, equivalente a{' '}
-                <strong className="text-gray-900 font-bold">R$ 184.320</strong> em cobranças
-                vencidas.
+                <strong className="text-[#EF4444] font-bold">7,8%</strong> (taxa demonstrativa),
+                equivalente a <strong className="text-gray-900 font-bold">R$ 184.320</strong> em
+                cobranças vencidas (dados ilustrativos).
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs sm:text-sm">
                 <div className="p-3 bg-white rounded-lg border border-gray-200 flex items-center justify-between">
                   <span className="text-gray-600">Em agosto, a inadimplência foi de:</span>
-                  <strong className="text-gray-900 font-bold">6,9%</strong>
+                  <strong className="text-gray-900 font-bold">6,9% (exemplo)</strong>
                 </div>
                 <div className="p-3 bg-white rounded-lg border border-gray-200 flex items-center justify-between">
                   <span className="text-gray-600">Variação no período:</span>
                   <span className="inline-flex items-center gap-1 font-bold text-rose-600">
                     <ArrowUpRight className="w-4 h-4" />
-                    +0,9 ponto percentual
+                    +0,9 ponto percentual (ilustrativo)
                   </span>
                 </div>
               </div>
@@ -221,7 +234,7 @@ export default function Finance() {
           <div className="text-2xl sm:text-3xl font-extrabold text-[#0E1B3D] tabular-nums tracking-tight">
             R$ 2,36 mi
           </div>
-          <p className="text-xs text-gray-600 mt-1 font-medium">Arrecadação no período</p>
+          <p className="text-xs text-gray-600 mt-1 font-medium">Arrecadação no período (exemplo)</p>
         </div>
 
         {/* Card 2: R$ 184 mil */}
@@ -233,7 +246,7 @@ export default function Finance() {
           <div className="text-2xl sm:text-3xl font-extrabold text-[#EF4444] tabular-nums tracking-tight">
             R$ 184 mil
           </div>
-          <p className="text-xs text-gray-600 mt-1 font-medium">Valor inadimplente</p>
+          <p className="text-xs text-gray-600 mt-1 font-medium">Valor inadimplente (ilustrativo)</p>
         </div>
 
         {/* Card 3: 7,8% */}
@@ -245,7 +258,7 @@ export default function Finance() {
           <div className="text-2xl sm:text-3xl font-extrabold text-[#0E1B3D] tabular-nums tracking-tight">
             7,8%
           </div>
-          <p className="text-xs text-gray-600 mt-1 font-medium">Taxa de inadimplência</p>
+          <p className="text-xs text-gray-600 mt-1 font-medium">Inadimplência (demonstrativa)</p>
         </div>
 
         {/* Card 4: 1.284 */}
@@ -257,7 +270,7 @@ export default function Finance() {
           <div className="text-2xl sm:text-3xl font-extrabold text-[#0E1B3D] tabular-nums tracking-tight">
             1.284
           </div>
-          <p className="text-xs text-gray-600 mt-1 font-medium">Cobranças vencidas</p>
+          <p className="text-xs text-gray-600 mt-1 font-medium">Cobranças vencidas (exemplo)</p>
         </div>
       </section>
 
@@ -270,11 +283,11 @@ export default function Finance() {
             <div className="flex items-center gap-2">
               <BarChart3 className="w-5 h-5 text-blue-600" />
               <h3 className="text-base sm:text-lg font-bold text-[#0E1B3D]">
-                Evolução da inadimplência — últimos 6 meses
+                Evolução da inadimplência — últimos 6 meses (demonstrativo)
               </h3>
             </div>
             <p className="text-xs text-[#6B7280] mt-0.5">
-              Tendência suave de alta ao longo do semestre com aceleração no último ciclo.
+              Dados ilustrativos de tendência ao longo do semestre com aceleração no último ciclo.
             </p>
           </div>
 
@@ -364,21 +377,23 @@ export default function Finance() {
             <div className="p-1.5 rounded-lg bg-amber-500 text-white">
               <AlertTriangle className="w-4 h-4" />
             </div>
-            <h3 className="font-bold text-base">Atenção</h3>
+            <h3 className="font-bold text-base">Atenção (Alerta Demonstrativo)</h3>
           </div>
 
           <div className="space-y-2 text-xs sm:text-sm text-amber-950 leading-relaxed">
-            <p className="font-semibold">A inadimplência aumentou pelo segundo mês consecutivo.</p>
+            <p className="font-semibold">
+              Exemplo: a inadimplência aumentou pelo segundo mês consecutivo.
+            </p>
             <p className="text-amber-900/90">
-              A maior concentração de valores vencidos está entre associados com atraso entre 6 e 15
-              dias.
+              Maior concentração de valores vencidos ilustrada entre associados com atraso entre 6 e
+              15 dias.
             </p>
           </div>
 
           <div className="pt-2">
             <span className="text-[11px] text-amber-800 font-medium">
-              Recomendação Cogito: disparar régua preventiva de cobrança via WhatsApp antes do 15º
-              dia.
+              Recomendação demonstrativa Cogito: disparar régua preventiva de cobrança via WhatsApp
+              antes do 15º dia.
             </span>
           </div>
         </div>
@@ -390,19 +405,20 @@ export default function Finance() {
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-purple-600" />
                 <h3 className="font-bold text-base text-[#0E1B3D]">
-                  Cogito encontrou uma anomalia
+                  Cogito encontrou uma anomalia (demonstrativo)
                 </h3>
               </div>
               <span className="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
-                Detecção Automática
+                Detecção Demonstrativa
               </span>
             </div>
 
             <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-              12 contratos ativos não apresentaram cobrança gerada neste ciclo.
+              12 contratos de exemplo sem cobrança gerada neste ciclo.
             </p>
             <p className="text-xs text-gray-400 mt-1">
-              Demonstração de que o Finance monitora ativamente sem precisar que o usuário pergunte.
+              Demonstração de como o Cogito pode apontar inconsistências sem necessidade de consulta
+              manual.
             </p>
           </div>
 
@@ -410,9 +426,10 @@ export default function Finance() {
             <button
               type="button"
               onClick={handleAnalyseContracts}
+              title="Ação demonstrativa"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0E1B3D] text-white text-xs sm:text-sm font-semibold hover:bg-purple-700 transition-colors shadow-sm"
             >
-              <span>Analisar contratos</span>
+              <span>Analisar contratos (demonstrativo)</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
