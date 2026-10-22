@@ -125,38 +125,115 @@ export default function Sales() {
       {/* ========================================================= */}
       {/* 1. HEADER CONTROLS (Period selector & Atualizar análise) */}
       {/* ========================================================= */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-gray-200">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-[#EF4444] border border-rose-200">
-              17 oportunidades priorizadas
-            </span>
-            <span className="text-xs text-gray-400">Proteção Veicular & Frotas</span>
+      <div className="space-y-3 pb-4 border-b border-gray-200">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-xs">
+                MVP PRIORITÁRIO
+              </span>
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-[#EF4444] border border-rose-200">
+                17 oportunidades priorizadas
+              </span>
+              <span className="text-xs text-gray-400">Proteção Veicular & Frotas</span>
+            </div>
+            <h1 className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight mt-1">
+              Cogito Sales
+            </h1>
+            <p className="text-xs sm:text-sm text-blue-700 font-semibold mt-0.5">
+              Priorização de oportunidades e próxima melhor ação
+            </p>
+            <p className="text-xs sm:text-sm text-gray-600 mt-1 max-w-2xl leading-relaxed">
+              O Cogito identifica sinais de atenção no funil comercial, organiza as oportunidades
+              por prioridade e sugere o próximo passo para o consultor.
+            </p>
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight mt-1">
-            Oportunidades que precisam de atenção
-          </h2>
+
+          <div className="flex items-center gap-2.5 self-start sm:self-auto shrink-0">
+            {/* Period selector */}
+            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-gray-300 text-xs sm:text-sm font-medium text-gray-700 shadow-sm cursor-pointer hover:bg-gray-50">
+              <Calendar className="w-4 h-4 text-gray-500" />
+              <span>Hoje (demonstrativo)</span>
+              <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+            </div>
+
+            {/* Refresh analysis button */}
+            <button
+              type="button"
+              onClick={handleRefresh}
+              disabled={isUpdating}
+              title="Ação demonstrativa — não altera registros"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0E1B3D] text-white text-xs sm:text-sm font-semibold hover:bg-blue-600 active:scale-95 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-75"
+            >
+              <RefreshCw className={cn('w-4 h-4', isUpdating && 'animate-spin')} />
+              <span>{isUpdating ? 'Atualizando...' : 'Atualizar análise'}</span>
+            </button>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2.5 self-start sm:self-auto">
-          {/* Period selector */}
-          <div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-gray-300 text-xs sm:text-sm font-medium text-gray-700 shadow-sm cursor-pointer hover:bg-gray-50">
-            <Calendar className="w-4 h-4 text-gray-500" />
-            <span>Hoje (demonstrativo)</span>
-            <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+        {/* 1.1 MODELO DO MVP: Regra identifica -> Cogito contextualiza -> IA recomenda -> Consultor decide */}
+        <div className="bg-blue-50/60 border border-blue-200 rounded-xl p-3.5 space-y-1.5">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-blue-900 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+              Como o MVP funciona
+            </span>
+            <span className="text-[10px] text-blue-700 font-medium">Princípio Operacional</span>
           </div>
+          <div className="flex items-center gap-1 sm:gap-2 text-xs font-semibold text-[#0E1B3D] overflow-x-auto pb-1 sm:pb-0">
+            <span className="px-2 py-1 bg-white rounded border border-blue-200 shrink-0">
+              Regra identifica
+            </span>
+            <ArrowRight className="w-3 h-3 text-blue-600 shrink-0" />
+            <span className="px-2 py-1 bg-white rounded border border-blue-200 shrink-0">
+              Cogito contextualiza
+            </span>
+            <ArrowRight className="w-3 h-3 text-blue-600 shrink-0" />
+            <span className="px-2 py-1 bg-blue-600 text-white rounded shrink-0">IA recomenda</span>
+            <ArrowRight className="w-3 h-3 text-blue-600 shrink-0" />
+            <span className="px-2 py-1 bg-emerald-600 text-white rounded shrink-0">
+              Consultor decide
+            </span>
+          </div>
+          <p className="text-[11px] text-gray-600 leading-relaxed pt-0.5">
+            O primeiro MVP combina regras operacionais com IA generativa. O sistema identifica
+            situações objetivas no CRM e utiliza IA para contextualizar e sugerir a ação, sempre com
+            supervisão humana.
+          </p>
+        </div>
 
-          {/* Refresh analysis button */}
-          <button
-            type="button"
-            onClick={handleRefresh}
-            disabled={isUpdating}
-            title="Ação demonstrativa — não altera registros"
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0E1B3D] text-white text-xs sm:text-sm font-semibold hover:bg-blue-600 active:scale-95 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-75"
-          >
-            <RefreshCw className={cn('w-4 h-4', isUpdating && 'animate-spin')} />
-            <span>{isUpdating ? 'Atualizando...' : 'Atualizar análise'}</span>
-          </button>
+        {/* 1.2 LÓGICA VISUAL DO SALES (3 Etapas) */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+          <div className="bg-white p-3 rounded-xl border border-gray-200 space-y-1">
+            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-blue-100 text-blue-800">
+              1 · Detectar
+            </span>
+            <p className="text-xs font-bold text-[#0E1B3D] pt-0.5">Sinais Operacionais</p>
+            <p className="text-[11px] text-gray-500 leading-snug">
+              Propostas sem movimentação, documentação incompleta, assinatura pendente ou ausência
+              de próxima atividade agendada.
+            </p>
+          </div>
+          <div className="bg-white p-3 rounded-xl border border-gray-200 space-y-1">
+            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">
+              2 · Explicar
+            </span>
+            <p className="text-xs font-bold text-[#0E1B3D] pt-0.5">Contexto Transparente</p>
+            <p className="text-[11px] text-gray-500 leading-snug">
+              Explicação objetiva dos motivos da priorização com base no tempo de inércia, valor da
+              oportunidade e histórico do funil.
+            </p>
+          </div>
+          <div className="bg-white p-3 rounded-xl border border-gray-200 space-y-1">
+            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
+              3 · Recomendar
+            </span>
+            <p className="text-xs font-bold text-[#0E1B3D] pt-0.5">Próximo Passo Assistido</p>
+            <p className="text-[11px] text-gray-500 leading-snug">
+              Sugestão de abordagem e geração assistida de mensagem para confirmação e envio pelo
+              consultor comercial.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -224,8 +301,63 @@ export default function Sales() {
             <Sparkles className="w-4 h-4" />
           </div>
           <p className="text-xs sm:text-sm font-medium leading-relaxed">
-            O Cogito identificou 17 oportunidades que merecem atenção.
+            O Cogito identificou 17 oportunidades que merecem atenção com base em sinais
+            operacionais observáveis no CRM.
           </p>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* 2.1 MÉTRICAS DO MVP (Área pequena: Como mediríamos o MVP) */}
+      {/* ========================================================= */}
+      <section className="bg-white rounded-2xl p-5 border border-gray-200 shadow-subtle space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+          <div className="flex items-center gap-2">
+            <TrendingUp className="w-4 h-4 text-blue-600" />
+            <h3 className="text-xs sm:text-sm font-bold text-[#0E1B3D] uppercase tracking-wider">
+              Como mediríamos o MVP
+            </h3>
+          </div>
+          <span className="text-[11px] text-gray-400">
+            Métricas conceituais — definição final dependerá dos dados disponíveis no CRM.
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+          <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
+            <span className="text-[10px] text-gray-500 uppercase font-semibold block">Volume</span>
+            <span className="text-sm sm:text-base font-bold text-[#0E1B3D]">
+              Oportunidades priorizadas
+            </span>
+            <p className="text-[11px] text-gray-500 mt-0.5">
+              Identificadas por sinais operacionais
+            </p>
+          </div>
+          <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
+            <span className="text-[10px] text-gray-500 uppercase font-semibold block">
+              Recuperação
+            </span>
+            <span className="text-sm sm:text-base font-bold text-emerald-700">
+              Oportunidades recuperadas
+            </span>
+            <p className="text-[11px] text-gray-500 mt-0.5">Reativadas após inércia</p>
+          </div>
+          <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
+            <span className="text-[10px] text-gray-500 uppercase font-semibold block">
+              Eficácia
+            </span>
+            <span className="text-sm sm:text-base font-bold text-blue-700">
+              Conversão após recomendação
+            </span>
+            <p className="text-[11px] text-gray-500 mt-0.5">Fechamento pós-ação assistida</p>
+          </div>
+          <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
+            <span className="text-[10px] text-gray-500 uppercase font-semibold block">Tempo</span>
+            <span className="text-sm sm:text-base font-bold text-purple-700">
+              Tempo médio sem interação
+            </span>
+            <p className="text-[11px] text-gray-500 mt-0.5">Redução da inércia no funil</p>
+          </div>
         </div>
       </section>
 
@@ -314,11 +446,17 @@ export default function Sales() {
                   {/* Prioridade */}
                   <td className="py-3.5 px-4">
                     {opp.prioridade === 'Alta' ? (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-[#EF4444]">
+                      <span
+                        className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-[#EF4444]"
+                        title="Prioridade Alta — baseada em sinais operacionais ilustrativos."
+                      >
                         Alta
                       </span>
                     ) : (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-[#F59E0B]">
+                      <span
+                        className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-[#F59E0B]"
+                        title="Prioridade Média — baseada em sinais operacionais ilustrativos."
+                      >
                         Média
                       </span>
                     )}
@@ -397,11 +535,17 @@ export default function Sales() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {opp.prioridade === 'Alta' ? (
-                    <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-[#EF4444]">
+                    <span
+                      className="px-2 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-[#EF4444]"
+                      title="Prioridade Alta — baseada em sinais operacionais ilustrativos."
+                    >
                       Alta
                     </span>
                   ) : (
-                    <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-[#F59E0B]">
+                    <span
+                      className="px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-[#F59E0B]"
+                      title="Prioridade Média — baseada em sinais operacionais ilustrativos."
+                    >
                       Média
                     </span>
                   )}
@@ -558,7 +702,8 @@ export default function Sales() {
                     </span>
                   </div>
                   <p className="text-[11px] text-emerald-700/80 italic">
-                    Classificação operacional — dado ilustrativo do mockup.
+                    Prioridade Alta — baseada em sinais operacionais ilustrativos (tempo parado e
+                    ausência de atividade).
                   </p>
                 </div>
 

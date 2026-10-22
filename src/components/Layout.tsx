@@ -39,27 +39,28 @@ export default function Layout() {
       case '/sales':
         return {
           title: 'Cogito Sales',
-          subtitle:
-            'Sua inteligência comercial para identificar oportunidades, priorizar ações e recuperar vendas.',
-          tag: 'Módulo Comercial',
+          subtitle: 'Priorização de oportunidades e próxima melhor ação',
+          tag: 'MVP PRIORITÁRIO',
         }
       case '/finance':
         return {
           title: 'Cogito Finance',
-          subtitle: 'Pergunte sobre seus números. O Cogito encontra, consolida e explica.',
-          tag: 'Inteligência Financeira',
+          subtitle: 'Consultas financeiras e validação de dados do ERP',
+          tag: 'PRÓXIMA FRENTE',
         }
       case '/help':
         return {
           title: 'Cogito Help',
-          subtitle: 'Seu assistente para utilizar o CRM e ERP da I3Tech.',
-          tag: 'Assistente Operacional',
+          subtitle:
+            'Assistência contextual para orientar usuários em fluxos e funcionalidades do CRM e ERP',
+          tag: 'QUICK WIN / ROADMAP',
         }
       case '/':
       default:
         return {
           title: 'Cogito',
-          subtitle: 'Inteligência integrada ao CRM e ERP da I3Tech',
+          subtitle:
+            'Transformando dados operacionais em prioridades, recomendações e ações assistidas.',
           tag: 'Inteligência para CRM & ERP',
         }
     }

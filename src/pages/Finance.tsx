@@ -26,11 +26,11 @@ export default function Finance() {
   const [activeQuestion, setActiveQuestion] = useState('Qual foi a inadimplência do mês passado?')
 
   const suggestions = [
-    'Qual foi a inadimplência do mês passado?',
     'Quanto recebemos hoje?',
-    'Quais despesas mais cresceram neste trimestre?',
-    'Como está a arrecadação deste mês?',
-    'Quais cobranças precisam de atenção?',
+    'Quanto está em aberto?',
+    'Qual foi a inadimplência do último período?',
+    'Quais cobranças estão vencidas?',
+    'Qual o valor total de cobranças pendentes?',
     'Compare a arrecadação deste mês com o anterior.',
   ]
 
@@ -38,7 +38,7 @@ export default function Finance() {
     'Ver associados com maior valor em atraso',
     'Comparar inadimplência por regional',
     'Analisar recuperação após cobrança',
-    'Projetar arrecadação do próximo mês',
+    'Reconciliar recebimentos com extrato bancário',
   ]
 
   const handleSuggestionClick = (text: string) => {
@@ -84,20 +84,62 @@ export default function Finance() {
       </div>
 
       {/* ========================================================= */}
-      {/* 1. CAIXA PRINCIPAL DE CONSULTA (Wide prompt + 6 Suggestions) */}
+      {/* 1. HEADER & CAIXA PRINCIPAL DE CONSULTA */}
       {/* ========================================================= */}
+      <div className="space-y-2 pb-2 border-b border-gray-200">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+            PRÓXIMA FRENTE
+          </span>
+          <span className="text-xs text-gray-500">Segunda frente de desenvolvimento Cogito</span>
+        </div>
+        <h1 className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight">
+          Cogito Finance
+        </h1>
+        <p className="text-xs sm:text-sm font-semibold text-emerald-800">
+          Consultas financeiras e validação de dados do ERP
+        </p>
+        <p className="text-xs text-emerald-700 bg-emerald-50/70 inline-block px-2.5 py-1 rounded-md border border-emerald-100 font-medium">
+          &quot;O ERP registra os números. O Cogito ajuda a entendê-los.&quot;
+        </p>
+      </div>
+
+      {/* Fluxo estruturado: Pergunta -> Consulta estruturada -> Dados do ERP -> Resposta */}
+      <div className="bg-white rounded-xl p-3.5 border border-gray-200 shadow-xs space-y-1.5">
+        <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-gray-600">
+          <span>Fluxo de Consulta Financeira</span>
+          <span className="text-[10px] text-emerald-700">Reconciliação Direta</span>
+        </div>
+        <div className="flex items-center gap-1 sm:gap-2 text-xs font-medium text-[#0E1B3D] overflow-x-auto pb-1 sm:pb-0">
+          <span className="px-2.5 py-1 bg-gray-50 rounded border border-gray-200 shrink-0">
+            Pergunta do usuário
+          </span>
+          <ChevronRight className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+          <span className="px-2.5 py-1 bg-gray-50 rounded border border-gray-200 shrink-0">
+            Consulta estruturada
+          </span>
+          <ChevronRight className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+          <span className="px-2.5 py-1 bg-emerald-50 text-emerald-800 rounded border border-emerald-200 font-semibold shrink-0">
+            Dados do ERP
+          </span>
+          <ChevronRight className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+          <span className="px-2.5 py-1 bg-blue-50 text-blue-800 rounded border border-blue-200 font-semibold shrink-0">
+            Resposta clara
+          </span>
+        </div>
+      </div>
+
       <section className="bg-white rounded-2xl p-6 sm:p-7 border border-[#E5E7EB] shadow-subtle space-y-4">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
+          <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm">
             <Sparkles className="w-4 h-4" />
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-bold text-[#0E1B3D]">
-              Consulta Financeira Inteligente
+              Consulta Financeira Estruturada
             </h2>
             <p className="text-xs text-[#6B7280]">
-              Exemplo de consulta sobre arrecadação, fluxo, títulos ou inadimplência com dados
-              ilustrativos.
+              Consulte valores, recebimentos, cobranças e dados do ERP em linguagem natural.
             </p>
           </div>
         </div>
@@ -383,27 +425,27 @@ export default function Finance() {
           </div>
         </div>
 
-        {/* Card 2: Proativo — Cogito encontrou uma anomalia */}
+        {/* Card 2: Proativo — Contratos sem cobrança como Evolução futura */}
         <div className="bg-white rounded-2xl p-5 sm:p-6 border border-gray-200 border-l-4 border-l-purple-600 shadow-subtle space-y-3 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-purple-600" />
                 <h3 className="font-bold text-base text-[#0E1B3D]">
-                  Cogito encontrou uma anomalia (demonstrativo)
+                  Contratos sem cobrança (anomalia)
                 </h3>
               </div>
-              <span className="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
-                Detecção Demonstrativa
+              <span className="text-[10px] font-bold uppercase tracking-wider text-purple-800 bg-purple-100 px-2.5 py-0.5 rounded border border-purple-200">
+                Evolução futura
               </span>
             </div>
 
-            <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-              12 contratos de exemplo sem cobrança gerada neste ciclo.
+            <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed">
+              12 contratos ativos identificados sem cobrança gerada neste ciclo.
             </p>
-            <p className="text-xs text-gray-400 mt-1">
-              Demonstração de como o Cogito pode apontar inconsistências sem necessidade de consulta
-              manual.
+            <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
+              Após validar consultas e reconciliação dos dados, o Cogito poderá evoluir para
+              identificação proativa de inconsistências e anomalias financeiras.
             </p>
           </div>
 
@@ -414,12 +456,30 @@ export default function Finance() {
               title="Ação demonstrativa"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0E1B3D] text-white text-xs sm:text-sm font-semibold hover:bg-purple-700 transition-colors shadow-sm"
             >
-              <span>Analisar contratos</span>
+              <span>Ver contratos demonstrativos</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
       </div>
+
+      {/* ========================================================= */}
+      {/* 5.1 NOTA DE ESCOPO / ROADMAP FUTURO */}
+      {/* ========================================================= */}
+      <section className="bg-gray-50 rounded-xl p-4 border border-dashed border-gray-300 text-xs text-gray-600 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div className="space-y-0.5">
+          <span className="font-bold text-gray-800 uppercase tracking-wider text-[10px]">
+            Roadmap futuro — condicionado à disponibilidade e qualidade do histórico de pagamentos.
+          </span>
+          <p className="text-[11px] text-gray-500">
+            Previsão de inadimplência, score preditivo de associados e decisões automatizadas serão
+            avaliados após a consolidação das consultas e validações operacionais com o ERP.
+          </p>
+        </div>
+        <span className="px-2.5 py-1 bg-white rounded border border-gray-200 text-[10px] font-semibold text-gray-600 shrink-0 self-start sm:self-auto">
+          Fora do MVP inicial
+        </span>
+      </section>
 
       {/* ========================================================= */}
       {/* 6. PRÓXIMAS ANÁLISES SUGERIDAS */}

@@ -100,8 +100,26 @@ export default function Help() {
       </div>
 
       {/* ========================================================= */}
-      {/* 1. DIFERENCIAL CONTEXTUAL (Aviso com ícone de pin/localização) */}
+      {/* 1. HEADER & DIFERENCIAL CONTEXTUAL */}
       {/* ========================================================= */}
+      <div className="space-y-2 pb-2 border-b border-gray-200">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-[#8B5CF6] border border-purple-200">
+            QUICK WIN / ROADMAP
+          </span>
+          <span className="text-xs text-gray-500">
+            Assistência contextual e suporte operacional
+          </span>
+        </div>
+        <h1 className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight">Cogito Help</h1>
+        <p className="text-xs sm:text-sm text-purple-700 font-semibold">
+          Assistência contextual para orientar usuários em fluxos e funcionalidades do CRM e ERP
+        </p>
+        <p className="text-xs text-purple-700 bg-purple-50/70 inline-block px-2.5 py-1 rounded-md border border-purple-100 font-medium">
+          &quot;O sistema possui os processos. O Cogito ajuda o usuário a executá-los.&quot;
+        </p>
+      </div>
+
       <section className="bg-gradient-to-r from-blue-50/90 to-purple-50/70 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-subtle">
         <div className="flex items-start sm:items-center gap-3">
           <div className="p-2 rounded-xl bg-blue-600 text-white shrink-0">

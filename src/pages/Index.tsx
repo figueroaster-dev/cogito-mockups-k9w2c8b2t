@@ -91,13 +91,16 @@ export default function Index() {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-3 border border-blue-100/80">
               <Sparkles className="w-3.5 h-3.5 text-blue-600 animate-pulse" />
-              <span>Visão Executiva do Dia</span>
+              <span>Visão Executiva</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-bold text-[#0E1B3D] tracking-tight">
               Boa tarde, Vinicius.
             </h1>
-            <p className="text-base text-[#6B7280] mt-1.5 font-normal">
-              Aqui estão os pontos que merecem atenção hoje.
+            <p className="text-sm sm:text-base text-[#6B7280] mt-1.5 font-normal max-w-xl">
+              Transformando dados operacionais em prioridades, recomendações e ações assistidas.
+            </p>
+            <p className="text-xs text-blue-700 font-medium mt-2 bg-blue-50/80 inline-block px-2.5 py-1 rounded-md border border-blue-100">
+              &quot;O CRM registra o trabalho. O Cogito ajuda a decidir onde agir.&quot;
             </p>
           </div>
 
@@ -106,9 +109,9 @@ export default function Index() {
             <div className="flex items-center justify-between text-[11px] font-semibold text-[#6B7280] uppercase tracking-wider mb-2">
               <span className="flex items-center gap-1 text-[#0E1B3D]">
                 <Activity className="w-3.5 h-3.5 text-blue-600" />
-                Ciclo de IA (Demonstração)
+                Ciclo de Inteligência
               </span>
-              <span className="text-[10px] text-gray-400">CRM & ERP I3Tech</span>
+              <span className="text-[10px] text-gray-400">Supervisão Ativa</span>
             </div>
             <div className="flex items-center gap-1 sm:gap-1.5 text-xs font-medium overflow-x-auto pb-1 sm:pb-0">
               <span className="px-2 py-1 bg-white rounded border border-gray-200 text-gray-700">
@@ -131,6 +134,9 @@ export default function Index() {
                 Ação
               </span>
             </div>
+            <p className="text-[11px] text-[#6B7280] mt-2 pt-2 border-t border-gray-200 leading-snug">
+              No primeiro MVP, decisões e ações permanecem supervisionadas pelo usuário.
+            </p>
           </div>
         </div>
       </section>
@@ -153,49 +159,61 @@ export default function Index() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {/* Card 1: SALES */}
-          <div className="group bg-white rounded-2xl border border-[#E5E7EB] p-6 shadow-subtle hover:shadow-elevation transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between relative overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+          {/* Card 1: SALES (MVP PRIORITÁRIO - Destaque Principal) */}
+          <div className="group bg-white rounded-2xl border-2 border-blue-600 p-6 shadow-elevation hover:shadow-xl transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between relative overflow-hidden ring-4 ring-blue-50">
             {/* Top Accent Band */}
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 to-indigo-600" />
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500" />
 
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 group-hover:scale-105 transition-transform">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
                     <TrendingUp className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-base text-[#0E1B3D]">Sales</h3>
-                    <span className="text-[11px] text-gray-400">Funil & Conversão</span>
+                    <h3 className="font-bold text-lg text-[#0E1B3D]">Cogito Sales</h3>
+                    <span className="text-[11px] text-blue-700 font-semibold">
+                      Priorização & Próxima Ação
+                    </span>
                   </div>
                 </div>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-[#EF4444] border border-rose-100">
-                  Atenção Alta
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-600 text-white shadow-xs tracking-wide">
+                  MVP PRIORITÁRIO
                 </span>
               </div>
 
-              <div className="space-y-1 my-3">
+              <div className="space-y-1.5 my-3">
                 <p className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight">
-                  17 oportunidades precisam de atenção
+                  17 oportunidades priorizadas
                 </p>
-                <p className="text-sm font-semibold text-blue-600">
-                  R$ 248.600 em potencial comercial (exemplo)
-                </p>
+                <p className="text-sm font-bold text-blue-700">R$ 248.600 em potencial comercial</p>
               </div>
 
-              <p className="text-xs text-gray-500 mt-2 leading-relaxed">
-                Propostas sem movimentação recente e contratos prontos aguardando assinatura de
-                associados.
+              <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+                Identifica oportunidades que merecem atenção, explica os sinais encontrados e
+                recomenda a próxima melhor ação para o consultor.
               </p>
+
+              {/* Mini visual summary of indicators */}
+              <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-gray-100 text-[11px] text-gray-600">
+                <div className="bg-blue-50/70 p-2 rounded-lg">
+                  <span className="font-semibold text-blue-900 block">6 propostas</span>
+                  aguardando assinatura
+                </div>
+                <div className="bg-purple-50/70 p-2 rounded-lg">
+                  <span className="font-semibold text-purple-900 block">4 oportunidades</span>
+                  sem interação há 5+ dias
+                </div>
+              </div>
             </div>
 
             <div className="pt-5 mt-4 border-t border-gray-100 space-y-2">
               <Link
                 to="/sales"
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#0E1B3D] text-white text-sm font-semibold hover:bg-blue-600 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <span>Ver oportunidades</span>
+                <span>Explorar MVP Sales</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <p className="text-[11px] text-center text-gray-400">
@@ -204,40 +222,52 @@ export default function Index() {
             </div>
           </div>
 
-          {/* Card 2: FINANCE */}
+          {/* Card 2: FINANCE (PRÓXIMA FRENTE) */}
           <div className="group bg-white rounded-2xl border border-[#E5E7EB] p-6 shadow-subtle hover:shadow-elevation transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between relative overflow-hidden">
             {/* Top Accent Band */}
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 to-rose-500" />
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500" />
 
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 group-hover:scale-105 transition-transform">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-700 group-hover:scale-105 transition-transform">
                     <Landmark className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-base text-[#0E1B3D]">Finance</h3>
-                    <span className="text-[11px] text-gray-400">Cobrança & Inadimplência</span>
+                    <h3 className="font-bold text-base text-[#0E1B3D]">Cogito Finance</h3>
+                    <span className="text-[11px] text-gray-400">Consultas & Reconciliação</span>
                   </div>
                 </div>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
-                  +0,9 p.p.
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  PRÓXIMA FRENTE
                 </span>
               </div>
 
               <div className="space-y-1 my-3">
-                <p className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight">
-                  Inadimplência de 7,8% (ilustrativa)
+                <p className="text-lg sm:text-xl font-bold text-[#0E1B3D] tracking-tight">
+                  Consultas em Linguagem Natural
                 </p>
-                <p className="text-sm font-semibold text-rose-600">
-                  R$ 184 mil em cobranças vencidas (exemplo)
+                <p className="text-xs font-semibold text-emerald-700">
+                  Reconciliação e validação direta de dados do ERP
                 </p>
               </div>
 
               <p className="text-xs text-gray-500 mt-2 leading-relaxed">
-                Concentração em atrasos de 6 a 15 dias. Cogito identificou também 12 contratos sem
-                cobrança gerada.
+                Consultas financeiras em linguagem natural e validação de valores e cobranças com
+                base nos dados do ERP.
               </p>
+
+              {/* Sample queries preview */}
+              <div className="mt-4 pt-3 border-t border-gray-100 space-y-1.5 text-[11px] text-gray-600">
+                <div className="flex items-center gap-1.5 text-gray-700">
+                  <span className="w-1 h-1 rounded-full bg-emerald-500" />
+                  <span>Quanto recebemos hoje?</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-gray-700">
+                  <span className="w-1 h-1 rounded-full bg-emerald-500" />
+                  <span>Quais cobranças estão vencidas?</span>
+                </div>
+              </div>
             </div>
 
             <div className="pt-5 mt-4 border-t border-gray-100 space-y-2">
@@ -245,7 +275,7 @@ export default function Index() {
                 to="/finance"
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#0E1B3D] text-white text-sm font-semibold hover:bg-blue-600 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <span>Ver análise</span>
+                <span>Ver conceito Finance</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <p className="text-[11px] text-center text-gray-400">
@@ -254,7 +284,7 @@ export default function Index() {
             </div>
           </div>
 
-          {/* Card 3: HELP */}
+          {/* Card 3: HELP (QUICK WIN / ROADMAP) */}
           <div className="group bg-white rounded-2xl border border-[#E5E7EB] p-6 shadow-subtle hover:shadow-elevation transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between relative overflow-hidden">
             {/* Top Accent Band */}
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-500 to-indigo-500" />
@@ -266,28 +296,40 @@ export default function Index() {
                     <LifeBuoy className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-base text-[#0E1B3D]">Help</h3>
-                    <span className="text-[11px] text-gray-400">Assistente & Suporte</span>
+                    <h3 className="font-bold text-base text-[#0E1B3D]">Cogito Help</h3>
+                    <span className="text-[11px] text-gray-400">Assistência Operacional</span>
                   </div>
                 </div>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  87% resolvidas sem escalonamento (ilustrativo)
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-purple-50 text-[#8B5CF6] border border-purple-200">
+                  QUICK WIN / ROADMAP
                 </span>
               </div>
 
               <div className="space-y-1 my-3">
-                <p className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight">
-                  26 dúvidas respondidas (exemplo)
+                <p className="text-lg sm:text-xl font-bold text-[#0E1B3D] tracking-tight">
+                  Orientação Contextual de Uso
                 </p>
-                <p className="text-sm font-semibold text-emerald-600">
-                  87% resolvidas sem escalonamento (ilustrativo)
+                <p className="text-xs font-semibold text-purple-700">
+                  Passo a passo nos processos operacionais
                 </p>
               </div>
 
               <p className="text-xs text-gray-500 mt-2 leading-relaxed">
-                Consultas sobre cadastro de associados, emissão de boletos e ativação de vistorias
-                resolvidas no fluxo.
+                Assistência contextual para orientar usuários em fluxos e funcionalidades do CRM e
+                ERP.
               </p>
+
+              {/* Sample help items */}
+              <div className="mt-4 pt-3 border-t border-gray-100 space-y-1.5 text-[11px] text-gray-600">
+                <div className="flex items-center gap-1.5 text-gray-700">
+                  <span className="w-1 h-1 rounded-full bg-purple-500" />
+                  <span>Cadastro guiado de novos associados</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-gray-700">
+                  <span className="w-1 h-1 rounded-full bg-purple-500" />
+                  <span>Redução de dúvidas repetitivas</span>
+                </div>
+              </div>
             </div>
 
             <div className="pt-5 mt-4 border-t border-gray-100 space-y-2">
@@ -295,7 +337,7 @@ export default function Index() {
                 to="/help"
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#0E1B3D] text-white text-sm font-semibold hover:bg-blue-600 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <span>Abrir assistente</span>
+                <span>Ver conceito Help</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <p className="text-[11px] text-center text-gray-400">
@@ -328,52 +370,53 @@ export default function Index() {
         </div>
 
         <div className="divide-y divide-gray-100">
-          {/* Insight 1 - Comercial */}
-          <div className="py-3.5 first:pt-1 last:pb-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group hover:bg-gray-50/80 -mx-3 px-3 rounded-lg transition-colors">
+          {/* Insight 1 - Comercial (Prioridade Principal - MVP) */}
+          <div className="py-3.5 first:pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group hover:bg-blue-50/50 -mx-3 px-3 rounded-lg transition-colors border-l-2 border-l-blue-600">
             <div className="flex items-start sm:items-center gap-3">
-              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100 shrink-0">
-                Comercial
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-blue-100 text-blue-800 border border-blue-200 shrink-0">
+                Comercial · MVP P1
               </span>
               <p className="text-sm font-medium text-[#111827]">
-                38 propostas estão sem movimentação há mais de cinco dias.
+                17 oportunidades apresentam sinais que merecem atenção.
               </p>
             </div>
             <Link
               to="/sales"
               className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700 shrink-0 group-hover:translate-x-0.5 transition-transform"
             >
-              <span>Ver no Sales</span>
+              <span>Explorar no Sales</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {/* Insight 2 - Financeiro */}
+          {/* Insight 2 - Financeiro (Próxima Frente) */}
           <div className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group hover:bg-gray-50/80 -mx-3 px-3 rounded-lg transition-colors">
             <div className="flex items-start sm:items-center gap-3">
-              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100 shrink-0">
-                Financeiro
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-100 shrink-0">
+                Financeiro · P2
               </span>
               <p className="text-sm font-medium text-[#111827]">
-                12 contratos ativos não apresentaram cobrança gerada.
+                Exemplo de consulta: valores e cobranças podem ser consolidados diretamente dos
+                dados do ERP.
               </p>
             </div>
             <Link
               to="/finance"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 hover:text-emerald-700 shrink-0 group-hover:translate-x-0.5 transition-transform"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800 shrink-0 group-hover:translate-x-0.5 transition-transform"
             >
               <span>Ver no Finance</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {/* Insight 3 - Operação */}
-          <div className="py-3.5 first:pt-1 last:pb-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group hover:bg-gray-50/80 -mx-3 px-3 rounded-lg transition-colors">
+          {/* Insight 3 - Operação (Quick Win / Roadmap) */}
+          <div className="py-3.5 last:pb-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group hover:bg-gray-50/80 -mx-3 px-3 rounded-lg transition-colors">
             <div className="flex items-start sm:items-center gap-3">
               <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-purple-50 text-[#8B5CF6] border border-purple-100 shrink-0">
-                Operação
+                Operação · Quick Win
               </span>
               <p className="text-sm font-medium text-[#111827]">
-                As dúvidas mais frequentes desta semana foram relacionadas a cadastro e faturamento.
+                Cogito Help pode reduzir dúvidas repetitivas sobre utilização do sistema.
               </p>
             </div>
             <Link
@@ -383,6 +426,79 @@ export default function Index() {
               <span>Ver no Help</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* 3.1 ROADMAP ESTRATÉGICO VISUAL (Agora -> Próxima -> Quick Win -> Futuro) */}
+      {/* ========================================================= */}
+      <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#E5E7EB] shadow-subtle space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Layers className="w-4 h-4 text-blue-600" />
+            <h3 className="text-sm sm:text-base font-bold text-[#0E1B3D]">
+              Direção de Produto & Roadmap
+            </h3>
+          </div>
+          <span className="text-[11px] text-gray-400">Sequenciamento do produto</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+          {/* 1. Agora: Sales */}
+          <div className="p-3.5 rounded-xl border-2 border-blue-600 bg-blue-50/40 space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-blue-600 text-white tracking-wider">
+                Agora · MVP P1
+              </span>
+              <TrendingUp className="w-4 h-4 text-blue-600" />
+            </div>
+            <p className="text-xs font-bold text-[#0E1B3D] pt-1">Cogito Sales</p>
+            <p className="text-[11px] text-gray-600 leading-snug">
+              Priorização de oportunidades e próxima melhor ação supervisionada.
+            </p>
+          </div>
+
+          {/* 2. Próxima frente: Finance */}
+          <div className="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/30 space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 tracking-wider">
+                Próxima Frente · P2
+              </span>
+              <Landmark className="w-4 h-4 text-emerald-700" />
+            </div>
+            <p className="text-xs font-bold text-[#0E1B3D] pt-1">Cogito Finance</p>
+            <p className="text-[11px] text-gray-600 leading-snug">
+              Consultas financeiras e reconciliação com dados do ERP.
+            </p>
+          </div>
+
+          {/* 3. Quick Win / evolução: Help */}
+          <div className="p-3.5 rounded-xl border border-purple-200 bg-purple-50/30 space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-purple-100 text-[#8B5CF6] tracking-wider">
+                Quick Win / Evolução
+              </span>
+              <LifeBuoy className="w-4 h-4 text-[#8B5CF6]" />
+            </div>
+            <p className="text-xs font-bold text-[#0E1B3D] pt-1">Cogito Help</p>
+            <p className="text-[11px] text-gray-600 leading-snug">
+              Orientação contextual para fluxos e processos do sistema.
+            </p>
+          </div>
+
+          {/* 4. Futuro condicionado */}
+          <div className="p-3.5 rounded-xl border border-dashed border-gray-300 bg-gray-50/60 space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-gray-200 text-gray-600 tracking-wider">
+                Futuro
+              </span>
+              <Clock className="w-4 h-4 text-gray-400" />
+            </div>
+            <p className="text-xs font-bold text-gray-700 pt-1">Evoluções Avançadas</p>
+            <p className="text-[11px] text-gray-500 leading-snug">
+              Predictive Finance · Sinistros · Vistoria · Automações avançadas.
+            </p>
           </div>
         </div>
       </section>
