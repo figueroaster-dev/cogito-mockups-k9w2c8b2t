@@ -27,7 +27,6 @@ export type PrioridadeQuestao =
   | 'P1 — Primeiro MVP'
   | 'P2 — Segunda onda'
   | 'Quick Win — Escopo reduzido'
-  | 'Depende de validação técnica'
 
 export interface QuestaoValidacao {
   id: number
@@ -39,6 +38,8 @@ export interface QuestaoValidacao {
   responsavel: string // Inicia "A definir"
   status: StatusValidacao // Inicia "Em aberto"
   prioridade: PrioridadeQuestao
+  entregasAfetadas: string
+  isBloqueador: boolean
   bloqueiaQualEntrega: string
 }
 
@@ -51,12 +52,15 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Garantir leitura segura sem impacto operacional e viabilizar atualização da lista de prioridades em tempo hábil.',
     evidenciaObservada:
-      'Telas do CRM e ERP operam em ambiente web, mas não há documentação pública de endpoints REST, Webhooks ou banco espelho.',
+      'A navegação ocorreu pela interface. APIs e eventos não foram validados (documentação pública de APIs não foi verificada nesta análise).',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P1 — Primeiro MVP',
-    bloqueiaQualEntrega: 'Conexão em tempo real da lista de Cotações para Destravar (P1 Sales).',
+    entregasAfetadas: 'Cogito Sales (P1) e Cogito Finance (P2)',
+    isBloqueador: true,
+    bloqueiaQualEntrega:
+      'Conexão e leitura de dados do CRM para a lista de Cotações para Destravar (P1 Sales).',
   },
   {
     id: 2,
@@ -65,13 +69,15 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Mapear chaves primárias e relacionamentos (1:N, N:N) para unificar o ciclo completo sem duplicidade ou órfãos de dados.',
     evidenciaObservada:
-      'No ERP foram observados múltiplos contratos (atual e encerrado) vinculados à mesma placa/veículo, e cotações com múltiplas propostas comerciais.',
+      'Foram observadas múltiplas propostas em uma cotação e contratos atual e encerrado no mesmo veículo.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P1 — Primeiro MVP',
+    entregasAfetadas: 'Cogito Sales (P1) e Cogito Finance (P2)',
+    isBloqueador: true,
     bloqueiaQualEntrega:
-      'Mapeamento de entidades para Sales (P1) e Fila de Exceções do Finance (P2).',
+      'Mapeamento consistente de cotações/propostas no Sales (P1) e amarração veículo-contrato no Finance (P2).',
   },
   {
     id: 3,
@@ -81,12 +87,15 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Calcular com exatidão o tempo real de inércia na etapa sem inferir "dias sem contato" equivocadamente.',
     evidenciaObservada:
-      'Alguns cartões exibem data de movimentação de coluna e outros apenas data de criação do lead ou registro de anotação.',
+      'Existem datas nos cartões e "Última atualização" na listagem de análises; sua semântica precisa ser confirmada.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P1 — Primeiro MVP',
-    bloqueiaQualEntrega: 'Regras explícitas de ordenação e detecção de cotações travadas.',
+    entregasAfetadas: 'Cogito Sales (P1)',
+    isBloqueador: true,
+    bloqueiaQualEntrega:
+      'Regras explícitas de ordenação e detecção de cotações travadas no Sales (P1).',
   },
   {
     id: 4,
@@ -96,13 +105,15 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Saber se o lead realmente recebeu a proposta e se há tentativa recente antes de sugerir nova abordagem.',
     evidenciaObservada:
-      'Disparos ocorrem por canais diversos (WhatsApp, SMS, e-mail) sem retorno padronizado no histórico do lead no CRM.',
+      'Foram observados recursos de contato e agenda; não foi validado histórico consolidado de envio, leitura e resposta.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P1 — Primeiro MVP',
+    entregasAfetadas: 'Cogito Sales (P1)',
+    isBloqueador: false,
     bloqueiaQualEntrega:
-      'Contextualização situacional e redação assistida de mensagens de follow-up.',
+      'Contextualização situacional e sugestão de redação de mensagens no Sales (P1).',
   },
   {
     id: 5,
@@ -112,13 +123,15 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Evitar alertar o consultor sobre oportunidades que já possuem reunião, ligação ou vistoria agendada para hoje ou amanhã.',
     evidenciaObservada:
-      'O CRM possui calendário e tarefas, mas nem todos os consultores vinculam a atividade diretamente ao ID da cotação.',
+      'Existe agenda vinculada ao lead; a consulta por integração e a completude do preenchimento não foram verificadas.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P1 — Primeiro MVP',
+    entregasAfetadas: 'Cogito Sales (P1)',
+    isBloqueador: true,
     bloqueiaQualEntrega:
-      'Filtro de "Nenhum compromisso futuro registrado" na lista de trabalho priorizada.',
+      'Regra de detecção "Nenhum compromisso futuro registrado" na lista de trabalho do Sales (P1).',
   },
   {
     id: 6,
@@ -128,12 +141,15 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Eliminar ambiguidade entre status da cotação no funil e status das abas de documentos, vistoria e assinatura.',
     evidenciaObservada:
-      'Existem cotações na etapa "Assinatura" com laudo de vistoria ainda não concluído formalmente.',
+      'Existem etapa, situação e substatus; em um caso, a situação indicava vistoria pendente enquanto o status da vistoria estava aprovado.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P1 — Primeiro MVP',
-    bloqueiaQualEntrega: 'Classificação fidedigna de bloqueios em 5 tipos de pendência.',
+    entregasAfetadas: 'Cogito Sales (P1)',
+    isBloqueador: true,
+    bloqueiaQualEntrega:
+      'Classificação fidedigna de bloqueios em 5 tipos de pendência no Sales (P1).',
   },
   {
     id: 7,
@@ -142,12 +158,14 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Atribuir a recomendação do Cogito à pessoa correta (filial vs sede) sem gerar cobrança indevida ao consultor.',
     evidenciaObservada:
-      'Pendências de análise operacional ficam na mesa técnica da sede, enquanto documentos ilegíveis dependem do consultor.',
+      'Conferência e análise operacional apresentam controles diferentes; a matriz de responsáveis não foi validada.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P1 — Primeiro MVP',
-    bloqueiaQualEntrega: 'Definição do campo "Responsável pela próxima ação" no Sales e no Help.',
+    entregasAfetadas: 'Cogito Sales (P1) e Cogito Help (Quick Win)',
+    isBloqueador: true,
+    bloqueiaQualEntrega: 'Definição do campo "Responsável pela próxima ação" no Sales (P1).',
   },
   {
     id: 8,
@@ -157,13 +175,15 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Apresentar volume comercial real sem somar cotações alternativas nem confundir valor protegido FIPE com receita da associação.',
     evidenciaObservada:
-      'Uma única cotação pode conter 3 opções de plano (Básico, Intermediário e Completo) cadastradas como propostas filhas.',
+      'Uma cotação pode ter múltiplas propostas; é necessário definir qual considerar na agregação.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P1 — Primeiro MVP',
+    entregasAfetadas: 'Cogito Sales (P1)',
+    isBloqueador: true,
     bloqueiaQualEntrega:
-      'Cálculo de "Mensalidade potencial das cotações priorizadas" e "Taxa de adesão".',
+      'Cálculo de "Mensalidade potencial" e "Total de adesões potenciais" no Sales (P1).',
   },
   {
     id: 9,
@@ -172,13 +192,14 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Identificar ausência real de faturamento sem gerar falsos positivos para contratos recém-ativados ou com carência contratual.',
     evidenciaObservada:
-      'O relatório de associados sem faturas do ERP aponta casos com vencimentos especiais ou primeiro pagamento quitado na adesão.',
+      'Existe relatório de associados sem faturas; as regras e exceções não foram confirmadas.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P2 — Segunda onda',
-    bloqueiaQualEntrega:
-      'Categoria "Possível ausência de faturamento no período" no Cogito Finance.',
+    entregasAfetadas: 'Cogito Finance (P2)',
+    isBloqueador: false,
+    bloqueiaQualEntrega: 'Categoria "Possível ausência de faturamento" no Cogito Finance (P2).',
   },
   {
     id: 10,
@@ -188,12 +209,14 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Reconhecer exceções operacionais legítimas para não rotular contratos regulares como anomalias ou erros.',
     evidenciaObservada:
-      'Alguns associados possuem contratos anuais com cobrança semestral ou acordos de diretoria sem fatura mensal.',
+      'Foram observados contratos atuais/encerrados e fatura cancelada; regras de isenção e renegociação não foram verificadas.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P2 — Segunda onda',
-    bloqueiaQualEntrega: 'Fila de Exceções do Finance (P2) e filtros de conferência.',
+    entregasAfetadas: 'Cogito Finance (P2)',
+    isBloqueador: false,
+    bloqueiaQualEntrega: 'Fila de Exceções de Faturamento do Finance (P2).',
   },
   {
     id: 11,
@@ -203,12 +226,15 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Distinguir com precisão fatura não paga de pagamento recebido pendente de baixa ou conciliação.',
     evidenciaObservada:
-      'Identificados pagamentos via Pix sem conciliação automática com o CNAB bancário no contas a receber.',
+      'Existem filtros de pagamento e modos de quitação; não foi validada fonte independente de pagamentos.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P2 — Segunda onda',
-    bloqueiaQualEntrega: 'Status visual de "Pagamento sem baixa" e conferência bancária.',
+    entregasAfetadas: 'Cogito Finance (P2)',
+    isBloqueador: false,
+    bloqueiaQualEntrega:
+      'Evolução futura de reconciliação e status "Hipótese de pagamento sem baixa" no Finance (P2).',
   },
   {
     id: 12,
@@ -217,12 +243,14 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Padronizar a fórmula oficial de cálculo de inadimplência (faixa de dias de atraso e títulos considerados) sem divergência com a diretoria.',
     evidenciaObservada:
-      'Diferentes áreas calculam taxa de inadimplência considerando cortes de 1 dia, 15 dias ou 60 dias de vencimento.',
+      'Há status e dados financeiros relacionados; fórmula oficial e reconstrução histórica não foram confirmadas.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P2 — Segunda onda',
-    bloqueiaQualEntrega: 'Indicadores do Finance e histórico mensal de inadimplência.',
+    entregasAfetadas: 'Cogito Finance (P2)',
+    isBloqueador: false,
+    bloqueiaQualEntrega: 'Indicador e histórico de inadimplência no Finance (P2).',
   },
   {
     id: 13,
@@ -231,13 +259,15 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Garantir conformidade com a LGPD e evitar que consultores visualizem cotações de outros consultores ou regionais não autorizadas.',
     evidenciaObservada:
-      'O ERP e CRM atendem operações multi-associação e regionais com gerências distintas.',
+      'Há seleção de associação e identificação de consultor; segregação efetiva de acesso não foi testada.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
-    prioridade: 'Depende de validação técnica',
+    prioridade: 'P1 — Primeiro MVP',
+    entregasAfetadas: 'Cogito Sales (P1), Cogito Finance (P2) e Cogito Help (Quick Win)',
+    isBloqueador: true,
     bloqueiaQualEntrega:
-      'Segurança e controle de acesso em todos os módulos (Sales, Finance, Help).',
+      'Segurança, segregação por perfil e liberação segura do Primeiro MVP do Cogito Sales (P1).',
   },
   {
     id: 14,
@@ -247,11 +277,13 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Alimentar a assistência contextual com conhecimento homologado, evitando inventar processos ou divulgar procedimentos desatualizados.',
     evidenciaObservada:
-      'Existem artigos e manuais no Movidesk, mas com datas de atualização variadas e sem responsável formal por revisão.',
+      'Existem acessos a manuais, vídeo e Movidesk; conteúdo, atualização e responsáveis não foram avaliados.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'Quick Win — Escopo reduzido',
+    entregasAfetadas: 'Cogito Help (Quick Win)',
+    isBloqueador: false,
     bloqueiaQualEntrega: 'Base oficial de perguntas e respostas operacionais do Cogito Help.',
   },
   {
@@ -262,12 +294,14 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     porQuePrecisamosEsclarecer:
       'Testar as regras determinísticas e as sugestões de IA em um grupo piloto de consultores antes da liberação geral.',
     evidenciaObservada:
-      'Comportamentos de preenchimento variam substancialmente entre filiais com rotinas comerciais diferentes.',
+      'A amostra demonstrativa é pequena e insuficiente para medir frequência das dores e ROI.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
     prioridade: 'P1 — Primeiro MVP',
-    bloqueiaQualEntrega: 'Validação de eficácia e acurácia do Primeiro MVP do Cogito Sales.',
+    entregasAfetadas: 'Cogito Sales (P1)',
+    isBloqueador: true,
+    bloqueiaQualEntrega: 'Validação operacional e piloto do Primeiro MVP do Cogito Sales (P1).',
   },
 ]
 
@@ -276,19 +310,25 @@ export default function Validacao() {
   const [selectedPrioridade, setSelectedPrioridade] = useState<string>('Todas as prioridades')
   const [selectedStatus, setSelectedStatus] = useState<string>('Todos os status')
   const [selectedEntrega, setSelectedEntrega] = useState<string>('Todas as entregas')
+  const [onlyMvpBlockers, setOnlyMvpBlockers] = useState<boolean>(false)
   const [isPrintMode, setIsPrintMode] = useState<boolean>(false)
   const [activeEditingId, setActiveEditingId] = useState<number | null>(null)
   const [tempResposta, setTempResposta] = useState<string>('')
   const [tempResponsavel, setTempResponsavel] = useState<string>('A definir')
   const [tempStatus, setTempStatus] = useState<StatusValidacao>('Em aberto')
 
-  // Filtragem
+  // Filtragem com suporte a "Bloqueadores do primeiro MVP"
   const filteredQuestoes = questoes.filter((q) => {
+    if (onlyMvpBlockers) {
+      if (!q.isBloqueador || q.prioridade !== 'P1 — Primeiro MVP') return false
+    }
+
     const matchPrio =
       selectedPrioridade === 'Todas as prioridades' || q.prioridade === selectedPrioridade
     const matchStatus = selectedStatus === 'Todos os status' || q.status === selectedStatus
     const matchEntrega =
       selectedEntrega === 'Todas as entregas' ||
+      q.entregasAfetadas.toLowerCase().includes(selectedEntrega.toLowerCase()) ||
       q.bloqueiaQualEntrega.toLowerCase().includes(selectedEntrega.toLowerCase())
 
     return matchPrio && matchStatus && matchEntrega
@@ -422,69 +462,102 @@ export default function Validacao() {
         {/* Aviso de Preenchimento Demonstrativo */}
         <div className="p-3.5 rounded-xl bg-blue-50/70 border border-blue-200 text-xs text-blue-950 flex items-start gap-2.5">
           <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-          <p className="leading-relaxed">
-            <strong>Nota sobre persistência:</strong> O preenchimento nesta página é puramente
-            demonstrativo. Edições efetuadas durante a apresentação operam em estado local da sessão
-            e <strong>não são gravadas no backend</strong>.
-          </p>
+          <div className="space-y-1">
+            <p className="leading-relaxed">
+              <strong>Nota sobre persistência:</strong> O preenchimento nesta página é puramente
+              demonstrativo. Edições efetuadas durante a reunião operam em estado local da sessão e{' '}
+              <strong>não são gravadas no backend</strong>.
+            </p>
+            <p className="text-[11px] text-blue-900/80">
+              As respostas permanecem em aberto para preenchimento conjunto; nenhuma resposta foi
+              preenchida como se a I3Tech já tivesse esclarecido os temas.
+            </p>
+          </div>
         </div>
       </div>
 
       {/* ========================================================= */}
-      {/* 2. FILTROS DA PAUTA DE VALIDAÇÃO */}
+      {/* 2. FILTROS DA PAUTA DE VALIDAÇÃO + VISUALIZAÇÃO DE BLOQUEADORES */}
       {/* ========================================================= */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 print:hidden">
-        <div className="relative">
-          <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1 block">
-            Prioridade
-          </label>
-          <select
-            value={selectedPrioridade}
-            onChange={(e) => setSelectedPrioridade(e.target.value)}
-            className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer"
+      <div className="space-y-3 print:hidden">
+        {/* Botão de Destaque: Bloqueadores do primeiro MVP */}
+        <div className="flex flex-wrap items-center justify-between gap-2 p-3 rounded-xl bg-indigo-50/70 border border-indigo-200">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-indigo-700" />
+            <span className="text-xs font-bold text-indigo-950">
+              Visualização rápida de dependências críticas:
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setOnlyMvpBlockers(!onlyMvpBlockers)}
+            className={cn(
+              'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all shadow-xs flex items-center gap-1.5',
+              onlyMvpBlockers
+                ? 'bg-rose-600 text-white ring-2 ring-rose-300'
+                : 'bg-white text-indigo-900 border border-indigo-300 hover:bg-indigo-100',
+            )}
           >
-            <option>Todas as prioridades</option>
-            <option>P1 — Primeiro MVP</option>
-            <option>P2 — Segunda onda</option>
-            <option>Quick Win — Escopo reduzido</option>
-            <option>Depende de validação técnica</option>
-          </select>
-          <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 bottom-2.5 pointer-events-none" />
+            <span>Bloqueadores do primeiro MVP</span>
+            {onlyMvpBlockers && (
+              <span className="text-[10px] bg-rose-800 px-1.5 py-0.2 rounded">Ativo</span>
+            )}
+          </button>
         </div>
 
-        <div className="relative">
-          <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1 block">
-            Status
-          </label>
-          <select
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-            className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer"
-          >
-            <option>Todos os status</option>
-            <option>Em aberto</option>
-            <option>Parcialmente esclarecido</option>
-            <option>Esclarecido</option>
-            <option>Não se aplica</option>
-          </select>
-          <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 bottom-2.5 pointer-events-none" />
-        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="relative">
+            <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1 block">
+              Prioridade
+            </label>
+            <select
+              value={selectedPrioridade}
+              onChange={(e) => setSelectedPrioridade(e.target.value)}
+              disabled={onlyMvpBlockers}
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer disabled:bg-gray-100 disabled:opacity-60"
+            >
+              <option>Todas as prioridades</option>
+              <option>P1 — Primeiro MVP</option>
+              <option>P2 — Segunda onda</option>
+              <option>Quick Win — Escopo reduzido</option>
+            </select>
+            <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 bottom-2.5 pointer-events-none" />
+          </div>
 
-        <div className="relative">
-          <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1 block">
-            Entrega Afetada
-          </label>
-          <select
-            value={selectedEntrega}
-            onChange={(e) => setSelectedEntrega(e.target.value)}
-            className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer"
-          >
-            <option>Todas as entregas</option>
-            <option>Sales</option>
-            <option>Finance</option>
-            <option>Help</option>
-          </select>
-          <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 bottom-2.5 pointer-events-none" />
+          <div className="relative">
+            <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1 block">
+              Status do Esclarecimento
+            </label>
+            <select
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.target.value)}
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer"
+            >
+              <option>Todos os status</option>
+              <option>Em aberto</option>
+              <option>Parcialmente esclarecido</option>
+              <option>Esclarecido</option>
+              <option>Não se aplica</option>
+            </select>
+            <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 bottom-2.5 pointer-events-none" />
+          </div>
+
+          <div className="relative">
+            <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1 block">
+              Entrega Afetada
+            </label>
+            <select
+              value={selectedEntrega}
+              onChange={(e) => setSelectedEntrega(e.target.value)}
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer"
+            >
+              <option>Todas as entregas</option>
+              <option>Sales</option>
+              <option>Finance</option>
+              <option>Help</option>
+            </select>
+            <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 bottom-2.5 pointer-events-none" />
+          </div>
         </div>
       </div>
 
@@ -505,7 +578,7 @@ export default function Validacao() {
               key={q.id}
               className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 shadow-subtle space-y-4 transition-all hover:border-indigo-300"
             >
-              {/* Header da Questão: Número, Tema, Prioridade e Status */}
+              {/* Header da Questão: Número, Tema, Prioridade, Entregas Afetadas, Bloqueador e Status */}
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 border-b border-gray-100 pb-3">
                 <div className="space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
@@ -516,8 +589,17 @@ export default function Validacao() {
                       Tema: {q.tema}
                     </span>
                     <span className="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-gray-100 text-gray-700">
-                      {q.prioridade}
+                      Prioridade: {q.prioridade}
                     </span>
+                    {q.isBloqueador ? (
+                      <span className="px-2 py-0.5 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-200">
+                        Bloqueador
+                      </span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-gray-100 text-gray-600">
+                        Não bloqueador
+                      </span>
+                    )}
                     {getStatusBadge(q.status)}
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-[#0E1B3D] pt-1">
@@ -532,6 +614,38 @@ export default function Validacao() {
                 </div>
               </div>
 
+              {/* Informações Separadas: Prioridade, Entregas Afetadas, É Bloqueadora, Status */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-2.5 rounded-lg bg-gray-50/80 border border-gray-200 text-xs">
+                <div>
+                  <span className="text-gray-400 block text-[10px] uppercase font-bold">
+                    Prioridade
+                  </span>
+                  <span className="font-semibold text-gray-800">{q.prioridade}</span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block text-[10px] uppercase font-bold">
+                    Entregas Afetadas
+                  </span>
+                  <span className="font-semibold text-gray-800">{q.entregasAfetadas}</span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block text-[10px] uppercase font-bold">
+                    É Bloqueadora?
+                  </span>
+                  <span
+                    className={cn('font-bold', q.isBloqueador ? 'text-rose-700' : 'text-gray-600')}
+                  >
+                    {q.isBloqueador ? 'Sim (Bloqueador)' : 'Não'}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block text-[10px] uppercase font-bold">
+                    Status do Esclarecimento
+                  </span>
+                  <span className="font-semibold text-gray-800">{q.status}</span>
+                </div>
+              </div>
+
               {/* Grid: Por que precisamos esclarecer & Evidência observada */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                 <div className="p-3 rounded-xl bg-gray-50 border border-gray-200 space-y-1">
@@ -543,7 +657,7 @@ export default function Validacao() {
 
                 <div className="p-3 rounded-xl bg-gray-50 border border-gray-200 space-y-1">
                   <span className="font-bold text-gray-900 uppercase tracking-wider text-[10px] block">
-                    Evidência observada no Protótipo / Análise
+                    Evidência observada no CRM / ERP
                   </span>
                   <p className="text-gray-600 leading-relaxed">{q.evidenciaObservada}</p>
                 </div>
@@ -553,7 +667,7 @@ export default function Validacao() {
               <div className="p-2.5 rounded-lg bg-rose-50/60 border border-rose-200 text-xs text-rose-950 flex items-start gap-2">
                 <AlertTriangle className="w-3.5 h-3.5 text-rose-600 shrink-0 mt-0.5" />
                 <p>
-                  <strong>Bloqueia qual entrega:</strong> {q.bloqueiaQualEntrega}
+                  <strong>Impacto na entrega:</strong> {q.bloqueiaQualEntrega}
                 </p>
               </div>
 

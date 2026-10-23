@@ -219,32 +219,27 @@ export default function Index() {
 
               <div className="space-y-1.5 my-3 p-3 bg-blue-50/60 rounded-xl border border-blue-100">
                 <p className="text-xs font-semibold text-blue-900 uppercase tracking-wide">
-                  Lista de Trabalho Priorizada
+                  Lista de Prioridades (Complementar ao CRM)
                 </p>
                 <p className="text-lg sm:text-xl font-bold text-[#0E1B3D]">
-                  5 cotações que precisam de ação imediata
+                  5 cotações com pendências no demonstrativo
                 </p>
                 <div className="pt-1.5 border-t border-blue-200/60 text-[11px] text-gray-600 space-y-0.5">
                   <p>
-                    <span className="font-semibold text-gray-800">
-                      Mensalidade potencial das cotações priorizadas:
-                    </span>{' '}
-                    <strong className="text-blue-700">R$ 1.050/mês</strong>
+                    <span className="font-semibold text-gray-800">Mensalidade potencial:</span>{' '}
+                    <strong className="text-blue-700">R$ 1.050/mês</strong> (4 de 5 conhecidas)
                   </p>
                   <p className="text-[10px] text-gray-500">
-                    Adesões estimadas somam R$ 1.550 (sem soma indevida com FIPE ou propostas
-                    alternativas).
+                    Total de adesões potenciais: R$ 1.550 (sem somar propostas alternativas da mesma
+                    cotação).
                   </p>
                 </div>
               </div>
 
               <p className="text-xs text-gray-600 mt-2 leading-relaxed">
-                Responde:{' '}
-                <em>
-                  &quot;Quais cotações precisam da minha atenção, qual é o bloqueio e o que devo
-                  fazer agora?&quot;
-                </em>{' '}
-                com pendências separadas (associado, veículo, vistoria, assinatura e operacional).
+                O Cogito complementa o funil do CRM com uma lista de prioridades, reunindo
+                pendências, responsáveis e próximos passos, com separação entre etapa da cotação e
+                status dos processos.
               </p>
             </div>
 
@@ -274,7 +269,7 @@ export default function Index() {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg text-[#0E1B3D]">Cogito Finance</h3>
-                    <p className="text-[11px] text-gray-500">Fila de Exceções & Reconciliação</p>
+                    <p className="text-[11px] text-gray-500">Exceções de Faturamento</p>
                   </div>
                 </div>
                 <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
@@ -284,19 +279,20 @@ export default function Index() {
 
               <div className="space-y-1.5 my-3 p-3 bg-emerald-50/50 rounded-xl border border-emerald-100">
                 <p className="text-xs font-semibold text-emerald-900 uppercase tracking-wide">
-                  Fila de Exceções Operacionais
+                  Exceções de Faturamento
                 </p>
                 <p className="text-base font-bold text-[#0E1B3D]">
-                  Possíveis ausências de faturamento e faturas pendentes
+                  Possível ausência de faturamento e status de faturas
                 </p>
                 <p className="text-[11px] text-gray-600 leading-snug">
-                  Diferenciação clara: não emitida, sem registro bancário, vencida e sem baixa.
+                  Diferenciação operacional entre faturas sem registro bancário, vencidas e hipótese
+                  futura de pagamento sem baixa.
                 </p>
               </div>
 
               <p className="text-xs text-gray-600 mt-2 leading-relaxed">
                 Foco em situações que precisam de conferência humana no ERP. Sem baixa ou
-                cancelamento automático; taxa de inadimplência sujeita a definição de negócio.
+                cancelamento automático; taxa de inadimplência com definição a validar.
               </p>
             </div>
 
@@ -342,14 +338,13 @@ export default function Index() {
                   Orientação por tela e fluxo operacional
                 </p>
                 <p className="text-[11px] text-gray-600 leading-snug">
-                  Base em manuais e suporte Movidesk conhecidos; aviso explícito para regras a
-                  confirmar.
+                  Orientações contextuais observadas nas telas de conferência e análise operacional.
                 </p>
               </div>
 
               <p className="text-xs text-gray-600 mt-2 leading-relaxed">
-                Explica dúvidas frequentes (aprovação de cotação, conferência vs análise
-                operacional, regras de faturas) e o impacto de cada ação no CRM e ERP.
+                Apresenta instruções demonstrativas separando com rigor o observado no demonstrativo
+                do que permanece a confirmar com a I3Tech.
               </p>
             </div>
 

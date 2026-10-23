@@ -48,16 +48,16 @@ export default function Layout() {
         }
       case '/finance':
         return {
-          title: 'Cogito Finance — Fila de Exceções & Reconciliação',
+          title: 'Cogito Finance — Exceções de Faturamento',
           subtitle:
-            'Detecção de possíveis ausências de faturamento, faturas pendentes e conferência ERP',
+            'Diferenciação operacional entre possível ausência de faturamento, faturas sem registro bancário e vencidas',
           tag: 'P2 — Segunda onda',
         }
       case '/help':
         return {
           title: 'Cogito Help — Assistência Contextual',
           subtitle:
-            'Orientação operacional por fluxo, manuais de apoio e preparação assistida com supervisão humana',
+            'Orientação operacional contextual por fluxo observada nas telas de Análise Conferência e Operacional',
           tag: 'Quick Win — Escopo reduzido',
         }
       case '/roadmap':
@@ -381,6 +381,17 @@ export default function Layout() {
 
             {/* Right: Actions, Notification bell & User avatar */}
             <div className="flex items-center gap-3 shrink-0">
+              {/* Data de Referência da Demonstração */}
+              <div
+                className="hidden lg:flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100/90 px-2.5 py-1.5 rounded-lg border border-gray-200"
+                title="Data única de referência de todo o ambiente demonstrativo"
+              >
+                <span className="w-2 h-2 rounded-full bg-blue-500" />
+                <span>
+                  Ref. Demonstração: <strong>21/10/2024</strong>
+                </span>
+              </div>
+
               {/* Notification bell with red dot */}
               <button
                 type="button"

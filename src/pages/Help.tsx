@@ -37,131 +37,125 @@ interface HelpTopic {
 const helpTopicsData: HelpTopic[] = [
   {
     id: 'help-1',
-    pergunta: 'Por que não consigo aprovar esta cotação?',
-    contextoTela: 'CRM — Funil de Vendas > Etapa de Análise Conferência / Aprovação',
+    pergunta: 'Como funciona a conferência e aprovação de cotações?',
+    contextoTela: 'CRM — Funil de Vendas > Telas de Análise Conferência e Análise Operacional',
     orientacaoObjetiva:
-      'Uma cotação só é liberada para aprovação quando todos os quatro requisitos obrigatórios de conformidade forem validados: documentos do associado, documentos do veículo, laudo de vistoria prévia e termo de adesão assinado eletronicamente.',
+      'Na interface observada, Análise Conferência permite acompanhar os dados e processos. A tela informa que a análise de fotos e a alteração dos status dos processos ficam disponíveis na Análise Operacional. Responsabilidades e permissões por perfil precisam ser confirmadas com a I3Tech.',
     passos: [
       {
         num: 1,
-        titulo: 'Verificar status dos documentos do associado e do veículo',
-        desc: 'Abra a aba "Documentação" da cotação. Certifique-se de que nenhum anexo possui o status "Pendente" ou "Rejeitado por legibilidade".',
+        titulo: 'Acompanhar dados e status dos processos na Análise Conferência',
+        desc: 'Na tela Análise Conferência, é possível visualizar o resumo cadastral, campos da cotação e os status dos processos (documentos do associado, documentos do veículo, vistoria e assinatura).',
       },
       {
         num: 2,
-        titulo: 'Conferir o parecer do laudo de vistoria prévia',
-        desc: 'Verifique se o número do laudo foi integrado e se o parecer do vistoriador consta como "Aprovado sem ressalvas".',
+        titulo: 'Acessar a tela Análise Operacional para fotos e alterações',
+        desc: 'A própria tela Análise Conferência informa expressamente que a análise de fotos e a alteração dos status dos processos ficam disponíveis na Análise Operacional.',
       },
       {
         num: 3,
-        titulo: 'Validar a assinatura eletrônica do termo de adesão',
-        desc: 'O contrato precisa estar com status "Assinado". Se estiver como "Enviado", o lead ainda não concluiu a assinatura eletrônica.',
-      },
-      {
-        num: 4,
-        titulo: 'Liberar aprovação na mesa de conferência',
-        desc: 'Com todas as abas aprovadas, o botão "Aprovar Cotação" ficará habilitado para os perfis com permissão operacional.',
+        titulo: 'Operar os controles de aprovação e reprovação observados',
+        desc: 'A Análise Operacional apresenta controles de aprovação e reprovação. Os efeitos exatos e a existência de restrições por perfil dependem de validação técnica.',
         efeitoRelevante:
-          'Efeito: Ao aprovar a cotação, o sistema gera o rascunho de contrato no ERP e notifica o consultor para ativação.',
+          'A confirmar com a I3Tech: Os efeitos sistêmicos das ações de aprovação ou reprovação (ex.: criação de contrato, bloqueio de edição ou notificações) ainda não foram validados.',
       },
     ],
-    fonteOficial: 'Manual Movidesk — Artigo #1042: Regras de Aprovação e Alçadas no CRM I3Tech',
+    fonteOficial: 'Fonte oficial pendente de validação pela I3Tech.',
     conteudoNaoValidado:
-      'A regra de tolerância para vistorias com avarias leves ainda não foi formalmente confirmada pela coordenação.',
+      'Obrigatoriedade e exceções dos requisitos de aprovação, alçadas financeiras e matriz de permissões precisam ser confirmadas com a I3Tech.',
     efeitoAcao:
-      'Aprovar a cotação bloqueia edição de dados cadastrais e move o lead para a etapa "Aprovados", disparando a criação do contrato no ERP.',
+      'Na demonstração: controles de aprovação e reprovação existem na Análise Operacional. Efeitos em contratos ou notificações não foram confirmados.',
   },
   {
     id: 'help-2',
     pergunta: 'Qual a diferença entre conferência e análise operacional?',
-    contextoTela: 'Operacional — Divisão de Responsabilidades Comercial vs Sede',
+    contextoTela: 'CRM — Telas Análise Conferência vs Análise Operacional',
     orientacaoObjetiva:
-      'A conferência é uma etapa de checagem documental e cadastral primária (geralmente realizada pelo consultor ou filial), enquanto a análise operacional é a validação de regras de risco, alçadas financeiras e conformidade técnica conduzida pela equipe da sede.',
+      'Na interface observada, Análise Conferência permite acompanhar os dados e processos. A tela informa que a análise de fotos e a alteração dos status dos processos ficam disponíveis na Análise Operacional. Responsabilidades e permissões por perfil precisam ser confirmadas com a I3Tech.',
     passos: [
       {
         num: 1,
-        titulo: 'Conferência Cadastral (Prévia)',
-        desc: 'Validação da completude: conferir se fotos estão nítidas, se o comprovante é recente e se o veículo confere com a tabela FIPE indicada.',
+        titulo: 'Visualização e acompanhamento (Análise Conferência)',
+        desc: 'Permite acompanhar os dados da cotação e o andamento dos processos associados.',
       },
       {
         num: 2,
-        titulo: 'Submissão à Mesa Operacional',
-        desc: 'Envio formal para a fila da sede. O consultor perde a permissão de edição direta durante a análise.',
+        titulo: 'Ação e deliberação (Análise Operacional)',
+        desc: 'A tela de conferência redireciona para a Análise Operacional quando é necessária a análise de fotos e a alteração dos status dos processos.',
       },
       {
         num: 3,
-        titulo: 'Análise Operacional Técnica (Sede)',
-        desc: 'Verificação em bases externas, checagem de regras de veículos pesados/frotas, validação de rateio e emissão do parecer final.',
+        titulo: 'Controles operacionais observados',
+        desc: 'A Análise Operacional dispõe de controles de aprovação e reprovação, além de campos de motivo de pendência.',
       },
     ],
-    fonteOficial:
-      'Manual Operacional I3Tech — Seção 3.2: Fluxo de Análise e Matriz de Responsabilidades',
+    fonteOficial: 'Fonte oficial pendente de validação pela I3Tech.',
     conteudoNaoValidado:
-      'Os prazos de SLA entre a conferência inicial e a resposta da mesa técnica ainda não constam documentados oficialmente.',
+      'Matriz completa de permissões por perfil (consultor vs mesa técnica da matriz) e divisão de alçadas permanecem a confirmar com a I3Tech.',
     efeitoAcao:
-      'A reprovação na análise operacional devolve a cotação para o consultor com exigência cadastrada.',
+      'A definição exata de quem pode agir em cada tela e o efeito de cada deliberação dependem de validação técnica.',
   },
   {
     id: 'help-3',
-    pergunta: 'Como cadastrar associado, veículo e financeiro?',
-    contextoTela: 'ERP Gestão — Módulos Cadastrais > Associados e Contratos',
+    pergunta: 'Como estão estruturados associado, veículo e contrato no ERP?',
+    contextoTela: 'ERP Gestão — Entidades Cadastrais Observadas',
     orientacaoObjetiva:
-      'O cadastro no ERP deve seguir a ordem estrita de dependência de entidades: primeiro o Associado (pessoa física/jurídica), depois o Veículo vinculado a ele, e por fim o Contrato com o Plano e as Regras Financeiras.',
+      'No ERP foram observados: associados, veículos, planos e contratos. Foi observado também que contrato atual e contrato encerrado podem estar vinculados ao mesmo veículo.',
     passos: [
       {
         num: 1,
-        titulo: 'Cadastrar o Associado no ERP',
-        desc: 'Acesse Módulo de Associados > Novo. Insira CPF/CNPJ, nome completo, endereço com CEP válido e contatos para envio de boleto.',
+        titulo: 'Associado, Veículo e Plano',
+        desc: 'Identificados cadastros de associados com dados de identificação, veículos associados e vínculos com planos de proteção.',
       },
       {
         num: 2,
-        titulo: 'Vincular o Veículo ao Associado',
-        desc: 'Acesse a aba Veículos do associado > Adicionar Veículo. Preencha placa, chassi, renavam, ano e código FIPE correspondente.',
+        titulo: 'Contratos vinculados ao veículo',
+        desc: 'Foi observado na interface que um mesmo veículo pode ter múltiplos contratos vinculados ao longo do tempo (contrato atual e contrato encerrado).',
       },
       {
         num: 3,
-        titulo: 'Criar o Contrato e Configurar o Financeiro',
-        desc: 'Acesse Contratos > Novo Contrato. Selecione o veículo, defina o plano de proteção veicular, dia de vencimento, forma de cobrança (boleto/Pix) e valor de mensalidade.',
+        titulo: 'Composição de valores e histórico',
+        desc: 'Foram observados vigência, consultor, região, forma de pagamento, composição de valores e histórico de alterações de contrato.',
         efeitoRelevante:
-          'Efeito: A criação do contrato com data ativa aciona a régua de geração automática de faturas no próximo ciclo de faturamento.',
+          'A confirmar com a I3Tech: Regras de ativação automática e efeitos de integrações entre CRM e ERP.',
       },
     ],
-    fonteOficial: 'Base de Conhecimento Movidesk — Treinamento Operacional ERP Módulo Associados',
+    fonteOficial: 'Fonte oficial pendente de validação pela I3Tech.',
     conteudoNaoValidado:
-      'Regras de rateio proporcional para adesões no meio do mês dependem do regulamento interno de cada associação.',
+      'Regras completas de cobrança esperada, carências e regras de rateio precisam ser validadas.',
     efeitoAcao:
-      'Cadastrar o contrato com vencimento imediato pode gerar cobrança pró-rata automática no ERP.',
+      'Instrução demonstrativa baseada na estrutura de entidades observada na navegação do ERP.',
   },
   {
     id: 'help-4',
-    pergunta: 'Qual a diferença entre fatura sem registro e fatura não paga?',
-    contextoTela: 'ERP Financeiro — Módulo de Contas a Receber e Cobrança Bancária',
+    pergunta: 'Qual a diferença entre fatura sem registro bancário e fatura não paga?',
+    contextoTela: 'ERP Financeiro — Faturas & Registro Bancário de Cobranças',
     orientacaoObjetiva:
-      'Fatura sem registro bancário é um boleto gerado no sistema cujo arquivo de remessa ainda não foi confirmado pelo banco conveniado (o código de barras pode não ser aceito em canais de pagamento). Fatura não paga é um título registrado cujo vencimento ocorreu sem liquidação pelo associado.',
+      'No ERP foi observada tela de faturas sem registro, relacionada ao registro bancário de cobranças e a integrações. Uma fatura sem registro bancário não se confunde com fatura não emitida, com fatura não paga ou com pagamento sem baixa.',
     passos: [
       {
         num: 1,
-        titulo: 'Identificar a Fatura Emitida sem Registro',
-        desc: 'O boleto possui número interno, mas a coluna "Registro Bancário" está como "Pendente" ou "Aguardando Retorno". Não deve ser cobrado do associado como atraso.',
+        titulo: 'Fatura sem registro bancário',
+        desc: 'Relacionada à confirmação do registro da cobrança junto ao banco conveniado ou a integrações do ERP. A interface informa tela específica de faturas sem registro.',
       },
       {
         num: 2,
-        titulo: 'Processar Arquivo de Retorno',
-        desc: 'Importe o arquivo de retorno diário do banco conveniado para que o ERP confirme o registro da cobrança.',
+        titulo: 'Fatura vencida com saldo pendente (Fatura não paga)',
+        desc: 'Fatura que já foi emitida e cujo vencimento ocorreu sem quitação registrada no contas a receber.',
       },
       {
         num: 3,
-        titulo: 'Tratar Fatura Não Paga (Vencida)',
-        desc: 'Título que foi devidamente registrado no banco, teve seu vencimento ultrapassado e permanece com saldo devedor.',
+        titulo: 'Hipótese de pagamento sem baixa',
+        desc: 'Cenário futuro que depende de acesso a uma fonte independente de pagamentos e conciliação bancária.',
         efeitoRelevante:
-          'Efeito: Somente faturas registradas e vencidas entram na contagem de inadimplência e régua de notificação.',
+          'A confirmar com a I3Tech: Fluxo de importação de retorno bancário informa possibilidade de quitação automática na interface.',
       },
     ],
-    fonteOficial: 'Manual Movidesk — Artigo #208: Conciliação Bancária e Status de Cobrança no ERP',
+    fonteOficial: 'Fonte oficial pendente de validação pela I3Tech.',
     conteudoNaoValidado:
-      'O tempo limite de aceitação de boletos sem registro varia conforme o banco emissor (geralmente até D+1).',
+      'Regras de pagamentos parciais, estornos, renegociações e fontes bancárias externas dependem de validação.',
     efeitoAcao:
-      'Cobrar um associado por fatura sem registro pode gerar reclamações no suporte por erro de linha digitável.',
+      'Distinção conceitual estrita para evitar confusão entre pendência bancária, inadimplência e cobrança indevida.',
   },
 ]
 
@@ -242,9 +236,10 @@ export default function Help() {
           operacionais
         </p>
         <p className="text-xs sm:text-sm text-gray-600 max-w-3xl leading-relaxed">
-          O Help responde dúvidas frequentes de operação sem inventar links ou regras internas
-          inexistentes. Cada resposta indica com clareza o contexto da tela, a fonte do conhecimento
-          e alertas para regras que ainda dependem de validação com a gestão.
+          Demonstração de assistência contextual orientada aos fluxos observados no CRM e ERP da
+          I3Tech. Foram observados acesso a manuais, tutorial em vídeo e widget Movidesk na
+          interface; o conteúdo desses materiais e as regras internas permanecem pendentes de
+          validação pela I3Tech.
         </p>
 
         {/* Ciclo de Evolução Futura: Orientar → Preparar → Usuário revisar → Confirmar */}
@@ -328,7 +323,7 @@ export default function Help() {
                 <HelpCircle className="w-4 h-4" />
               </span>
               <span className="text-xs font-bold uppercase tracking-wider text-purple-800">
-                Assistência Contextual
+                Demonstração de Orientação Contextual
               </span>
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-[#0E1B3D] mt-1">
@@ -343,7 +338,7 @@ export default function Help() {
           </div>
 
           <span className="text-[11px] font-semibold text-purple-800 bg-purple-50 px-2.5 py-1 rounded-md border border-purple-200 self-start sm:self-auto shrink-0">
-            Orientação Objetiva
+            Observado no demonstrativo
           </span>
         </div>
 
@@ -355,7 +350,7 @@ export default function Help() {
         {/* Passos Numerados com Explicação de Efeitos */}
         <div className="space-y-3">
           <h4 className="text-xs font-bold uppercase tracking-wider text-gray-700">
-            Passo a Passo de Resolução
+            Passo a Passo de Resolução (Demonstrativo)
           </h4>
 
           <div className="space-y-3">
@@ -387,7 +382,7 @@ export default function Help() {
         <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-200 space-y-1.5 text-xs text-blue-950">
           <p className="font-bold uppercase tracking-wider text-[11px] text-blue-900 flex items-center gap-1.5">
             <Info className="w-3.5 h-3.5 text-blue-600" />
-            Impacto da Ação no Sistema (CRM & ERP)
+            Impacto Operacional & Limites Observados
           </p>
           <p className="leading-relaxed">{activeTopic.efeitoAcao}</p>
         </div>
@@ -397,23 +392,26 @@ export default function Help() {
           <div className="p-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-700 space-y-1">
             <span className="font-bold text-[#0E1B3D] block flex items-center gap-1.5">
               <BookOpen className="w-3.5 h-3.5 text-purple-600" />
-              Fonte Oficial Conhecida
+              Fonte Oficial
             </span>
-            <p className="text-gray-600 text-[11px]">{activeTopic.fonteOficial}</p>
+            <p className="text-gray-700 font-semibold text-[11px]">{activeTopic.fonteOficial}</p>
+            <p className="text-gray-500 text-[10px]">
+              Foram observados acesso a manuais, tutorial em vídeo e widget Movidesk na interface; o
+              conteúdo não foi consultado ou homologado.
+            </p>
           </div>
 
           <div className="p-3 rounded-lg bg-amber-50/70 border border-amber-200 text-amber-900 space-y-1">
             <span className="font-bold text-amber-950 block flex items-center gap-1.5">
               <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
-              Conteúdo Ainda Não Validado
+              A confirmar com a I3Tech
             </span>
             <p className="text-amber-900/90 text-[11px]">
               {activeTopic.conteudoNaoValidado ||
-                'Regras complementares a confirmar com a equipe técnica da I3Tech.'}
+                'Regras complementares e efeitos sistêmicos a confirmar com a equipe técnica da I3Tech.'}
             </p>
           </div>
         </div>
-
         {/* Ações Demonstrativas de Auxílio */}
         <div className="flex flex-wrap items-center gap-2 pt-2">
           <button

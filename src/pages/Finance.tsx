@@ -29,16 +29,16 @@ import { cn } from '@/lib/utils'
 
 export type CategoriaExcecao =
   | 'Todas as exceções'
-  | 'Possível ausência de faturamento no período'
-  | 'Faturas vencidas com saldo pendente'
-  | 'Registro bancário pendente de confirmação'
-  | 'Situações que precisam de conferência'
+  | 'Possível ausência de faturamento'
+  | 'Fatura emitida sem confirmação de registro bancário'
+  | 'Fatura vencida com saldo pendente'
+  | 'Hipótese de pagamento sem baixa'
 
 export type StatusVisualFatura =
-  | 'Fatura não emitida'
+  | 'Fatura não emitida (Possível ausência)'
   | 'Fatura emitida sem registro bancário'
-  | 'Fatura vencida'
-  | 'Pagamento sem baixa'
+  | 'Fatura vencida com saldo pendente'
+  | 'Hipótese de pagamento sem baixa (Cenário futuro)'
 
 export interface ItemFilaExcecao {
   id: string
@@ -54,29 +54,30 @@ export interface ItemFilaExcecao {
   verificacoesNecessarias: string
   proximoPasso: string
   origem: string
+  avisoCenarioFuturo?: string
 }
 
 const filaExcecoesData: ItemFilaExcecao[] = [
   {
     id: 'exc-1',
-    categoria: 'Possível ausência de faturamento no período',
-    tipoFatura: 'Fatura não emitida',
+    categoria: 'Possível ausência de faturamento',
+    tipoFatura: 'Fatura não emitida (Possível ausência)',
     associado: 'Transportadora Silva & Filhos Ltda',
     veiculo: 'Volvo FH 540 (Frota - Contrato Ativo)',
     contratoId: 'CTR-9012',
     periodo: 'Competência Outubro/2024',
     valor: 'R$ 1.840,00 (estimado)',
     evidencias:
-      'Contrato ativo no ERP; já consta no relatório padrão de associados sem fatura no período; plano vigente sem bloqueio cadastral.',
-    motivo: 'Possível ausência de faturamento no período de fechamento da regional.',
+      'Observado no ERP demonstrativo: contrato ativo; listado no relatório padrão de associados sem fatura no período. A ausência de fatura exige verificar vigência, periodicidade, transferência e exceções contratuais.',
+    motivo: 'Possível ausência de faturamento no período de fechamento.',
     verificacoesNecessarias:
-      'Verificar se houve migração de plano, isenção pontual negociada pela diretoria ou pendência no lote de faturamento.',
-    proximoPasso: 'Conferir histórico financeiro no ERP antes de qualquer emissão manual.',
+      'Conferir vigência, periodicidade acordada, eventual isenção ou carência antes de qualquer emissão manual.',
+    proximoPasso: 'Conferir histórico financeiro e contrato no ERP.',
     origem: 'ERP I3Tech (Relatório de Associados Sem Faturas)',
   },
   {
     id: 'exc-2',
-    categoria: 'Registro bancário pendente de confirmação',
+    categoria: 'Fatura emitida sem confirmação de registro bancário',
     tipoFatura: 'Fatura emitida sem registro bancário',
     associado: 'Julio Cesar Albuquerque',
     veiculo: 'Jeep Renegade Longitude (2022)',
@@ -84,68 +85,70 @@ const filaExcecoesData: ItemFilaExcecao[] = [
     periodo: 'Vencimento 25/10/2024',
     valor: 'R$ 215,00',
     evidencias:
-      'Boleto gerado no sistema em 15/10; remessa bancária enviada, mas arquivo de retorno com confirmação de registro bancário ainda não processado.',
+      'Observado no ERP: tela de faturas sem registro relacionada ao registro bancário de cobranças e a integrações. A confirmação do registro depende de retorno bancário ou conciliação.',
     motivo:
-      'Fatura emitida sem confirmação do registro bancário ou código de barras pendente de validação pelo banco conveniado.',
+      'Fatura emitida sem confirmação de registro bancário (não confundir com fatura não emitida ou não paga).',
     verificacoesNecessarias:
-      'Confirmar retorno da remessa no módulo bancário ou verificar se o banco devolveu inconsistência de CEP/CPF.',
+      'Confirmar retorno da remessa bancária no fluxo de retorno ou validar arquivo de remessa.',
     proximoPasso:
-      'Consultar status do arquivo de retorno bancário antes de orientar o associado a pagar.',
+      'Consultar status do retorno bancário antes de orientar o associado sobre pagamento.',
     origem: 'Módulo de Cobrança Bancária ERP',
   },
   {
     id: 'exc-3',
-    categoria: 'Faturas vencidas com saldo pendente',
-    tipoFatura: 'Fatura vencida',
+    categoria: 'Fatura vencida com saldo pendente',
+    tipoFatura: 'Fatura vencida com saldo pendente',
     associado: 'Mariana Duarte Barreto',
     veiculo: 'Chevrolet Tracker Premier (2021)',
     contratoId: 'CTR-6610',
     periodo: 'Vencido em 10/10/2024 (Há 11 dias)',
     valor: 'R$ 280,00',
     evidencias:
-      'Fatura com registro bancário confirmado; vencimento ultrapassado em 11 dias sem identificação de crédito no extrato.',
-    motivo: 'Fatura vencida com saldo pendente de liquidação.',
+      'Observado no ERP: fatura registrada com vencimento em 10/10/2024 e saldo pendente no relatório de faturas.',
+    motivo: 'Fatura vencida com saldo pendente de quitação.',
     verificacoesNecessarias:
-      'Verificar se o associado solicitou segunda via com data atualizada ou efetuou pagamento via Pix sem identificação de contrato.',
+      'Verificar se houve emissão de segunda via com nova data ou modo de quitação manual em andamento.',
     proximoPasso:
-      'Acompanhar fila de régua de cobrança padrão (sem envio ou cancelamento automático pelo Cogito).',
+      'Acompanhar fluxo de cobrança operacional padrão do ERP (sem envio automático pelo Cogito).',
     origem: 'Contas a Receber ERP',
   },
   {
     id: 'exc-4',
-    categoria: 'Situações que precisam de conferência',
-    tipoFatura: 'Pagamento sem baixa',
+    categoria: 'Hipótese de pagamento sem baixa',
+    tipoFatura: 'Hipótese de pagamento sem baixa (Cenário futuro)',
     associado: 'Auto Posto Alvorada Ltda',
     veiculo: '3 Veículos Leves (Contrato Coletivo)',
     contratoId: 'CTR-8104',
     periodo: 'Competência Setembro/2024',
     valor: 'R$ 690,00',
     evidencias:
-      'Crédito bancário de R$ 690,00 localizado no extrato bancário com descrição genérica; título permanece em aberto no ERP.',
+      'Exemplo ilustrativo: no demonstrativo há título em aberto. Não foi confirmada fonte independente de extratos ou conciliação bancária completa no ERP.',
     motivo:
-      'Hipótese de pagamento sem baixa (dependente de confirmação com a fonte externa de pagamentos ou conciliação bancária).',
+      'Hipótese de pagamento sem baixa — Cenário futuro — depende de acesso a uma fonte independente de pagamentos.',
     verificacoesNecessarias:
-      'Checar comprovante bancário ou conciliação manual da conta corrente da associação.',
-    proximoPasso: 'Realizar conciliação manual no ERP após confirmação da tesouraria.',
-    origem: 'Extrato Bancário vs Contas a Receber',
+      'Verificar comprovante manual do associado ou conferência com tesouraria quando houver integração bancária.',
+    proximoPasso: 'Aguardar validação da conciliação bancária com a I3Tech.',
+    origem: 'Exemplo ilustrativo de reconciliação futura',
+    avisoCenarioFuturo:
+      'Cenário futuro — depende de acesso a uma fonte independente de pagamentos. Não há afirmação de localização de créditos em extrato real.',
   },
   {
     id: 'exc-5',
-    categoria: 'Possível ausência de faturamento no período',
-    tipoFatura: 'Fatura não emitida',
+    categoria: 'Possível ausência de faturamento',
+    tipoFatura: 'Fatura não emitida (Possível ausência)',
     associado: 'Roberto Carlos Viana',
     veiculo: 'Honda Civic Touring (2019)',
     contratoId: 'CTR-5520',
     periodo: 'Competência Outubro/2024',
     valor: 'R$ 240,00 (a confirmar)',
     evidencias:
-      'Existem contratos atual e encerrado vinculados ao mesmo veículo; fatura do contrato ativo não localizada no lote mensal.',
+      'Observado no ERP: contrato atual e contrato encerrado vinculados ao mesmo veículo. Não há fatura gerada no lote mensal do contrato ativo.',
     motivo:
-      'Possível ausência de faturamento decorrente de multiplicidade de contratos no mesmo veículo.',
+      'Possível ausência de faturamento — requer verificação de duplicidade de contratos no mesmo veículo.',
     verificacoesNecessarias:
-      'Conferir se a cobrança foi vinculada acidentalmente ao contrato encerrado.',
-    proximoPasso: 'Mesa financeira verificar amarração veículo-contrato ativo no ERP.',
-    origem: 'ERP Cadastros de Contratos',
+      'Confirmar se a vigência do contrato atual está ativa e se houve faturamento vinculado indevidamente ao encerrado.',
+    proximoPasso: 'Conferir histórico de alterações de contrato e veículos no ERP.',
+    origem: 'ERP Cadastros de Contratos & Veículos',
   },
 ]
 
@@ -195,35 +198,35 @@ export default function Finance() {
     return matchCat && matchSearch
   })
 
-  // Estilo visual dos 4 status de faturas
+  // Estilo visual dos 4 status de faturas (separados e com clareza conceitual)
   const getBadgeForStatus = (status: StatusVisualFatura) => {
     switch (status) {
-      case 'Fatura não emitida':
+      case 'Fatura não emitida (Possível ausência)':
         return (
           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold bg-amber-50 text-amber-800 border border-amber-300">
             <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
-            <span>Fatura não emitida</span>
+            <span>Possível ausência de faturamento</span>
           </span>
         )
       case 'Fatura emitida sem registro bancário':
         return (
           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold bg-blue-50 text-blue-800 border border-blue-300">
             <Clock className="w-3.5 h-3.5 text-blue-600" />
-            <span>Fatura emitida sem registro bancário</span>
+            <span>Fatura emitida sem confirmação de registro bancário</span>
           </span>
         )
-      case 'Fatura vencida':
+      case 'Fatura vencida com saldo pendente':
         return (
           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold bg-rose-50 text-rose-800 border border-rose-300">
             <FileWarning className="w-3.5 h-3.5 text-rose-600" />
-            <span>Fatura vencida</span>
+            <span>Fatura vencida com saldo pendente</span>
           </span>
         )
-      case 'Pagamento sem baixa':
+      case 'Hipótese de pagamento sem baixa (Cenário futuro)':
         return (
           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold bg-purple-50 text-purple-800 border border-purple-300">
             <HelpCircle className="w-3.5 h-3.5 text-purple-600" />
-            <span>Pagamento sem baixa (hipótese)</span>
+            <span>Hipótese de pagamento sem baixa (Cenário futuro)</span>
           </span>
         )
       default:
@@ -263,16 +266,18 @@ export default function Finance() {
         </div>
 
         <h1 className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight">
-          Cogito Finance — Fila de Exceções & Reconciliação
+          Cogito Finance — Exceções de Faturamento
         </h1>
         <p className="text-xs sm:text-sm font-semibold text-emerald-800">
-          Identificação de discrepâncias cadastrais, faturas pendentes e conferência com o ERP
+          Diferenciação operacional entre possível ausência de faturamento, faturas sem registro
+          bancário, faturas vencidas e hipótese de pagamento sem baixa
         </p>
         <p className="text-xs sm:text-sm text-gray-600 max-w-3xl leading-relaxed">
-          Nesta segunda onda, o Cogito foca na <strong>Fila de Exceções</strong> para apoiar o
-          operador financeiro a identificar inconsistências. Usamos o conceito cauteloso de{' '}
-          <em>&quot;Possível ausência de faturamento&quot;</em> — nunca afirmando que todo contrato
-          sem fatura é erro (pode haver isenção, renegociação ou periodicidade especial).{' '}
+          Nesta segunda onda, o Cogito foca na <strong>Fila de Exceções de Faturamento</strong>.
+          Mantemos rigorosamente a expressão <em>&quot;Possível ausência de faturamento&quot;</em>,
+          pois a ausência de fatura exige verificar vigência, periodicidade, transferência e
+          exceções contratuais antes de qualquer conclusão. Reconciliação com fontes bancárias é
+          tratada como evolução dependente de validação.{' '}
           <strong>O sistema NÃO oferece emissão, baixa, cancelamento ou cobrança automática</strong>
           .
         </p>
@@ -315,9 +320,9 @@ export default function Finance() {
               <span className="font-semibold text-purple-700">Taxa de Inadimplência</span>
               <TrendingUp className="w-4 h-4 text-purple-600" />
             </div>
-            <div className="text-2xl font-bold text-[#0E1B3D] tabular-nums mt-1">7,8%*</div>
+            <div className="text-xl font-bold text-purple-900 mt-1">Definição a validar</div>
             <p className="text-[10px] text-purple-800 font-medium mt-0.5">
-              *Dependente de definição de negócio e regras de corte
+              Fórmula oficial, faixa de corte e histórico a confirmar com a I3Tech
             </p>
           </div>
         </div>
@@ -350,10 +355,10 @@ export default function Finance() {
         <div className="flex flex-wrap gap-2 pt-1 border-b border-gray-100 pb-3">
           {[
             'Todas as exceções',
-            'Possível ausência de faturamento no período',
-            'Faturas vencidas com saldo pendente',
-            'Registro bancário pendente de confirmação',
-            'Situações que precisam de conferência',
+            'Possível ausência de faturamento',
+            'Fatura emitida sem confirmação de registro bancário',
+            'Fatura vencida com saldo pendente',
+            'Hipótese de pagamento sem baixa',
           ].map((cat) => (
             <button
               key={cat}
@@ -432,6 +437,11 @@ export default function Finance() {
                     <span>Motivo do Alerta:</span>
                   </p>
                   <p className="text-gray-600 leading-relaxed">{item.motivo}</p>
+                  {item.avisoCenarioFuturo && (
+                    <div className="mt-1.5 p-2 rounded-md bg-purple-50 border border-purple-200 text-purple-900 text-[11px] font-medium">
+                      ⚠️ {item.avisoCenarioFuturo}
+                    </div>
+                  )}
                 </div>
 
                 <div className="space-y-1 pt-1 md:border-t md:border-gray-200">
@@ -545,16 +555,22 @@ export default function Finance() {
               Em relação à pergunta <strong>&quot;{activeQuestion}&quot;</strong>:
             </p>
             <p>
-              O Cogito analisou os dados consolidados do ERP e localizou{' '}
-              <strong>12 contratos ativos sem fatura gerada na competência de Outubro/2024</strong>.
-              Desses, 2 apresentam contratos duplicados no mesmo veículo e 1 possui solicitação de
-              isenção em tramitação interna.
+              Neste cenário ilustrativo, a resposta apresentaria a lista de contratos que constam no
+              relatório de associados sem faturas do ERP demonstrativo (competência de
+              Outubro/2024), indicando a necessidade de verificar vigência, periodicidade acordada e
+              duplicidade de contratos no mesmo veículo antes de qualquer ação.
             </p>
-            <div className="p-3 bg-white rounded-lg border border-blue-200 text-xs text-gray-600">
-              <strong>Nota sobre Inadimplência:</strong> A apuração de 7,8% é uma referência
-              preliminar demonstrativa. A fórmula oficial de cálculo (se considera títulos a partir
-              de 1 dia, 5 dias ou 30 dias de atraso) é uma questão em aberto a ser esclarecida com a
-              I3Tech.
+            <div className="p-3 bg-white rounded-lg border border-blue-200 text-xs text-gray-600 space-y-1">
+              <p>
+                <strong>Taxa de inadimplência:</strong> Exibe{' '}
+                <strong>&quot;Definição a validar&quot;</strong> — a fórmula oficial de cálculo (se
+                considera títulos a partir de 1 dia, 5 dias ou 30 dias de atraso, modo de quitação e
+                histórico) é uma definição a ser confirmada com a I3Tech.
+              </p>
+              <p className="text-[11px] text-gray-500">
+                <strong>Reconciliação com fontes bancárias:</strong> Tratada como evolução futura
+                dependente de validação de acesso a fontes independentes de pagamento.
+              </p>
             </div>
           </div>
         </div>

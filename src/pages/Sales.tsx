@@ -85,31 +85,31 @@ const cotacoesData: CotacaoPriorizada[] = [
     lead: 'Carlos Henrique Medeiros',
     consultor: 'Rafael Silveira',
     etapa: 'Assinatura',
-    responsavelAcao: 'Consultor (Rafael)',
+    responsavelAcao: 'Responsável a confirmar',
     tipoPendencia: 'Assinatura',
-    detalhePendencia: 'Termo de adesão gerado; assinatura eletrônica pendente pelo lead',
+    detalhePendencia: 'Status do processo de assinatura pendente no CRM (cenário ilustrativo)',
     ultimaAtualizacao: 'Há 3 dias (18/10 às 14:20)',
     proximoCompromisso: 'Nenhum compromisso futuro registrado',
     mensalidadePotencial: 'R$ 290/mês',
     adesao: 'R$ 400',
     motivoPrioridade:
-      'Aguardando assinatura do lead sem compromisso de retorno cadastrado na agenda.',
+      'Processo de assinatura marcado como pendente, sem compromisso futuro registrado na agenda.',
     proximaAcaoRecomendada:
-      'Fazer contato telefônico/WhatsApp para orientar o preenchimento da assinatura eletrônica.',
+      'Fazer contato para verificar se houve recebimento do link e se há dúvidas sobre o termo.',
     regiao: 'Belo Horizonte - MG',
     referenciaComercial: 'Campanha Digital Outubro',
     veiculo: 'Toyota Corolla XEi 2.0 (2022) — Categoria Passeio',
     evidencias: {
-      statusAssociadoDocs: 'Aprovados (RG e Comprovante de endereço conferidos)',
-      statusVeiculoDocs: 'Aprovados (CRLV conferido)',
-      statusVistoria: 'Concluída e aprovada (Laudo nº 44102)',
-      statusAssinatura: 'Pendente (link enviado, aguardando clique e assinatura)',
-      statusAnaliseOperacional: 'Pré-conferência OK; aguarda apenas o contrato assinado',
+      statusAssociadoDocs: 'Aprovados no CRM',
+      statusVeiculoDocs: 'Aprovados no CRM',
+      statusVistoria: 'Aprovada (cenário demonstrativo)',
+      statusAssinatura: 'Pendente (envio e leitura do link a confirmar com a I3Tech)',
+      statusAnaliseOperacional: 'Disponível na Análise Operacional (regras a confirmar)',
       timestamps:
-        'Criação: 12/10 | Última movimentação do consultor: 18/10 | Horário de abertura de link: Não disponível',
+        'Registro no CRM: 12/10 | Última atualização do registro: 18/10 | Rastreamento de leitura: Não verificado',
     },
     mensagemSugerida:
-      'Olá Carlos Henrique! Tudo bem? Vi aqui que a sua cotação (COT-8421) para o Corolla está com a vistoria e documentação aprovadas, faltando apenas a assinatura eletrônica do termo de adesão. Teve alguma dúvida no link de assinatura que te enviamos? Posso te apoiar por aqui agora!',
+      'Olá Carlos Henrique! Tudo bem? Acompanhando sua cotação (COT-8421) para o Corolla, verificamos que os processos de documentação e vistoria estão aprovados, constando a assinatura do termo como pendente. Gostaria de saber se você teve acesso ao documento ou se precisa de algum suporte por aqui.',
   },
   {
     id: 'cot-2',
@@ -117,31 +117,32 @@ const cotacoesData: CotacaoPriorizada[] = [
     lead: 'Fernanda Almeida Prado',
     consultor: 'Lucas Nogueira',
     etapa: 'Vistoria',
-    responsavelAcao: 'Consultor (Lucas)',
+    responsavelAcao: 'Responsável a confirmar',
     tipoPendencia: 'Vistoria',
-    detalhePendencia: 'Link de vistoria prévia veicular enviado; fotos não enviadas pelo associado',
+    detalhePendencia: 'Status do processo de vistoria consta como pendente no CRM',
     ultimaAtualizacao: 'Há 5 dias (16/10 às 11:15)',
     proximoCompromisso: 'Nenhum compromisso futuro registrado',
     mensalidadePotencial: 'R$ 180/mês',
     adesao: 'R$ 250',
     motivoPrioridade:
-      'Vistoria travada há mais de 4 dias úteis sem avanço no link de auto-vistoria.',
+      'Cotação na etapa Vistoria com processo de vistoria pendente há mais de 4 dias e sem compromisso futuro na agenda.',
     proximaAcaoRecomendada:
-      'Acionar a lead para verificar se houve dificuldade no aplicativo de vistoria ou agendar vistoria assistida.',
+      'Contatar a lead para orientar a realização da vistoria ou checar necessidade de vistoria assistida.',
     regiao: 'Contagem - MG',
     referenciaComercial: 'Indicação de Associado',
     veiculo: 'Hyundai HB20 1.0 Flex (2021)',
     evidencias: {
       statusAssociadoDocs: 'Aprovados',
       statusVeiculoDocs: 'Aprovados',
-      statusVistoria: 'Pendente (Fotos não submetidas na plataforma)',
-      statusAssinatura: 'Não iniciada (depende de vistoria)',
-      statusAnaliseOperacional: 'Aguardando laudo de vistoria para conferência',
+      statusVistoria:
+        'Pendente (não há evidência no CRM se o link foi aberto ou se houve tentativa)',
+      statusAssinatura: 'Não iniciada',
+      statusAnaliseOperacional: 'Aguardando vistoria (controles na Análise Operacional)',
       timestamps:
-        'Criação: 14/10 | Disparo do link de vistoria: 16/10 | Histórico de tentativas do lead: Não disponível no CRM',
+        'Registro no CRM: 14/10 | Atualização de registro: 16/10 | Envio/leitura: Não validado no CRM',
     },
     mensagemSugerida:
-      'Olá Fernanda! Tudo bem? Estou acompanhando sua proteção veicular (COT-8395) para o HB20. Vi que o link de vistoria veicular foi enviado. Você teve alguma dificuldade para abrir o app ou tirar as fotos? Se preferir, posso te orientar passo a passo agora!',
+      'Olá Fernanda! Tudo bem? Estou acompanhando sua cotação (COT-8395) para o HB20. No sistema consta a vistoria como pendente. Teve alguma dificuldade para realizar as fotos ou gostaria de apoio para concluir essa etapa?',
   },
   {
     id: 'cot-3',
@@ -149,30 +150,31 @@ const cotacoesData: CotacaoPriorizada[] = [
     lead: 'Ricardo Souza Mendes',
     consultor: 'Amanda Vasconcelos',
     etapa: 'Documentos',
-    responsavelAcao: 'Consultor (Amanda)',
+    responsavelAcao: 'Responsável a confirmar',
     tipoPendencia: 'Documentos do veículo',
-    detalhePendencia: 'CRLV anexado com imagem ilegível; solicitado reenvio pelo consultor',
+    detalhePendencia:
+      'Cenário ilustrativo com regra a confirmar: documento do veículo com apontamento de pendência',
     ultimaAtualizacao: 'Há 2 dias (19/10 às 09:30)',
     proximoCompromisso: 'Nenhum compromisso futuro registrado',
     mensalidadePotencial: 'R$ 230/mês',
     adesao: 'R$ 300',
     motivoPrioridade:
-      'Documento do veículo com pendência de legibilidade; cotação parada na etapa de documentos.',
-    proximaAcaoRecomendada: 'Solicitar envio de foto nítida do documento do veículo via WhatsApp.',
+      'Processo de documentos do veículo com pendência assinalada e sem agendamento futuro no lead.',
+    proximaAcaoRecomendada: 'Solicitar reenvio do documento do veículo com boa legibilidade.',
     regiao: 'Betim - MG',
     referenciaComercial: 'Parceiro Oficina Credenciada',
     veiculo: 'Chevrolet Onix Plus Turbo (2020)',
     evidencias: {
-      statusAssociadoDocs: 'Aprovados (CNH legível)',
-      statusVeiculoDocs: 'Rejeitado por legibilidade (CRLV cortado na foto)',
-      statusVistoria: 'Aprovada previamente',
+      statusAssociadoDocs: 'Aprovados',
+      statusVeiculoDocs: 'Pendente com motivo registrado (cenário demonstrativo)',
+      statusVistoria: 'Aprovada',
       statusAssinatura: 'Não iniciada',
-      statusAnaliseOperacional: 'Recusou o documento do veículo em 19/10 às 09:25',
+      statusAnaliseOperacional: 'Pendência registrada no CRM em 19/10 às 09:25',
       timestamps:
-        'Criação: 17/10 | Parecer da conferência: 19/10 | Resposta do associado: Não registrada',
+        'Registro: 17/10 | Última atualização do registro: 19/10 | Histórico de contato consolidado: Não verificado',
     },
     mensagemSugerida:
-      'Olá Ricardo! Tudo bem? A análise da sua cotação (COT-8512) identificou que a foto do CRLV do seu Onix Plus ficou um pouco embaçada. Poderia me enviar uma nova foto bem nítida por aqui para eu liberar sua proposta hoje mesmo?',
+      'Olá Ricardo! Tudo bem? Na conferência da sua cotação (COT-8512), foi apontada uma pendência na foto do documento do seu Onix Plus. Poderia nos enviar uma nova imagem nítida para darmos andamento à cotação?',
   },
   {
     id: 'cot-4',
@@ -180,32 +182,33 @@ const cotacoesData: CotacaoPriorizada[] = [
     lead: 'Juliana Costa Ferreira',
     consultor: 'Rafael Silveira',
     etapa: 'Análise Conferência',
-    responsavelAcao: 'Análise Operacional (Conferência)',
+    responsavelAcao: 'Responsável a confirmar',
     tipoPendencia: 'Análise operacional',
     detalhePendencia:
-      'Documentos e vistoria enviados; fila de conferência operacional da sede pendente',
+      'Cotação em Análise Conferência; alteração de status e fotos disponível na Análise Operacional',
     ultimaAtualizacao: 'Há 1 dia (20/10 às 15:10)',
     proximoCompromisso: 'A confirmar na mesa de conferência',
     mensalidadePotencial: 'R$ 350/mês',
     adesao: 'R$ 600',
     motivoPrioridade:
-      'Comercial concluiu a captação; fila operacional precisa emitir o parecer para liberação de aprovação.',
+      'Cotação na etapa Análise Conferência aguardando parecer ou deliberação nos controles operacionais.',
     proximaAcaoRecomendada:
-      'Acionar o time de conferência operacional para priorizar o ticket de aprovação da cotação.',
+      'Verificar o status da cotação na Análise Operacional e validar alçadas e responsabilidades com a I3Tech.',
     regiao: 'Belo Horizonte - MG',
     referenciaComercial: 'Consultoria Direta',
-    veiculo: 'Jeep Compass Longitude Diesel (2021) — Alto Valor Protegido',
+    veiculo: 'Jeep Compass Longitude Diesel (2021)',
     evidencias: {
-      statusAssociadoDocs: 'Enviados pelo lead',
-      statusVeiculoDocs: 'Enviados pelo lead',
-      statusVistoria: 'Enviada e pré-validada pelo vistoriador',
-      statusAssinatura: 'Minuta pronta para envio',
-      statusAnaliseOperacional: 'Em análise pela mesa de conferência da matriz',
+      statusAssociadoDocs: 'Enviados no CRM',
+      statusVeiculoDocs: 'Enviados no CRM',
+      statusVistoria: 'Enviada',
+      statusAssinatura: 'Não finalizada',
+      statusAnaliseOperacional:
+        'A tela Análise Conferência informa que a alteração de status fica na Análise Operacional',
       timestamps:
-        'Criação: 18/10 | Submissão à conferência: 20/10 às 15:10 | SLA operacional: A confirmar',
+        'Registro: 18/10 | Última atualização: 20/10 às 15:10 | Matriz de permissões: A confirmar com a I3Tech',
     },
     mensagemSugerida:
-      'Olá Juliana! Informamos que os documentos e a vistoria do seu Compass foram recebidos com sucesso. A cotação (COT-8460) está agora na fase final de conferência cadastral pela nossa mesa técnica. Qualquer novidade retorno imediatamente!',
+      'Olá Juliana! Informamos que os dados e processos da sua cotação (COT-8460) estão em acompanhamento na etapa de Análise Conferência. Havendo qualquer atualização operacional, faremos contato imediato.',
   },
   {
     id: 'cot-5',
@@ -213,30 +216,32 @@ const cotacoesData: CotacaoPriorizada[] = [
     lead: 'Marcos Vinicius Santos',
     consultor: 'Lucas Nogueira',
     etapa: 'Documentos',
-    responsavelAcao: 'Consultor (Lucas)',
+    responsavelAcao: 'Responsável a confirmar',
     tipoPendencia: 'Documentos do associado',
-    detalhePendencia: 'Comprovante de residência desatualizado (data superior a 90 dias)',
+    detalhePendencia:
+      'Cenário ilustrativo com regra a confirmar: comprovante de residência com data a validar (prazo oficial pendente de confirmação com a I3Tech)',
     ultimaAtualizacao: 'Há 4 dias (17/10 às 17:00)',
     proximoCompromisso: 'Nenhum compromisso futuro registrado',
     mensalidadePotencial: 'A confirmar',
     adesao: 'Não disponível',
-    motivoPrioridade: 'Documento do associado vencido e sem contato de retorno recente.',
+    motivoPrioridade:
+      'Documento do associado com apontamento de pendência e sem compromisso futuro na agenda.',
     proximaAcaoRecomendada:
-      'Solicitar comprovante de endereço recente (luz, água ou internet dos últimos 60 dias).',
+      'Solicitar envio de comprovante recente conforme regra de aceitação a validar com a I3Tech.',
     regiao: 'Nova Lima - MG',
     referenciaComercial: 'Google Ads',
     veiculo: 'Fiat Strada Freedom 1.3 (2023)',
     evidencias: {
-      statusAssociadoDocs: 'Pendente (Comprovante emitido há 120 dias)',
+      statusAssociadoDocs: 'Pendente (cenário demonstrativo com regras a confirmar)',
       statusVeiculoDocs: 'Aprovados',
       statusVistoria: 'Aprovada',
       statusAssinatura: 'Não iniciada',
-      statusAnaliseOperacional: 'Aguardando comprovante válido',
+      statusAnaliseOperacional: 'Aguardando validação documental',
       timestamps:
-        'Criação: 15/10 | Solicitação do consultor: 17/10 | Histórico de leitura: Não disponível',
+        'Registro: 15/10 | Atualização de registro: 17/10 | Histórico consolidado de leitura: Não verificado',
     },
     mensagemSugerida:
-      'Olá Marcos Vinicius! Tudo bem? Para concluirmos a aprovação da sua proteção veicular (COT-8530), a mesa técnica solicitou um comprovante de residência mais recente (dos últimos 90 dias). Você teria uma conta recente para me mandar em foto?',
+      'Olá Marcos Vinicius! Tudo bem? Para o andamento da sua cotação (COT-8530), precisamos atualizar o comprovante de endereço. Você teria um documento recente para nos enviar por aqui?',
   },
 ]
 
@@ -293,6 +298,40 @@ export default function Sales() {
     return matchSearch && matchConsultor && matchEtapa && matchPendencia
   })
 
+  // Helper para converter string monetária ("R$ 290/mês", "R$ 400") em número
+  const parseValorNumerico = (str: string): number | null => {
+    if (
+      !str ||
+      str.toLowerCase().includes('confirmar') ||
+      str.toLowerCase().includes('disponível')
+    ) {
+      return null
+    }
+    const clean = str.replace(/[^\d,]/g, '').replace(',', '.')
+    const parsed = parseFloat(clean)
+    return isNaN(parsed) ? null : parsed
+  }
+
+  // Cálculos dinâmicos respeitando o filtro ativo
+  const totalCotacoes = filteredCotacoes.length
+
+  // Mensalidades conhecidas
+  const cotacoesComMensalidade = filteredCotacoes
+    .map((c) => parseValorNumerico(c.mensalidadePotencial))
+    .filter((v): v is number => v !== null)
+  const somaMensalidade = cotacoesComMensalidade.reduce((acc, val) => acc + val, 0)
+
+  // Adesões conhecidas
+  const cotacoesComAdesao = filteredCotacoes
+    .map((c) => parseValorNumerico(c.adesao))
+    .filter((v): v is number => v !== null)
+  const somaAdesao = cotacoesComAdesao.reduce((acc, val) => acc + val, 0)
+
+  // Sem compromisso futuro registrado
+  const countSemCompromisso = filteredCotacoes.filter((c) =>
+    c.proximoCompromisso.toLowerCase().includes('nenhum'),
+  ).length
+
   return (
     <div className="space-y-8 animate-fade-in relative">
       {/* Banner Global Mandatório */}
@@ -332,9 +371,8 @@ export default function Sales() {
               Quais cotações precisam da minha atenção, qual é o bloqueio e o que devo fazer agora?
             </p>
             <p className="text-xs sm:text-sm text-gray-600 mt-1 max-w-3xl leading-relaxed">
-              O primeiro MVP substitui um Kanban genérico por uma lista operacional que evidencia
-              pendências objetivas no CRM (documentos do associado, documentos do veículo, vistoria,
-              assinatura e análise operacional).
+              O Cogito complementa o funil do CRM com uma lista de prioridades, reunindo pendências,
+              responsáveis e próximos passos.
             </p>
           </div>
 
@@ -360,58 +398,72 @@ export default function Sales() {
               Como a detecção funciona neste MVP
             </span>
             <span className="text-[10px] text-blue-700 font-medium">
-              Sem previsão de conversão por IA
+              Sem previsão de conversão por IA (campo Chance de Conversão não é previsão de IA)
             </span>
           </div>
           <p className="text-xs text-gray-700 leading-relaxed">
             No primeiro MVP,{' '}
             <strong>a detecção e a ordenação são baseadas em regras explícitas</strong> (tempo desde
-            última atualização, ausência de compromisso futuro na agenda e pendências específicas em
-            documentos, vistoria ou assinatura). A{' '}
+            última atualização de registro, ausência de compromisso futuro na agenda e pendências
+            específicas em documentos, vistoria ou assinatura). A{' '}
             <strong>
-              IA apoia exclusivamente o resumo situacional, a explicação contextual e a preparação
-              de rascunhos de mensagens para revisão humana
+              IA apoia exclusivamente o resumo situacional, a explicação contextual e o rascunho
+              demonstrativo da experiência de redação assistida
             </strong>
             . Nenhuma mensagem é enviada sem o comando explícito do usuário.
           </p>
         </div>
 
-        {/* 4 Cards de Resumo Operacional (Linguagem rigorosa e sem somas indevidas) */}
+        {/* 4 Cards de Resumo Operacional (Respeitam estritamente o filtro e valores ausentes) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
-          {/* Card 1: Cotações Priorizadas */}
+          {/* Card 1: Quantidade de cotações */}
           <div className="bg-white rounded-xl p-4 border border-gray-200 border-l-4 border-l-blue-600 shadow-xs">
             <span className="text-[10px] font-bold uppercase tracking-wider text-blue-800 block">
               Volume no Filtro
             </span>
             <div className="text-2xl font-extrabold text-[#0E1B3D] tabular-nums mt-0.5">
-              {filteredCotacoes.length} cotações
+              {totalCotacoes} {totalCotacoes === 1 ? 'cotação' : 'cotações'}
             </div>
-            <p className="text-[11px] text-gray-500 mt-1">Com bloqueios identificados por regras</p>
+            <p className="text-[11px] text-gray-500 mt-1">
+              Registros correspondentes aos filtros ativos
+            </p>
           </div>
 
-          {/* Card 2: Mensalidade potencial das cotações priorizadas */}
+          {/* Card 2: Mensalidade potencial */}
           <div className="bg-white rounded-xl p-4 border border-gray-200 border-l-4 border-l-emerald-600 shadow-xs">
             <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block">
               Mensalidade Potencial
             </span>
             <div className="text-2xl font-extrabold text-emerald-700 tabular-nums mt-0.5">
-              R$ 1.050/mês
+              {cotacoesComMensalidade.length > 0
+                ? `R$ ${somaMensalidade.toLocaleString('pt-BR')}/mês`
+                : 'A confirmar'}
             </div>
             <p className="text-[10px] text-gray-500 mt-1">
-              Soma das propostas ativas selecionadas (sem duplicidade ou FIPE)
+              {totalCotacoes === 0
+                ? 'Nenhuma cotação no filtro'
+                : cotacoesComMensalidade.length === totalCotacoes
+                  ? `Total conhecido de ${totalCotacoes} de ${totalCotacoes} cotações`
+                  : `Total conhecido de ${cotacoesComMensalidade.length} das ${totalCotacoes} cotações`}
             </p>
           </div>
 
-          {/* Card 3: Adesões Potenciais */}
+          {/* Card 3: Total de adesões potenciais */}
           <div className="bg-white rounded-xl p-4 border border-gray-200 border-l-4 border-l-indigo-600 shadow-xs">
             <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-800 block">
-              Taxa de Adesão
+              Total de adesões potenciais
             </span>
             <div className="text-2xl font-extrabold text-[#0E1B3D] tabular-nums mt-0.5">
-              R$ 1.550
+              {cotacoesComAdesao.length > 0
+                ? `R$ ${somaAdesao.toLocaleString('pt-BR')}`
+                : 'Não disponível'}
             </div>
             <p className="text-[10px] text-gray-500 mt-1">
-              Adesões separadas da mensalidade recorrente
+              {totalCotacoes === 0
+                ? 'Nenhuma cotação no filtro'
+                : cotacoesComAdesao.length === totalCotacoes
+                  ? `Total conhecido de ${totalCotacoes} de ${totalCotacoes} cotações`
+                  : `Total conhecido de ${cotacoesComAdesao.length} das ${totalCotacoes} cotações`}
             </p>
           </div>
 
@@ -421,10 +473,10 @@ export default function Sales() {
               Agenda do Lead
             </span>
             <div className="text-2xl font-extrabold text-amber-700 tabular-nums mt-0.5">
-              4 cotações
+              {countSemCompromisso} {countSemCompromisso === 1 ? 'cotação' : 'cotações'}
             </div>
             <p className="text-[10px] text-gray-500 mt-1">
-              Nenhum compromisso futuro registrado na agenda
+              Sem compromisso futuro registrado na agenda no filtro atual
             </p>
           </div>
         </div>
@@ -747,42 +799,98 @@ export default function Sales() {
                 </button>
               </div>
 
-              {/* Corpo com os 7 Requisitos da Especificação */}
+              {/* Corpo: Painel com 5 blocos separados conforme instrução */}
               <div className="p-5 sm:p-6 space-y-6 flex-1 text-xs sm:text-sm">
-                {/* 1. Resumo da Situação */}
-                <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 space-y-1.5">
+                {/* 1. Dados ilustrativos da cotação */}
+                <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 space-y-2">
                   <div className="flex items-center justify-between text-blue-900 font-bold uppercase tracking-wider text-[11px]">
                     <span className="flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-                      1. Resumo da Situação
+                      <FileText className="w-3.5 h-3.5 text-blue-600" />
+                      1. Dados ilustrativos da cotação
                     </span>
-                    <span className="text-[10px] text-blue-700">Contexto Cogito</span>
+                    <span className="text-[10px] text-blue-700 font-semibold">
+                      Exemplo ilustrativo
+                    </span>
                   </div>
-                  <p className="text-gray-800 leading-relaxed">
-                    A cotação <strong>{selectedCotacao.codigo}</strong> refere-se ao veículo{' '}
-                    <strong>{selectedCotacao.veiculo}</strong>. Encontra-se na etapa de{' '}
-                    <strong>{selectedCotacao.etapa}</strong> sob responsabilidade comercial de{' '}
-                    <strong>{selectedCotacao.consultor}</strong> ({selectedCotacao.regiao}).
-                  </p>
-                  <div className="pt-2 border-t border-blue-200/60 grid grid-cols-2 gap-2 text-[11px]">
+                  <div className="grid grid-cols-2 gap-2 text-xs text-gray-800">
                     <div>
-                      <span className="text-gray-500">Mensalidade potencial:</span>{' '}
-                      <strong className="text-gray-900">
-                        {selectedCotacao.mensalidadePotencial}
-                      </strong>
+                      <span className="text-gray-500 block text-[10px] uppercase font-bold">
+                        Código & Lead
+                      </span>
+                      <strong>{selectedCotacao.codigo}</strong> — {selectedCotacao.lead}
                     </div>
                     <div>
-                      <span className="text-gray-500">Taxa de adesão:</span>{' '}
-                      <strong className="text-gray-900">{selectedCotacao.adesao}</strong>
+                      <span className="text-gray-500 block text-[10px] uppercase font-bold">
+                        Veículo
+                      </span>
+                      <span>{selectedCotacao.veiculo}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500 block text-[10px] uppercase font-bold">
+                        Etapa do Funil
+                      </span>
+                      <span className="inline-flex px-1.5 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold text-[11px]">
+                        {selectedCotacao.etapa}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500 block text-[10px] uppercase font-bold">
+                        Consultor & Região
+                      </span>
+                      <span>
+                        {selectedCotacao.consultor} ({selectedCotacao.regiao})
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500 block text-[10px] uppercase font-bold">
+                        Mensalidade Potencial
+                      </span>
+                      <strong>{selectedCotacao.mensalidadePotencial}</strong>
+                    </div>
+                    <div>
+                      <span className="text-gray-500 block text-[10px] uppercase font-bold">
+                        Total de adesões potenciais
+                      </span>
+                      <strong>{selectedCotacao.adesao}</strong>
                     </div>
                   </div>
                 </div>
 
-                {/* 2. Evidências Utilizadas */}
+                {/* 2. Regra demonstrativa de priorização */}
                 <div className="space-y-2">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-gray-600">
-                    2. Evidências Utilizadas (Dados do CRM)
+                    2. Regra demonstrativa de priorização
                   </h4>
+                  <div className="p-3.5 bg-white rounded-xl border border-gray-200 text-xs text-gray-700 space-y-1.5">
+                    <p className="font-medium text-gray-900">{selectedCotacao.motivoPrioridade}</p>
+                    <ul className="list-disc list-inside text-gray-600 space-y-1 pt-1 text-[11px]">
+                      <li>
+                        <strong>Última atualização de registro:</strong>{' '}
+                        {selectedCotacao.ultimaAtualizacao} (não representa confirmação de último
+                        contato efetivo).
+                      </li>
+                      <li>
+                        <strong>Compromisso na agenda:</strong> {selectedCotacao.proximoCompromisso}
+                        .
+                      </li>
+                      <li>
+                        <strong>Regra aplicada:</strong> Priorizar registros sem compromisso futuro
+                        cadastrado na agenda e com processos assinalados como pendentes.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* 3. Explicação do Cogito & Evidências do cenário demonstrativo */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-gray-700">
+                      3. Explicação do Cogito
+                    </h4>
+                    <span className="text-[10px] font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+                      Evidências do cenário demonstrativo
+                    </span>
+                  </div>
                   <div className="p-3.5 bg-gray-50 rounded-xl border border-gray-200 space-y-2 text-xs">
                     <div className="flex items-start justify-between border-b border-gray-200/60 pb-1.5">
                       <span className="text-gray-500">Documentos do associado:</span>
@@ -809,124 +917,126 @@ export default function Sales() {
                       </span>
                     </div>
                     <div className="flex items-start justify-between border-b border-gray-200/60 pb-1.5">
-                      <span className="text-gray-500">Análise operacional (sede):</span>
+                      <span className="text-gray-500">Análise Operacional:</span>
                       <span className="font-medium text-gray-800 text-right">
                         {selectedCotacao.evidencias.statusAnaliseOperacional}
                       </span>
                     </div>
                     <div className="pt-1 text-[11px] text-gray-500 leading-snug">
-                      <strong>Rastreamento de datas:</strong>{' '}
+                      <strong>Rastreamento no demonstrativo:</strong>{' '}
                       {selectedCotacao.evidencias.timestamps}
                     </div>
                   </div>
                 </div>
 
-                {/* 3. Pendências e Responsáveis */}
+                {/* 4. Próximo passo sugerido */}
                 <div className="space-y-2">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-gray-600">
-                    3. Pendências e Responsabilidades
+                    4. Próximo passo sugerido
                   </h4>
-                  <div className="p-3.5 bg-amber-50/70 rounded-xl border border-amber-200 space-y-2">
+                  <div className="p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200 text-xs text-emerald-950 space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-amber-900 text-xs">
-                        {selectedCotacao.tipoPendencia}
+                      <span className="font-bold text-emerald-900">
+                        {selectedCotacao.proximaAcaoRecomendada}
                       </span>
-                      <span className="text-[11px] font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
-                        Responsável: {selectedCotacao.responsavelAcao}
+                      <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
+                        {selectedCotacao.responsavelAcao}
                       </span>
                     </div>
-                    <p className="text-xs text-amber-950 leading-relaxed">
+                    <p className="text-xs text-emerald-900/80 leading-relaxed">
+                      Pendência assinalada: <strong>{selectedCotacao.tipoPendencia}</strong> —{' '}
                       {selectedCotacao.detalhePendencia}
                     </p>
+                    <div className="flex flex-wrap items-center gap-2 pt-1">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleSimulateAction('Simulação de agendamento de compromisso na agenda')
+                        }
+                        className="px-3 py-1.5 rounded-lg bg-white border border-emerald-300 text-emerald-800 hover:bg-emerald-100 font-semibold transition-colors"
+                      >
+                        Simular registro de compromisso
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSimulateAction('Simulação de notificação interna')}
+                        className="px-3 py-1.5 rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
+                      >
+                        Simular notificação
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                {/* 4. Explicação da Prioridade */}
+                {/* 5. Informações ainda não disponíveis */}
                 <div className="space-y-2">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-gray-600">
-                    4. Explicação da Prioridade
+                    5. Informações ainda não disponíveis
                   </h4>
-                  <div className="p-3.5 bg-white rounded-xl border border-gray-200 text-xs text-gray-700 space-y-1.5">
-                    <p className="font-medium text-gray-900">{selectedCotacao.motivoPrioridade}</p>
-                    <ul className="list-disc list-inside text-gray-600 space-y-1 pt-1">
-                      <li>Última atualização registrada: {selectedCotacao.ultimaAtualizacao}.</li>
+                  <div className="p-3 bg-amber-50/60 rounded-xl border border-amber-200 text-xs text-amber-950 space-y-1">
+                    <p className="font-semibold flex items-center gap-1.5 text-amber-900">
+                      <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
+                      A confirmar com a I3Tech:
+                    </p>
+                    <ul className="list-disc list-inside text-[11px] text-amber-900/90 space-y-0.5">
                       <li>
-                        Status de compromisso na agenda: {selectedCotacao.proximoCompromisso}.
+                        Histórico consolidado de envio, entrega, leitura e resposta de propostas e
+                        termos.
                       </li>
-                      <li>Inércia no funil de vendas sem agendamento futuro de retorno.</li>
+                      <li>
+                        Data de entrada em cada etapa e semântica exata dos timestamps do CRM.
+                      </li>
+                      <li>
+                        Matriz completa de responsabilidades e permissões entre consultor e mesa da
+                        sede.
+                      </li>
+                      <li>
+                        Obrigatoriedade e exceções de prazos para documentos (ex.: comprovantes de
+                        residência).
+                      </li>
+                      <li>Efeitos sistêmicos e APIs de escrita em tempo real.</li>
                     </ul>
                   </div>
                 </div>
 
-                {/* 5. Próximo Passo Recomendado */}
-                <div className="space-y-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-600">
-                    5. Próximo Passo Recomendado
-                  </h4>
-                  <div className="p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200 text-xs text-emerald-950 space-y-2">
-                    <p className="font-semibold">{selectedCotacao.proximaAcaoRecomendada}</p>
-                    <div className="flex flex-wrap items-center gap-2 pt-1">
-                      <button
-                        type="button"
-                        onClick={() => handleSimulateAction('Agendamento de compromisso no CRM')}
-                        className="px-3 py-1.5 rounded-lg bg-white border border-emerald-300 text-emerald-800 hover:bg-emerald-100 font-semibold transition-colors"
-                      >
-                        Registrar compromisso na agenda
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleSimulateAction('Notificação interna da equipe')}
-                        className="px-3 py-1.5 rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
-                      >
-                        Notificar responsável
-                      </button>
-                    </div>
+                {/* Registro de Origem */}
+                <div className="p-3 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-semibold text-gray-800">
+                      Registro {selectedCotacao.codigo} no CRM demonstrativo
+                    </p>
+                    <p className="text-[11px] text-gray-500">
+                      Lead: {selectedCotacao.lead} · Consultor: {selectedCotacao.consultor}
+                    </p>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => handleSimulateAction('Abertura simulada do registro no CRM')}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
+                  >
+                    <span>Abrir no CRM (simulação)</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
+                  </button>
                 </div>
 
-                {/* 6. Acesso Conceitual ao Registro de Origem */}
-                <div className="space-y-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-600">
-                    6. Registro de Origem
-                  </h4>
-                  <div className="p-3 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between">
-                    <div>
-                      <p className="text-xs font-semibold text-gray-800">
-                        Registro nº {selectedCotacao.codigo} no CRM I3Tech
-                      </p>
-                      <p className="text-[11px] text-gray-500">
-                        Lead: {selectedCotacao.lead} · Consultor: {selectedCotacao.consultor}
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleSimulateAction('Abertura do registro no CRM')}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
-                    >
-                      <span>Abrir no CRM</span>
-                      <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* 7. Preparação de Mensagem para Revisão (Sem envio automático) */}
+                {/* Preparação de Mensagem para Revisão (Rascunho demonstrativo) */}
                 <div className="space-y-3 pt-2 border-t border-gray-200">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-blue-600" />
                       <h4 className="text-xs font-bold uppercase tracking-wider text-gray-800">
-                        7. Preparação de Mensagem para Revisão
+                        Preparação de Mensagem para Revisão
                       </h4>
                     </div>
                     <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">
-                      Rascunho Sugerido
+                      Rascunho Demonstrativo
                     </span>
                   </div>
 
-                  <p className="text-[11px] text-gray-500 leading-snug">
-                    O rascunho abaixo é uma <strong>sugestão editável gerada pela IA</strong> para o
-                    consultor revisar antes de enviar pelo canal de sua escolha. Nenhuma mensagem é
-                    disparada pelo Cogito.
+                  <p className="text-[11px] text-gray-600 leading-snug">
+                    <strong>Rascunho demonstrativo da experiência de redação assistida.</strong> O
+                    conteúdo abaixo é um texto sugerido pré-configurado para o consultor revisar e
+                    copiar. Nenhuma mensagem é disparada pelo Cogito ou enviada ao cliente.
                   </p>
 
                   <div className="space-y-2">

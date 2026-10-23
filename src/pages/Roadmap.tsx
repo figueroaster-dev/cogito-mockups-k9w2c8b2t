@@ -100,22 +100,21 @@ const initiativesData: RoadmapInitiative[] = [
       'Busca semântica de artigos de ajuda e geração de roteiros passo a passo orientados à tela em que o usuário se encontra.',
   },
 
-  // Backlog — Exploração futura (SOMENTE CARTÕES DE OPORTUNIDADE)
+  // Backlog — Exploração futura (SOMENTE CARTÕES DE OPORTUNIDADE — HIPÓTESES A VALIDAR)
   {
     id: 'init-bk-1',
     frente: 'Backlog — Exploração futura',
     titulo: 'Previsão de Inadimplência & Score Comportamental',
     classificacao: 'C — IA necessária para a experiência proposta',
     problema:
-      'Falta de modelo preditivo para alertar sobre probabilidade de inadimplência antes do vencimento do boleto.',
+      'Hipótese de oportunidade: avaliar se padrões históricos de pagamentos permitem antecipar risco de atraso antes do vencimento.',
     usuarioPrincipal: 'Gestão Financeira e Risco',
     resultadoEsperado:
-      'Identificação precoce de padrões de atraso por perfil de associado, região e plano.',
-    dependencias:
-      'Histórico completo e confiável de pontualidade de pagamentos de pelo menos 18 meses no ERP.',
-    metricaSucesso: 'Acurácia da previsão e redução de 10% nas perdas por inadimplência crônica.',
+      'Sinalização precoce para priorizar contatos preventivos da equipe de cobrança.',
+    dependencias: 'Histórico representativo, com período a definir após análise dos dados no ERP.',
+    metricaSucesso: 'Acurácia de detecção e aderência da equipe em testes piloto.',
     papelAutomacaoIA:
-      'Modelos de machine learning supervisionados treinados sobre dados transacionais e comportamentais.',
+      'Modelos analíticos supervisionados treinados sobre dados transacionais consolidados.',
     apenasCartaoOportunidade: true,
   },
   {
@@ -124,14 +123,15 @@ const initiativesData: RoadmapInitiative[] = [
     titulo: 'Previsão de Retenção & Alerta de Churn de Associados',
     classificacao: 'C — IA necessária para a experiência proposta',
     problema:
-      'Cancelamentos de contratos ocorrem sem sinais prévios capturados pela equipe de relacionamento.',
+      'Hipótese de oportunidade: identificar sinais indiretos que antecedem cancelamentos de contratos para abordagem proativa.',
     usuarioPrincipal: 'Equipe de Retenção e Pós-Venda',
     resultadoEsperado:
-      'Alertas de propensão a cancelamento baseados em frequência de sinistros, tempo de casa e interações.',
-    dependencias: 'Histórico unificado de ocorrências, suporte e dados contratuais.',
-    metricaSucesso: 'Taxa de reversão de solicitações de cancelamento.',
+      'Avisos contextuais para relacionamento antes de solicitações formais de cancelamento.',
+    dependencias:
+      'Histórico representativo, com período a definir após análise dos dados de atendimento e contratos.',
+    metricaSucesso: 'Aderência dos alertas e engajamento nas tentativas de retenção.',
     papelAutomacaoIA:
-      'Análise preditiva de risco de churn e geração de ofertas personalizadas de retenção.',
+      'Análise de padrões de cancelamento e sugestão de abordagens personalizadas de retenção.',
     apenasCartaoOportunidade: true,
   },
   {
@@ -140,15 +140,15 @@ const initiativesData: RoadmapInitiative[] = [
     titulo: 'Vistoria Assistida com Visão Computacional',
     classificacao: 'C — IA necessária para a experiência proposta',
     problema:
-      'Fotos de vistorias com baixa qualidade, ângulos incorretos ou avarias não documentadas geram retrabalho e risco de aceitação indevida.',
+      'Hipótese de oportunidade: apoio ao associado ou vistoriador durante a captura de fotos para evitar reenvios por enquadramento incorreto.',
     usuarioPrincipal: 'Vistoriadores e Analistas de Risco',
     resultadoEsperado:
-      'Validação em tempo real do enquadramento da foto e pré-detecção de amassados e arranhões.',
+      'Orientação em tempo real sobre luz, enquadramento e visibilidade das partes do veículo.',
     dependencias:
-      'Aplicativo mobile ou web com suporte a streaming de câmera e modelo treinado de visão computacional veicular.',
-    metricaSucesso: 'Redução de 70% nas recusas de vistorias por erro de foto.',
+      'Fluxo de câmera compatível e viabilidade técnica a definir após análise das fotos demonstrativas.',
+    metricaSucesso: 'Diminuição de retrabalho e reenvio de fotos em testes com filiais.',
     papelAutomacaoIA:
-      'Modelos de visão computacional para detecção de partes do veículo e classificação de avarias.',
+      'Visão computacional para validação de layout fotográfico e identificação preliminar de componentes do veículo.',
     apenasCartaoOportunidade: true,
   },
   {
@@ -157,15 +157,13 @@ const initiativesData: RoadmapInitiative[] = [
     titulo: 'Análise Inteligente de Documentos e Imagens (OCR + Validação)',
     classificacao: 'C — IA necessária para a experiência proposta',
     problema:
-      'Conferência manual de CRLV, CNH e comprovantes consome tempo significativo da mesa operacional da sede.',
+      'Hipótese de oportunidade: agilizar a conferência manual de CRLV e CNH na mesa técnica através de pré-extração de campos.',
     usuarioPrincipal: 'Mesa de Conferência e Conformidade',
     resultadoEsperado:
-      'Extração automática de texto dos documentos e validação cruzada contra os campos digitados na cotação.',
-    dependencias:
-      'Acesso seguro a imagens em alta resolução e pipeline de OCR com mascaramento de dados sensíveis (LGPD).',
-    metricaSucesso: 'Diminuição de 60% no tempo de conferência de documentos.',
-    papelAutomacaoIA:
-      'OCR avançado com modelos multimodais de validação de layout documental e coerência de dados.',
+      'Extração assistida de texto para conferência visual lado a lado com os dados da cotação.',
+    dependencias: 'Acesso seguro a imagens e conformidade estrita com a LGPD.',
+    metricaSucesso: 'Redução do tempo despendido por documento conferido em amostragem controlada.',
+    papelAutomacaoIA: 'OCR assistido com cruzamento de campos para checagem com supervisão humana.',
     apenasCartaoOportunidade: true,
   },
   {
@@ -174,15 +172,13 @@ const initiativesData: RoadmapInitiative[] = [
     titulo: 'Campanhas Inteligentes e Régua Proativa de Contato',
     classificacao: 'B — Regra + IA',
     problema:
-      'Disparos genéricos de marketing geram baixo engajamento e alta taxa de descadastramento de associados.',
+      'Hipótese de oportunidade: apoiar a redação de mensagens personalizadas em comunicações sazonais com associados.',
     usuarioPrincipal: 'Marketing e Operações Comerciais',
-    resultadoEsperado:
-      'Segmentação dinâmica e redação de mensagens sob medida de acordo com o momento da cotação ou aniversário de contrato.',
-    dependencias:
-      'Integração com ferramenta de disparo oficial e consolidação de consentimentos de comunicação.',
-    metricaSucesso: 'Aumento da taxa de resposta e conversão de campanhas de reativação.',
+    resultadoEsperado: 'Rascunhos orientados ao perfil de veículo e estágio do associado na base.',
+    dependencias: 'Integração oficial de envio e autorizações de contato validadas.',
+    metricaSucesso: 'Taxa de leitura e resposta em campanhas piloto supervisionadas.',
     papelAutomacaoIA:
-      'Geração de cópias customizadas e recomendação de melhores horários de contato baseada em histórico.',
+      'Geração de minutas de mensagens para revisão e disparo por canais homologados.',
     apenasCartaoOportunidade: true,
   },
   {
@@ -191,14 +187,13 @@ const initiativesData: RoadmapInitiative[] = [
     titulo: 'Análises Gerenciais e Copiloto Executivo para Diretoria',
     classificacao: 'B — Regra + IA',
     problema:
-      'Diretores precisam aguardar relatórios mensais estáticos para identificar tendências operacionais e desvios regionais.',
+      'Hipótese de oportunidade: síntese de indicadores operacionais dispersos para reuniões de acompanhamento da gestão.',
     usuarioPrincipal: 'Diretoria Executiva e Gestores de Regional',
     resultadoEsperado:
-      'Copiloto executivo que gera resumos periódicos em linguagem natural e responde a perguntas estratégicas complexas.',
+      'Resumos executivos sob demanda a partir de bases consolidadas de vendas e financeiro.',
     dependencias:
-      'Data Warehouse ou réplica analítica atualizada com dados consolidados de CRM e ERP.',
-    metricaSucesso:
-      'Velocidade na identificação de gargalos regionais e tomada de decisão fundamentada em dados.',
+      'Definição de modelo de integração analítica e homologação prévia das fórmulas gerenciais.',
+    metricaSucesso: 'Clareza e precisão das sínteses validadas pelos gestores de regional.',
     papelAutomacaoIA:
       'Agregação analítica combinada com raciocínio de IA para síntese de relatórios executivos.',
     apenasCartaoOportunidade: true,
@@ -305,10 +300,16 @@ export default function Roadmap() {
         {/* Observação Mandatória */}
         <div className="p-3.5 rounded-xl bg-amber-50/80 border border-amber-200 text-xs text-amber-950 flex items-start gap-2.5">
           <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-          <p className="font-medium leading-relaxed">
-            <strong>Observação de governança:</strong> &quot;Prioridades propostas a partir do
-            discovery. Sequenciamento sujeito à validação de dados, esforço e impacto.&quot;
-          </p>
+          <div className="space-y-1">
+            <p className="font-medium leading-relaxed">
+              <strong>Observação de governança:</strong> &quot;Prioridades propostas a partir do
+              discovery. Sequenciamento sujeito à validação de dados, esforço e impacto.&quot;
+            </p>
+            <p className="text-[11px] text-amber-900/80">
+              Distinguimos rigorosamente dor observada na interface de hipóteses de oportunidade no
+              Backlog. Nenhuma hipótese de backlog constitui requisito técnico fechado.
+            </p>
+          </div>
         </div>
 
         {/* Guia de Classificação: A / B / C */}
