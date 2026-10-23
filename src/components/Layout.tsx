@@ -10,7 +10,8 @@ import {
   Bell,
   Menu,
   X,
-  ExternalLink,
+  Map,
+  ClipboardCheck,
   ChevronRight,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -23,10 +24,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: 'Visão Geral', to: '/', icon: LayoutDashboard },
-  { name: 'Cogito Sales', to: '/sales', icon: TrendingUp },
-  { name: 'Cogito Finance', to: '/finance', icon: Landmark },
-  { name: 'Cogito Help', to: '/help', icon: LifeBuoy },
+  { name: 'Prioridades (Home)', to: '/', icon: LayoutDashboard },
+  { name: 'Cotações para Destravar', to: '/sales', icon: TrendingUp, badge: 'P1' },
+  { name: 'Visão Financeira', to: '/finance', icon: Landmark, badge: 'P2' },
+  { name: 'Help Contextual', to: '/help', icon: LifeBuoy, badge: 'Quick Win' },
+  { name: 'Roadmap do Cogito', to: '/roadmap', icon: Map },
+  { name: 'Validação Técnica', to: '/validacao', icon: ClipboardCheck },
 ]
 
 export default function Layout() {
@@ -38,30 +41,46 @@ export default function Layout() {
     switch (location.pathname) {
       case '/sales':
         return {
-          title: 'Cogito Sales',
-          subtitle: 'Priorização de oportunidades e próxima melhor ação',
-          tag: 'MVP PRIORITÁRIO',
+          title: 'Cogito Sales — Cotações para Destravar',
+          subtitle:
+            'Quais cotações precisam da minha atenção, qual é o bloqueio e o que devo fazer agora?',
+          tag: 'P1 — Primeiro MVP',
         }
       case '/finance':
         return {
-          title: 'Cogito Finance',
-          subtitle: 'Consultas financeiras e validação de dados do ERP',
-          tag: 'PRÓXIMA FRENTE',
+          title: 'Cogito Finance — Fila de Exceções & Reconciliação',
+          subtitle:
+            'Detecção de possíveis ausências de faturamento, faturas pendentes e conferência ERP',
+          tag: 'P2 — Segunda onda',
         }
       case '/help':
         return {
-          title: 'Cogito Help',
+          title: 'Cogito Help — Assistência Contextual',
           subtitle:
-            'Assistência contextual para orientar usuários em fluxos e funcionalidades do CRM e ERP',
-          tag: 'QUICK WIN / ROADMAP',
+            'Orientação operacional por fluxo, manuais de apoio e preparação assistida com supervisão humana',
+          tag: 'Quick Win — Escopo reduzido',
+        }
+      case '/roadmap':
+        return {
+          title: 'Roadmap do Cogito',
+          subtitle:
+            'Visão estratégica estruturada por P1, P2, Quick Win e Backlog de oportunidades',
+          tag: 'Visão de Produto',
+        }
+      case '/validacao':
+        return {
+          title: 'Validação técnica — Dados e Acessos',
+          subtitle:
+            'Questões que precisamos esclarecer para transformar o protótipo em um MVP integrado',
+          tag: 'Pauta I3Tech',
         }
       case '/':
       default:
         return {
-          title: 'Cogito',
+          title: 'Prioridades que precisam da sua atenção',
           subtitle:
-            'Transformando dados operacionais em prioridades, recomendações e ações assistidas.',
-          tag: 'Inteligência para CRM & ERP',
+            'Entenda o que está acontecendo, consulte as evidências e decida o próximo passo.',
+          tag: 'P1 — Primeiro MVP',
         }
     }
   }
@@ -171,8 +190,13 @@ export default function Layout() {
                           className={cn('w-4 h-4', isActive ? 'text-white' : 'text-gray-400')}
                         />
                         <span>{item.name}</span>
+                        {item.badge && (
+                          <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-white/20 text-blue-100">
+                            {item.badge}
+                          </span>
+                        )}
                       </div>
-                      <ChevronRight className="w-4 h-4 text-white/50" />
+                      <ChevronRight className="w-4 h-4 text-white/50" />{' '}
                     </NavLink>
                   )
                 })}
@@ -284,6 +308,11 @@ export default function Layout() {
                         )}
                       />
                       <span className="hidden lg:inline-block truncate">{item.name}</span>
+                      {item.badge && (
+                        <span className="hidden lg:inline-block ml-auto text-[9px] font-bold px-1.5 py-0.5 rounded bg-white/10 text-blue-200 border border-white/10">
+                          {item.badge}
+                        </span>
+                      )}
                     </>
                   )}
                 </NavLink>

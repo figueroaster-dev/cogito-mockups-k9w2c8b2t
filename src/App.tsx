@@ -7,6 +7,8 @@ import Index from './pages/Index'
 import Sales from './pages/Sales'
 import Finance from './pages/Finance'
 import Help from './pages/Help'
+import Roadmap from './pages/Roadmap'
+import Validacao from './pages/Validacao'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 
@@ -21,6 +23,8 @@ const App = () => (
           <Route path="/sales" element={<Sales />} />
           <Route path="/finance" element={<Finance />} />
           <Route path="/help" element={<Help />} />
+          <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/validacao" element={<Validacao />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

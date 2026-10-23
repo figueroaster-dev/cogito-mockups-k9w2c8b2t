@@ -17,100 +17,286 @@ import {
   Filter,
   Check,
   ChevronDown,
+  Car,
+  User,
+  FileCheck2,
+  Eye,
+  Shield,
+  ExternalLink,
+  Layers,
+  HelpCircle,
+  Copy,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 
-interface Opportunity {
+export type EtapaFunil =
+  | 'Recebidas'
+  | 'Negociação'
+  | 'Vistoria'
+  | 'Documentos'
+  | 'Assinatura'
+  | 'Análise Conferência'
+  | 'Aprovados'
+  | 'Aguardando Ativação'
+
+export type PendenciaTipo =
+  | 'Documentos do associado'
+  | 'Documentos do veículo'
+  | 'Vistoria'
+  | 'Assinatura'
+  | 'Análise operacional'
+
+export interface CotacaoPriorizada {
   id: string
-  prioridade: 'Alta' | 'Média'
-  cliente: string
+  codigo: string
+  lead: string
   consultor: string
-  etapa: string
-  valor: string
-  tempoParado: string
-  motivo: string
-  acaoRecomendada: string
-  hasDeepAnalysis?: boolean
+  etapa: EtapaFunil
+  responsavelAcao: string // 'Consultor (Rafael)', 'Análise Operacional (Conferência)', etc. ou 'A confirmar'
+  tipoPendencia: PendenciaTipo
+  detalhePendencia: string
+  ultimaAtualizacao: string // 'Ontem às 16h40', 'Há 4 dias', etc.
+  proximoCompromisso: string // 'Hoje às 15h00' ou 'Nenhum compromisso futuro registrado'
+  mensalidadePotencial: string // 'R$ 210/mês' ou 'A confirmar'
+  adesao: string // 'R$ 350' ou 'Não disponível'
+  motivoPrioridade: string
+  proximaAcaoRecomendada: string
+  regiao: string
+  referenciaComercial: string
+  veiculo: string
+  // Dados de evidências
+  evidencias: {
+    statusAssociadoDocs: string
+    statusVeiculoDocs: string
+    statusVistoria: string
+    statusAssinatura: string
+    statusAnaliseOperacional: string
+    timestamps: string
+  }
+  // Rascunho para mensagem
+  mensagemSugerida: string
 }
 
-const opportunitiesData: Opportunity[] = [
+const cotacoesData: CotacaoPriorizada[] = [
   {
-    id: 'opp-1',
-    prioridade: 'Alta',
-    cliente: 'Carlos Henrique',
-    consultor: 'Rafael',
-    etapa: 'Proposta enviada',
-    valor: 'R$ 3.480/ano',
-    tempoParado: '6 dias',
-    motivo: 'proposta enviada sem retorno e nenhuma próxima atividade registrada',
-    acaoRecomendada: 'Realizar follow-up hoje',
-    hasDeepAnalysis: true,
+    id: 'cot-1',
+    codigo: 'COT-8421',
+    lead: 'Carlos Henrique Medeiros',
+    consultor: 'Rafael Silveira',
+    etapa: 'Assinatura',
+    responsavelAcao: 'Consultor (Rafael)',
+    tipoPendencia: 'Assinatura',
+    detalhePendencia: 'Termo de adesão gerado; assinatura eletrônica pendente pelo lead',
+    ultimaAtualizacao: 'Há 3 dias (18/10 às 14:20)',
+    proximoCompromisso: 'Nenhum compromisso futuro registrado',
+    mensalidadePotencial: 'R$ 290/mês',
+    adesao: 'R$ 400',
+    motivoPrioridade:
+      'Aguardando assinatura do lead sem compromisso de retorno cadastrado na agenda.',
+    proximaAcaoRecomendada:
+      'Fazer contato telefônico/WhatsApp para orientar o preenchimento da assinatura eletrônica.',
+    regiao: 'Belo Horizonte - MG',
+    referenciaComercial: 'Campanha Digital Outubro',
+    veiculo: 'Toyota Corolla XEi 2.0 (2022) — Categoria Passeio',
+    evidencias: {
+      statusAssociadoDocs: 'Aprovados (RG e Comprovante de endereço conferidos)',
+      statusVeiculoDocs: 'Aprovados (CRLV conferido)',
+      statusVistoria: 'Concluída e aprovada (Laudo nº 44102)',
+      statusAssinatura: 'Pendente (link enviado, aguardando clique e assinatura)',
+      statusAnaliseOperacional: 'Pré-conferência OK; aguarda apenas o contrato assinado',
+      timestamps:
+        'Criação: 12/10 | Última movimentação do consultor: 18/10 | Horário de abertura de link: Não disponível',
+    },
+    mensagemSugerida:
+      'Olá Carlos Henrique! Tudo bem? Vi aqui que a sua cotação (COT-8421) para o Corolla está com a vistoria e documentação aprovadas, faltando apenas a assinatura eletrônica do termo de adesão. Teve alguma dúvida no link de assinatura que te enviamos? Posso te apoiar por aqui agora!',
   },
   {
-    id: 'opp-2',
-    prioridade: 'Alta',
-    cliente: 'Fernanda Almeida',
-    consultor: 'Lucas',
-    etapa: 'Aguardando assinatura',
-    valor: 'R$ 4.920/ano',
-    tempoParado: '3 dias',
-    motivo: 'proposta aprovada, assinatura ainda pendente',
-    acaoRecomendada: 'Reenviar assinatura e entrar em contato',
-    hasDeepAnalysis: false,
+    id: 'cot-2',
+    codigo: 'COT-8395',
+    lead: 'Fernanda Almeida Prado',
+    consultor: 'Lucas Nogueira',
+    etapa: 'Vistoria',
+    responsavelAcao: 'Consultor (Lucas)',
+    tipoPendencia: 'Vistoria',
+    detalhePendencia: 'Link de vistoria prévia veicular enviado; fotos não enviadas pelo associado',
+    ultimaAtualizacao: 'Há 5 dias (16/10 às 11:15)',
+    proximoCompromisso: 'Nenhum compromisso futuro registrado',
+    mensalidadePotencial: 'R$ 180/mês',
+    adesao: 'R$ 250',
+    motivoPrioridade:
+      'Vistoria travada há mais de 4 dias úteis sem avanço no link de auto-vistoria.',
+    proximaAcaoRecomendada:
+      'Acionar a lead para verificar se houve dificuldade no aplicativo de vistoria ou agendar vistoria assistida.',
+    regiao: 'Contagem - MG',
+    referenciaComercial: 'Indicação de Associado',
+    veiculo: 'Hyundai HB20 1.0 Flex (2021)',
+    evidencias: {
+      statusAssociadoDocs: 'Aprovados',
+      statusVeiculoDocs: 'Aprovados',
+      statusVistoria: 'Pendente (Fotos não submetidas na plataforma)',
+      statusAssinatura: 'Não iniciada (depende de vistoria)',
+      statusAnaliseOperacional: 'Aguardando laudo de vistoria para conferência',
+      timestamps:
+        'Criação: 14/10 | Disparo do link de vistoria: 16/10 | Histórico de tentativas do lead: Não disponível no CRM',
+    },
+    mensagemSugerida:
+      'Olá Fernanda! Tudo bem? Estou acompanhando sua proteção veicular (COT-8395) para o HB20. Vi que o link de vistoria veicular foi enviado. Você teve alguma dificuldade para abrir o app ou tirar as fotos? Se preferir, posso te orientar passo a passo agora!',
   },
   {
-    id: 'opp-3',
-    prioridade: 'Média',
-    cliente: 'Ricardo Souza',
-    consultor: 'Amanda',
-    etapa: 'Documentação',
-    valor: 'R$ 2.760/ano',
-    tempoParado: '4 dias',
-    motivo: 'documentação incompleta',
-    acaoRecomendada: 'Solicitar documento pendente',
-    hasDeepAnalysis: false,
+    id: 'cot-3',
+    codigo: 'COT-8512',
+    lead: 'Ricardo Souza Mendes',
+    consultor: 'Amanda Vasconcelos',
+    etapa: 'Documentos',
+    responsavelAcao: 'Consultor (Amanda)',
+    tipoPendencia: 'Documentos do veículo',
+    detalhePendencia: 'CRLV anexado com imagem ilegível; solicitado reenvio pelo consultor',
+    ultimaAtualizacao: 'Há 2 dias (19/10 às 09:30)',
+    proximoCompromisso: 'Nenhum compromisso futuro registrado',
+    mensalidadePotencial: 'R$ 230/mês',
+    adesao: 'R$ 300',
+    motivoPrioridade:
+      'Documento do veículo com pendência de legibilidade; cotação parada na etapa de documentos.',
+    proximaAcaoRecomendada: 'Solicitar envio de foto nítida do documento do veículo via WhatsApp.',
+    regiao: 'Betim - MG',
+    referenciaComercial: 'Parceiro Oficina Credenciada',
+    veiculo: 'Chevrolet Onix Plus Turbo (2020)',
+    evidencias: {
+      statusAssociadoDocs: 'Aprovados (CNH legível)',
+      statusVeiculoDocs: 'Rejeitado por legibilidade (CRLV cortado na foto)',
+      statusVistoria: 'Aprovada previamente',
+      statusAssinatura: 'Não iniciada',
+      statusAnaliseOperacional: 'Recusou o documento do veículo em 19/10 às 09:25',
+      timestamps:
+        'Criação: 17/10 | Parecer da conferência: 19/10 | Resposta do associado: Não registrada',
+    },
+    mensagemSugerida:
+      'Olá Ricardo! Tudo bem? A análise da sua cotação (COT-8512) identificou que a foto do CRLV do seu Onix Plus ficou um pouco embaçada. Poderia me enviar uma nova foto bem nítida por aqui para eu liberar sua proposta hoje mesmo?',
+  },
+  {
+    id: 'cot-4',
+    codigo: 'COT-8460',
+    lead: 'Juliana Costa Ferreira',
+    consultor: 'Rafael Silveira',
+    etapa: 'Análise Conferência',
+    responsavelAcao: 'Análise Operacional (Conferência)',
+    tipoPendencia: 'Análise operacional',
+    detalhePendencia:
+      'Documentos e vistoria enviados; fila de conferência operacional da sede pendente',
+    ultimaAtualizacao: 'Há 1 dia (20/10 às 15:10)',
+    proximoCompromisso: 'A confirmar na mesa de conferência',
+    mensalidadePotencial: 'R$ 350/mês',
+    adesao: 'R$ 600',
+    motivoPrioridade:
+      'Comercial concluiu a captação; fila operacional precisa emitir o parecer para liberação de aprovação.',
+    proximaAcaoRecomendada:
+      'Acionar o time de conferência operacional para priorizar o ticket de aprovação da cotação.',
+    regiao: 'Belo Horizonte - MG',
+    referenciaComercial: 'Consultoria Direta',
+    veiculo: 'Jeep Compass Longitude Diesel (2021) — Alto Valor Protegido',
+    evidencias: {
+      statusAssociadoDocs: 'Enviados pelo lead',
+      statusVeiculoDocs: 'Enviados pelo lead',
+      statusVistoria: 'Enviada e pré-validada pelo vistoriador',
+      statusAssinatura: 'Minuta pronta para envio',
+      statusAnaliseOperacional: 'Em análise pela mesa de conferência da matriz',
+      timestamps:
+        'Criação: 18/10 | Submissão à conferência: 20/10 às 15:10 | SLA operacional: A confirmar',
+    },
+    mensagemSugerida:
+      'Olá Juliana! Informamos que os documentos e a vistoria do seu Compass foram recebidos com sucesso. A cotação (COT-8460) está agora na fase final de conferência cadastral pela nossa mesa técnica. Qualquer novidade retorno imediatamente!',
+  },
+  {
+    id: 'cot-5',
+    codigo: 'COT-8530',
+    lead: 'Marcos Vinicius Santos',
+    consultor: 'Lucas Nogueira',
+    etapa: 'Documentos',
+    responsavelAcao: 'Consultor (Lucas)',
+    tipoPendencia: 'Documentos do associado',
+    detalhePendencia: 'Comprovante de residência desatualizado (data superior a 90 dias)',
+    ultimaAtualizacao: 'Há 4 dias (17/10 às 17:00)',
+    proximoCompromisso: 'Nenhum compromisso futuro registrado',
+    mensalidadePotencial: 'A confirmar',
+    adesao: 'Não disponível',
+    motivoPrioridade: 'Documento do associado vencido e sem contato de retorno recente.',
+    proximaAcaoRecomendada:
+      'Solicitar comprovante de endereço recente (luz, água ou internet dos últimos 60 dias).',
+    regiao: 'Nova Lima - MG',
+    referenciaComercial: 'Google Ads',
+    veiculo: 'Fiat Strada Freedom 1.3 (2023)',
+    evidencias: {
+      statusAssociadoDocs: 'Pendente (Comprovante emitido há 120 dias)',
+      statusVeiculoDocs: 'Aprovados',
+      statusVistoria: 'Aprovada',
+      statusAssinatura: 'Não iniciada',
+      statusAnaliseOperacional: 'Aguardando comprovante válido',
+      timestamps:
+        'Criação: 15/10 | Solicitação do consultor: 17/10 | Histórico de leitura: Não disponível',
+    },
+    mensagemSugerida:
+      'Olá Marcos Vinicius! Tudo bem? Para concluirmos a aprovação da sua proteção veicular (COT-8530), a mesa técnica solicitou um comprovante de residência mais recente (dos últimos 90 dias). Você teria uma conta recente para me mandar em foto?',
   },
 ]
 
 export default function Sales() {
   const [isUpdating, setIsUpdating] = useState(false)
+  const [selectedCotacao, setSelectedCotacao] = useState<CotacaoPriorizada | null>(null)
   const [detailOpen, setDetailOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedConsultor, setSelectedConsultor] = useState('Todos os consultores')
   const [selectedEtapa, setSelectedEtapa] = useState('Todas as etapas')
-  const [selectedPrioridade, setSelectedPrioridade] = useState('Todas as prioridades')
-  const [copiedMessage, setCopiedMessage] = useState(false)
+  const [selectedPendencia, setSelectedPendencia] = useState('Todos os tipos de pendência')
+  const [copiedDraft, setCopiedDraft] = useState(false)
+  const [editableMessage, setEditableMessage] = useState('')
+  const [isEditingDraft, setIsEditingDraft] = useState(false)
 
   const handleRefresh = () => {
     setIsUpdating(true)
     setTimeout(() => {
       setIsUpdating(false)
-      toast.success('Simulação de análise atualizada (ambiente demonstrativo).')
-    }, 800)
+      toast.success('Lista de cotações priorizadas atualizada (regras explícitas do MVP).')
+    }, 600)
   }
 
-  const handleOpenDetail = (opp: Opportunity) => {
-    // Both Carlos Henrique and any row click can show Cogito Analysis
+  const handleOpenCotacao = (cot: CotacaoPriorizada) => {
+    setSelectedCotacao(cot)
+    setEditableMessage(cot.mensagemSugerida)
+    setIsEditingDraft(false)
     setDetailOpen(true)
   }
 
-  const handleActionClick = (actionName: string) => {
-    toast.info(`${actionName} (ação demonstrativa — não altera registros no CRM)`)
+  const handleCopyMessage = () => {
+    setCopiedDraft(true)
+    navigator.clipboard?.writeText(editableMessage)
+    toast.success('Rascunho copiado para a área de transferência! (Nenhuma mensagem enviada)')
+    setTimeout(() => setCopiedDraft(false), 2000)
   }
 
-  const handleUseMessage = () => {
-    setCopiedMessage(true)
-    navigator.clipboard?.writeText(
-      'Olá, Carlos! Tudo bem? Vi que encaminhamos sua proposta há alguns dias e gostaria de saber se conseguiu analisá-la. Posso ajudar com alguma dúvida ou verificar alguma condição para avançarmos?',
-    )
-    toast.success('Mensagem copiada! (ação demonstrativa — nenhum envio real realizado)')
-    setTimeout(() => setCopiedMessage(false), 2000)
+  const handleSimulateAction = (acao: string) => {
+    toast.info(`${acao} (Ação demonstrativa — nada é enviado ou alterado no CRM)`)
   }
+
+  // Filtragem da lista
+  const filteredCotacoes = cotacoesData.filter((c) => {
+    const matchSearch =
+      c.lead.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      c.codigo.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      c.veiculo.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchConsultor =
+      selectedConsultor === 'Todos os consultores' || c.consultor === selectedConsultor
+    const matchEtapa = selectedEtapa === 'Todas as etapas' || c.etapa === selectedEtapa
+    const matchPendencia =
+      selectedPendencia === 'Todos os tipos de pendência' || c.tipoPendencia === selectedPendencia
+
+    return matchSearch && matchConsultor && matchEtapa && matchPendencia
+  })
 
   return (
     <div className="space-y-8 animate-fade-in relative">
-      {/* Aviso de Protótipo */}
-      <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs text-blue-900 shadow-xs">
+      {/* Banner Global Mandatório */}
+      <div className="bg-blue-50/80 border border-blue-200 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs text-blue-900 shadow-xs">
         <div className="flex items-center gap-2">
           <Sparkles className="w-3.5 h-3.5 text-blue-600 shrink-0" />
           <span className="font-semibold text-[#0E1B3D]">
@@ -118,279 +304,176 @@ export default function Sales() {
           </span>
         </div>
         <span className="text-[11px] font-medium text-blue-700 bg-blue-100/70 px-2 py-0.5 rounded hidden sm:inline">
-          Ambiente demonstrativo
+          Ambiente demonstrativo · Decisão assistida
         </span>
       </div>
 
       {/* ========================================================= */}
-      {/* 1. HEADER CONTROLS (Period selector & Atualizar análise) */}
+      {/* 1. HEADER DO SALES: COTAÇÕES PARA DESTRAVAR (P1) */}
       {/* ========================================================= */}
-      <div className="space-y-3 pb-4 border-b border-gray-200">
+      <div className="space-y-4 pb-4 border-b border-gray-200">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-xs">
-                MVP PRIORITÁRIO
+                P1 — Primeiro MVP
               </span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-[#EF4444] border border-rose-200">
-                17 oportunidades priorizadas
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">
+                Lista de Trabalho Priorizada
               </span>
-              <span className="text-xs text-gray-400">Proteção Veicular & Frotas</span>
+              <span className="text-xs text-gray-500">
+                Regras explícitas de priorização + IA para contexto e redação
+              </span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight mt-1">
-              Cogito Sales
+            <h1 className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight mt-1.5">
+              Cotações para Destravar
             </h1>
-            <p className="text-xs sm:text-sm text-blue-700 font-semibold mt-0.5">
-              Priorização de oportunidades e próxima melhor ação
+            <p className="text-xs sm:text-sm text-blue-800 font-semibold mt-0.5">
+              Quais cotações precisam da minha atenção, qual é o bloqueio e o que devo fazer agora?
             </p>
-            <p className="text-xs sm:text-sm text-gray-600 mt-1 max-w-2xl leading-relaxed">
-              O Cogito identifica sinais de atenção no funil comercial, organiza as oportunidades
-              por prioridade e sugere o próximo passo para o consultor.
+            <p className="text-xs sm:text-sm text-gray-600 mt-1 max-w-3xl leading-relaxed">
+              O primeiro MVP substitui um Kanban genérico por uma lista operacional que evidencia
+              pendências objetivas no CRM (documentos do associado, documentos do veículo, vistoria,
+              assinatura e análise operacional).
             </p>
           </div>
 
           <div className="flex items-center gap-2.5 self-start sm:self-auto shrink-0">
-            {/* Period selector */}
-            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-gray-300 text-xs sm:text-sm font-medium text-gray-700 shadow-sm cursor-pointer hover:bg-gray-50">
-              <Calendar className="w-4 h-4 text-gray-500" />
-              <span>Hoje (demonstrativo)</span>
-              <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
-            </div>
-
-            {/* Refresh analysis button */}
             <button
               type="button"
               onClick={handleRefresh}
               disabled={isUpdating}
-              title="Ação demonstrativa — não altera registros"
+              title="Ação demonstrativa"
               className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0E1B3D] text-white text-xs sm:text-sm font-semibold hover:bg-blue-600 active:scale-95 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-75"
             >
               <RefreshCw className={cn('w-4 h-4', isUpdating && 'animate-spin')} />
-              <span>{isUpdating ? 'Atualizando...' : 'Atualizar análise'}</span>
+              <span>{isUpdating ? 'Reavaliando...' : 'Reavaliar regras'}</span>
             </button>
           </div>
         </div>
 
-        {/* 1.1 MODELO DO MVP: Regra identifica -> Cogito contextualiza -> IA recomenda -> Consultor decide */}
+        {/* Princípio de Engenharia do MVP */}
         <div className="bg-blue-50/60 border border-blue-200 rounded-xl p-3.5 space-y-1.5">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-blue-900 flex items-center gap-1.5">
+          <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-blue-900">
+            <span className="flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-              Como o MVP funciona
+              Como a detecção funciona neste MVP
             </span>
-            <span className="text-[10px] text-blue-700 font-medium">Princípio Operacional</span>
-          </div>
-          <div className="flex items-center gap-1 sm:gap-2 text-xs font-semibold text-[#0E1B3D] overflow-x-auto pb-1 sm:pb-0">
-            <span className="px-2 py-1 bg-white rounded border border-blue-200 shrink-0">
-              Regra identifica
-            </span>
-            <ArrowRight className="w-3 h-3 text-blue-600 shrink-0" />
-            <span className="px-2 py-1 bg-white rounded border border-blue-200 shrink-0">
-              Cogito contextualiza
-            </span>
-            <ArrowRight className="w-3 h-3 text-blue-600 shrink-0" />
-            <span className="px-2 py-1 bg-blue-600 text-white rounded shrink-0">IA recomenda</span>
-            <ArrowRight className="w-3 h-3 text-blue-600 shrink-0" />
-            <span className="px-2 py-1 bg-emerald-600 text-white rounded shrink-0">
-              Consultor decide
+            <span className="text-[10px] text-blue-700 font-medium">
+              Sem previsão de conversão por IA
             </span>
           </div>
-          <p className="text-[11px] text-gray-600 leading-relaxed pt-0.5">
-            O primeiro MVP combina regras operacionais com IA generativa. O sistema identifica
-            situações objetivas no CRM e utiliza IA para contextualizar e sugerir a ação, sempre com
-            supervisão humana.
+          <p className="text-xs text-gray-700 leading-relaxed">
+            No primeiro MVP,{' '}
+            <strong>a detecção e a ordenação são baseadas em regras explícitas</strong> (tempo desde
+            última atualização, ausência de compromisso futuro na agenda e pendências específicas em
+            documentos, vistoria ou assinatura). A{' '}
+            <strong>
+              IA apoia exclusivamente o resumo situacional, a explicação contextual e a preparação
+              de rascunhos de mensagens para revisão humana
+            </strong>
+            . Nenhuma mensagem é enviada sem o comando explícito do usuário.
           </p>
         </div>
 
-        {/* 1.2 LÓGICA VISUAL DO SALES (3 Etapas) */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-          <div className="bg-white p-3 rounded-xl border border-gray-200 space-y-1">
-            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-blue-100 text-blue-800">
-              1 · Detectar
+        {/* 4 Cards de Resumo Operacional (Linguagem rigorosa e sem somas indevidas) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
+          {/* Card 1: Cotações Priorizadas */}
+          <div className="bg-white rounded-xl p-4 border border-gray-200 border-l-4 border-l-blue-600 shadow-xs">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-blue-800 block">
+              Volume no Filtro
             </span>
-            <p className="text-xs font-bold text-[#0E1B3D] pt-0.5">Sinais Operacionais</p>
-            <p className="text-[11px] text-gray-500 leading-snug">
-              Propostas sem movimentação, documentação incompleta, assinatura pendente ou ausência
-              de próxima atividade agendada.
+            <div className="text-2xl font-extrabold text-[#0E1B3D] tabular-nums mt-0.5">
+              {filteredCotacoes.length} cotações
+            </div>
+            <p className="text-[11px] text-gray-500 mt-1">Com bloqueios identificados por regras</p>
+          </div>
+
+          {/* Card 2: Mensalidade potencial das cotações priorizadas */}
+          <div className="bg-white rounded-xl p-4 border border-gray-200 border-l-4 border-l-emerald-600 shadow-xs">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block">
+              Mensalidade Potencial
+            </span>
+            <div className="text-2xl font-extrabold text-emerald-700 tabular-nums mt-0.5">
+              R$ 1.050/mês
+            </div>
+            <p className="text-[10px] text-gray-500 mt-1">
+              Soma das propostas ativas selecionadas (sem duplicidade ou FIPE)
             </p>
           </div>
-          <div className="bg-white p-3 rounded-xl border border-gray-200 space-y-1">
-            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">
-              2 · Explicar
+
+          {/* Card 3: Adesões Potenciais */}
+          <div className="bg-white rounded-xl p-4 border border-gray-200 border-l-4 border-l-indigo-600 shadow-xs">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-800 block">
+              Taxa de Adesão
             </span>
-            <p className="text-xs font-bold text-[#0E1B3D] pt-0.5">Contexto Transparente</p>
-            <p className="text-[11px] text-gray-500 leading-snug">
-              Explicação objetiva dos motivos da priorização com base no tempo de inércia, valor da
-              oportunidade e histórico do funil.
+            <div className="text-2xl font-extrabold text-[#0E1B3D] tabular-nums mt-0.5">
+              R$ 1.550
+            </div>
+            <p className="text-[10px] text-gray-500 mt-1">
+              Adesões separadas da mensalidade recorrente
             </p>
           </div>
-          <div className="bg-white p-3 rounded-xl border border-gray-200 space-y-1">
-            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
-              3 · Recomendar
+
+          {/* Card 4: Sem Compromisso Futuro */}
+          <div className="bg-white rounded-xl p-4 border border-gray-200 border-l-4 border-l-amber-500 shadow-xs">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 block">
+              Agenda do Lead
             </span>
-            <p className="text-xs font-bold text-[#0E1B3D] pt-0.5">Próximo Passo Assistido</p>
-            <p className="text-[11px] text-gray-500 leading-snug">
-              Sugestão de abordagem e geração assistida de mensagem para confirmação e envio pelo
-              consultor comercial.
+            <div className="text-2xl font-extrabold text-amber-700 tabular-nums mt-0.5">
+              4 cotações
+            </div>
+            <p className="text-[10px] text-gray-500 mt-1">
+              Nenhum compromisso futuro registrado na agenda
             </p>
           </div>
         </div>
       </div>
 
       {/* ========================================================= */}
-      {/* 2. BLOCO 1 — RESUMO DO DIA (4 Cards KPI + Nota IA) */}
+      {/* 2. FILTROS E CONTROLES DA LISTA DE TRABALHO */}
       {/* ========================================================= */}
-      <section className="space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Card 1: 17 Oportunidades (accent vermelho/laranja) */}
-          <div className="bg-white rounded-2xl p-5 border border-gray-200 border-l-4 border-l-[#EF4444] shadow-subtle hover:shadow-elevation transition-all hover:-translate-y-0.5">
-            <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-              <span className="font-semibold text-rose-600">Atenção Imediata</span>
-              <AlertCircle className="w-4 h-4 text-[#EF4444]" />
-            </div>
-            <div className="text-3xl font-extrabold text-[#0E1B3D] tabular-nums tracking-tight">
-              17
-            </div>
-            <p className="text-xs text-gray-600 mt-1 font-medium">
-              Oportunidades precisam de atenção
+      <section className="bg-white rounded-2xl border border-gray-200 shadow-subtle p-5 sm:p-6 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h2 className="text-base sm:text-lg font-bold text-[#0E1B3D]">
+              Fila Operacional de Destravamento
+            </h2>
+            <p className="text-xs text-gray-500">
+              Clique em uma cotação para abrir o painel detalhado com evidências e preparar
+              mensagem.
             </p>
           </div>
-
-          {/* Card 2: R$ 248.600 (azul) */}
-          <div className="bg-white rounded-2xl p-5 border border-gray-200 border-l-4 border-l-[#3B82F6] shadow-subtle hover:shadow-elevation transition-all hover:-translate-y-0.5">
-            <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-              <span className="font-semibold text-blue-600">Volume Total</span>
-              <TrendingUp className="w-4 h-4 text-[#3B82F6]" />
-            </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#0E1B3D] tabular-nums tracking-tight">
-              R$ 248.600
-            </div>
-            <p className="text-xs text-gray-600 mt-1 font-medium">Potencial comercial em risco</p>
-          </div>
-
-          {/* Card 3: 6 Aguardando assinatura (âmbar) */}
-          <div className="bg-white rounded-2xl p-5 border border-gray-200 border-l-4 border-l-[#F59E0B] shadow-subtle hover:shadow-elevation transition-all hover:-translate-y-0.5">
-            <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-              <span className="font-semibold text-amber-600">Etapa de Fechamento</span>
-              <FileText className="w-4 h-4 text-[#F59E0B]" />
-            </div>
-            <div className="text-3xl font-extrabold text-[#0E1B3D] tabular-nums tracking-tight">
-              6
-            </div>
-            <p className="text-xs text-gray-600 mt-1 font-medium">Aguardando assinatura</p>
-          </div>
-
-          {/* Card 4: 4 Sem interação há mais de 5 dias (roxo) */}
-          <div className="bg-white rounded-2xl p-5 border border-gray-200 border-l-4 border-l-[#8B5CF6] shadow-subtle hover:shadow-elevation transition-all hover:-translate-y-0.5">
-            <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-              <span className="font-semibold text-purple-600">Inércia Crítica</span>
-              <Clock className="w-4 h-4 text-[#8B5CF6]" />
-            </div>
-            <div className="text-3xl font-extrabold text-[#0E1B3D] tabular-nums tracking-tight">
-              4
-            </div>
-            <p className="text-xs text-gray-600 mt-1 font-medium">
-              Sem interação há mais de 5 dias
-            </p>
-          </div>
-        </div>
-
-        {/* AI Note box */}
-        <div className="flex items-start gap-3 p-4 rounded-xl bg-blue-50/70 border border-blue-200 text-blue-900 text-sm">
-          <div className="p-1 rounded-md bg-blue-600 text-white shrink-0 mt-0.5">
-            <Sparkles className="w-4 h-4" />
-          </div>
-          <p className="text-xs sm:text-sm font-medium leading-relaxed">
-            O Cogito identificou 17 oportunidades que merecem atenção com base em sinais
-            operacionais observáveis no CRM.
-          </p>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 2.1 MÉTRICAS DO MVP (Área pequena: Como mediríamos o MVP) */}
-      {/* ========================================================= */}
-      <section className="bg-white rounded-2xl p-5 border border-gray-200 shadow-subtle space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-blue-600" />
-            <h3 className="text-xs sm:text-sm font-bold text-[#0E1B3D] uppercase tracking-wider">
-              Como mediríamos o MVP
-            </h3>
-          </div>
-          <span className="text-[11px] text-gray-400">
-            Métricas conceituais — definição final dependerá dos dados disponíveis no CRM.
+          <span className="text-xs text-gray-400">
+            {filteredCotacoes.length} de {cotacoesData.length} registros exibidos
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
-          <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
-            <span className="text-[10px] text-gray-500 uppercase font-semibold block">Volume</span>
-            <span className="text-sm sm:text-base font-bold text-[#0E1B3D]">
-              Oportunidades priorizadas
-            </span>
-            <p className="text-[11px] text-gray-500 mt-0.5">
-              Identificadas por sinais operacionais
-            </p>
-          </div>
-          <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
-            <span className="text-[10px] text-gray-500 uppercase font-semibold block">
-              Recuperação
-            </span>
-            <span className="text-sm sm:text-base font-bold text-emerald-700">
-              Oportunidades recuperadas
-            </span>
-            <p className="text-[11px] text-gray-500 mt-0.5">Reativadas após inércia</p>
-          </div>
-          <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
-            <span className="text-[10px] text-gray-500 uppercase font-semibold block">
-              Eficácia
-            </span>
-            <span className="text-sm sm:text-base font-bold text-blue-700">
-              Conversão após recomendação
-            </span>
-            <p className="text-[11px] text-gray-500 mt-0.5">Fechamento pós-ação assistida</p>
-          </div>
-          <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
-            <span className="text-[10px] text-gray-500 uppercase font-semibold block">Tempo</span>
-            <span className="text-sm sm:text-base font-bold text-purple-700">
-              Tempo médio sem interação
-            </span>
-            <p className="text-[11px] text-gray-500 mt-0.5">Redução da inércia no funil</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 3. BLOCO 2 — PRIORIDADES RECOMENDADAS PELO COGITO (Tabela) */}
-      {/* ========================================================= */}
-      <section className="bg-white rounded-2xl border border-gray-200 shadow-subtle p-5 sm:p-6 space-y-4">
-        <div>
-          <div className="flex items-center justify-between">
-            <h3 className="text-base sm:text-lg font-bold text-[#0E1B3D]">
-              Prioridades recomendadas pelo Cogito
-            </h3>
-            <span className="text-xs text-gray-400">
-              Exemplo demonstrativo — clique em uma linha para abrir a análise de IA
-            </span>
-          </div>
-          <p className="text-xs text-[#6B7280] mt-0.5">
-            Exemplo ilustrativo de como o Cogito analisa a inércia do funil e sugere a abordagem de
-            contato.
-          </p>
-        </div>
-
-        {/* Decorative filters row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {/* Barra de Filtros */}
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
           <div className="relative">
             <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar cliente ou consultor…"
+              placeholder="Buscar código, lead ou veículo…"
               className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+          </div>
+
+          <div className="relative">
+            <select
+              value={selectedConsultor}
+              onChange={(e) => setSelectedConsultor(e.target.value)}
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer"
+            >
+              <option>Todos os consultores</option>
+              <option>Rafael Silveira</option>
+              <option>Lucas Nogueira</option>
+              <option>Amanda Vasconcelos</option>
+            </select>
+            <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
 
           <div className="relative">
@@ -400,121 +483,154 @@ export default function Sales() {
               className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer"
             >
               <option>Todas as etapas</option>
-              <option>Proposta enviada</option>
-              <option>Aguardando assinatura</option>
-              <option>Documentação</option>
+              <option>Recebidas</option>
+              <option>Negociação</option>
+              <option>Vistoria</option>
+              <option>Documentos</option>
+              <option>Assinatura</option>
+              <option>Análise Conferência</option>
+              <option>Aprovados</option>
+              <option>Aguardando Ativação</option>
             </select>
             <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
 
           <div className="relative">
             <select
-              value={selectedPrioridade}
-              onChange={(e) => setSelectedPrioridade(e.target.value)}
+              value={selectedPendencia}
+              onChange={(e) => setSelectedPendencia(e.target.value)}
               className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer"
             >
-              <option>Todas as prioridades</option>
-              <option>Alta</option>
-              <option>Média</option>
+              <option>Todos os tipos de pendência</option>
+              <option>Documentos do associado</option>
+              <option>Documentos do veículo</option>
+              <option>Vistoria</option>
+              <option>Assinatura</option>
+              <option>Análise operacional</option>
             </select>
             <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
         </div>
 
-        {/* DESKTOP / TABLET TABLE */}
-        <div className="hidden md:block overflow-x-auto rounded-xl border border-gray-200">
+        {/* Tabela de Trabalho (Desktop / Tablet) */}
+        <div className="hidden lg:block overflow-x-auto rounded-xl border border-gray-200">
           <table className="w-full text-left text-xs sm:text-sm border-collapse">
             <thead className="bg-[#F7F8FA] text-gray-600 uppercase text-[10px] font-bold tracking-wider border-b border-gray-200">
               <tr>
-                <th className="py-3 px-4">Prioridade</th>
-                <th className="py-3 px-4">Cliente</th>
-                <th className="py-3 px-4">Consultor</th>
-                <th className="py-3 px-4">Etapa</th>
-                <th className="py-3 px-4">Valor</th>
-                <th className="py-3 px-4">Tempo parado</th>
-                <th className="py-3 px-4">Motivo</th>
-                <th className="py-3 px-4 text-right">Ação recomendada</th>
+                <th className="py-3 px-3">Cotação & Lead</th>
+                <th className="py-3 px-3">Etapa & Consultor</th>
+                <th className="py-3 px-3">Responsável Próx. Ação</th>
+                <th className="py-3 px-3">Pendência Específica</th>
+                <th className="py-3 px-3">Última Atualização & Agenda</th>
+                <th className="py-3 px-3">Valores</th>
+                <th className="py-3 px-3 text-right">Próxima Ação</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {opportunitiesData.map((opp) => (
+              {filteredCotacoes.map((cot) => (
                 <tr
-                  key={opp.id}
-                  onClick={() => handleOpenDetail(opp)}
+                  key={cot.id}
+                  onClick={() => handleOpenCotacao(cot)}
                   className="hover:bg-blue-50/50 cursor-pointer transition-colors group"
                 >
-                  {/* Prioridade */}
-                  <td className="py-3.5 px-4">
-                    {opp.prioridade === 'Alta' ? (
-                      <span
-                        className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-[#EF4444]"
-                        title="Prioridade Alta — baseada em sinais operacionais ilustrativos."
-                      >
-                        Alta
+                  {/* Código e Lead */}
+                  <td className="py-3 px-3">
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-bold text-blue-700 text-xs font-mono">
+                          {cot.codigo}
+                        </span>
+                        <span className="text-[10px] text-gray-400">· {cot.regiao}</span>
+                      </div>
+                      <span className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        {cot.lead}
                       </span>
-                    ) : (
-                      <span
-                        className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-[#F59E0B]"
-                        title="Prioridade Média — baseada em sinais operacionais ilustrativos."
-                      >
-                        Média
+                      <span className="text-[11px] text-gray-500 truncate max-w-[190px]">
+                        {cot.veiculo}
                       </span>
-                    )}
-                  </td>
-
-                  {/* Cliente */}
-                  <td className="py-3.5 px-4 font-semibold text-[#0E1B3D] group-hover:text-blue-600 transition-colors">
-                    <div className="flex items-center gap-1.5">
-                      <span>{opp.cliente}</span>
-                      {opp.hasDeepAnalysis && (
-                        <span
-                          className="w-1.5 h-1.5 rounded-full bg-blue-600"
-                          title="Análise detalhada disponível"
-                        />
-                      )}
                     </div>
                   </td>
 
-                  {/* Consultor */}
-                  <td className="py-3.5 px-4 text-gray-600">{opp.consultor}</td>
+                  {/* Etapa e Consultor */}
+                  <td className="py-3 px-3">
+                    <div className="flex flex-col gap-1">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-blue-50 text-blue-800 border border-blue-200 text-xs font-medium w-fit">
+                        {cot.etapa}
+                      </span>
+                      <span className="text-xs text-gray-600">
+                        Consultor: <strong>{cot.consultor}</strong>
+                      </span>
+                    </div>
+                  </td>
 
-                  {/* Etapa */}
-                  <td className="py-3.5 px-4">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-gray-100 text-gray-700 text-xs">
-                      {opp.etapa}
+                  {/* Responsável pela Próxima Ação */}
+                  <td className="py-3 px-3">
+                    <span
+                      className={cn(
+                        'inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium',
+                        cot.responsavelAcao.includes('Consultor')
+                          ? 'bg-amber-50 text-amber-900 border border-amber-200'
+                          : cot.responsavelAcao.includes('Análise Operacional')
+                            ? 'bg-purple-50 text-purple-900 border border-purple-200'
+                            : 'bg-gray-100 text-gray-700',
+                      )}
+                    >
+                      {cot.responsavelAcao}
                     </span>
                   </td>
 
-                  {/* Valor */}
-                  <td className="py-3.5 px-4 font-semibold tabular-nums text-gray-900">
-                    {opp.valor}
-                  </td>
-
-                  {/* Tempo parado */}
-                  <td className="py-3.5 px-4 text-rose-600 font-medium whitespace-nowrap">
-                    {opp.tempoParado}
-                  </td>
-
-                  {/* Motivo */}
-                  <td className="py-3.5 px-4 text-gray-600 text-xs max-w-xs leading-snug">
-                    {opp.motivo}
-                  </td>
-
-                  {/* Ação recomendada */}
-                  <td className="py-3.5 px-4 text-right">
-                    <div className="inline-flex items-center gap-2">
-                      <span className="text-xs font-semibold text-blue-600 group-hover:text-blue-700">
-                        {opp.acaoRecomendada}
+                  {/* Pendência Específica */}
+                  <td className="py-3 px-3 max-w-[210px]">
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-rose-700">
+                        {cot.tipoPendencia}
                       </span>
+                      <span className="text-xs text-gray-700 line-clamp-2 leading-snug">
+                        {cot.detalhePendencia}
+                      </span>
+                    </div>
+                  </td>
+
+                  {/* Última Atualização e Agenda */}
+                  <td className="py-3 px-3">
+                    <div className="flex flex-col text-xs space-y-0.5">
+                      <span className="text-gray-700">
+                        <strong>Atualizado:</strong> {cot.ultimaAtualizacao}
+                      </span>
+                      <span
+                        className={cn(
+                          'text-[11px]',
+                          cot.proximoCompromisso.includes('Nenhum')
+                            ? 'text-rose-600 font-semibold'
+                            : 'text-gray-500',
+                        )}
+                      >
+                        <strong>Agenda:</strong> {cot.proximoCompromisso}
+                      </span>
+                    </div>
+                  </td>
+
+                  {/* Valores Separados */}
+                  <td className="py-3 px-3">
+                    <div className="flex flex-col text-xs font-mono">
+                      <span className="font-bold text-[#0E1B3D]">{cot.mensalidadePotencial}</span>
+                      <span className="text-[10px] text-gray-500">Adesão: {cot.adesao}</span>
+                    </div>
+                  </td>
+
+                  {/* Próxima Ação */}
+                  <td className="py-3 px-3 text-right">
+                    <div className="flex flex-col items-end gap-1">
                       <button
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation()
-                          handleOpenDetail(opp)
+                          handleOpenCotacao(cot)
                         }}
-                        className="text-[11px] font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-2.5 py-1 rounded-md transition-colors"
+                        className="text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-md transition-colors inline-flex items-center gap-1"
                       >
-                        Ver análise
+                        <span>Abrir detalhe</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </td>
@@ -524,57 +640,64 @@ export default function Sales() {
           </table>
         </div>
 
-        {/* MOBILE STACKED CARDS (<= 640px) */}
-        <div className="md:hidden space-y-3">
-          {opportunitiesData.map((opp) => (
+        {/* Cards para Telas Menores / Mobile */}
+        <div className="lg:hidden space-y-3">
+          {filteredCotacoes.map((cot) => (
             <div
-              key={opp.id}
-              onClick={() => handleOpenDetail(opp)}
+              key={cot.id}
+              onClick={() => handleOpenCotacao(cot)}
               className="p-4 rounded-xl border border-gray-200 bg-white hover:border-blue-300 transition-colors cursor-pointer space-y-3"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  {opp.prioridade === 'Alta' ? (
-                    <span
-                      className="px-2 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-[#EF4444]"
-                      title="Prioridade Alta — baseada em sinais operacionais ilustrativos."
-                    >
-                      Alta
-                    </span>
-                  ) : (
-                    <span
-                      className="px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-[#F59E0B]"
-                      title="Prioridade Média — baseada em sinais operacionais ilustrativos."
-                    >
-                      Média
-                    </span>
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-mono text-xs font-bold text-blue-700">{cot.codigo}</span>
+                    <span className="text-[10px] text-gray-400">· {cot.regiao}</span>
+                  </div>
+                  <h3 className="font-bold text-sm text-[#0E1B3D]">{cot.lead}</h3>
+                  <p className="text-xs text-gray-500">{cot.veiculo}</p>
+                </div>
+                <div className="text-right font-mono text-xs">
+                  <span className="font-bold text-[#0E1B3D]">{cot.mensalidadePotencial}</span>
+                  <p className="text-[10px] text-gray-400">Adesão: {cot.adesao}</p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-1.5 text-xs">
+                <span className="px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 font-medium">
+                  {cot.etapa}
+                </span>
+                <span className="px-2 py-0.5 rounded bg-rose-50 text-rose-800 border border-rose-200 font-medium">
+                  {cot.tipoPendencia}
+                </span>
+                <span className="px-2 py-0.5 rounded bg-gray-100 text-gray-700">
+                  Resp: {cot.responsavelAcao}
+                </span>
+              </div>
+
+              <div className="text-xs bg-gray-50 p-2.5 rounded-lg space-y-1 text-gray-700">
+                <p>
+                  <strong>Bloqueio:</strong> {cot.detalhePendencia}
+                </p>
+                <p className="text-gray-500">
+                  <strong>Última atualização:</strong> {cot.ultimaAtualizacao}
+                </p>
+                <p
+                  className={cn(
+                    'text-[11px]',
+                    cot.proximoCompromisso.includes('Nenhum')
+                      ? 'text-rose-600 font-semibold'
+                      : 'text-gray-500',
                   )}
-                  <span className="font-bold text-sm text-[#0E1B3D]">{opp.cliente}</span>
-                </div>
-                <span className="text-xs font-bold text-gray-900">{opp.valor}</span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2 text-xs text-gray-600">
-                <div>
-                  <span className="text-gray-400">Consultor:</span> {opp.consultor}
-                </div>
-                <div>
-                  <span className="text-gray-400">Etapa:</span> {opp.etapa}
-                </div>
-                <div>
-                  <span className="text-gray-400">Parado há:</span>{' '}
-                  <span className="text-rose-600 font-semibold">{opp.tempoParado}</span>
-                </div>
-              </div>
-
-              <div className="text-xs bg-gray-50 p-2 rounded-lg text-gray-600">
-                <span className="font-semibold text-gray-800">Motivo:</span> {opp.motivo}
+                >
+                  <strong>Agenda:</strong> {cot.proximoCompromisso}
+                </p>
               </div>
 
               <div className="flex items-center justify-between pt-1">
-                <span className="text-xs font-semibold text-blue-600">{opp.acaoRecomendada}</span>
-                <span className="text-xs text-blue-700 bg-blue-50 px-2 py-1 rounded font-medium">
-                  Ver análise →
+                <span className="text-xs text-gray-500">Consultor: {cot.consultor}</span>
+                <span className="text-xs font-semibold text-blue-700 inline-flex items-center gap-1">
+                  Ver detalhe e rascunho →
                 </span>
               </div>
             </div>
@@ -583,52 +706,9 @@ export default function Sales() {
       </section>
 
       {/* ========================================================= */}
-      {/* 4. BLOCO 6 — DOIS CARDS "INSIGHT COGITO" */}
+      {/* 3. PAINEL DE DETALHE (DRAWER EXTENSIVO ADAPTADO COM OS 7 PONTOS) */}
       {/* ========================================================= */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Insight 1 */}
-        <div className="bg-white rounded-2xl p-5 border border-gray-200 shadow-subtle flex items-start gap-3.5">
-          <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-            <Sparkles className="w-5 h-5" />
-          </div>
-          <div>
-            <h4 className="text-xs font-bold text-[#0E1B3D] uppercase tracking-wider mb-1">
-              Insight Cogito
-            </h4>
-            <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-              38 oportunidades estão sem movimentação há mais de 5 dias. O maior volume está
-              concentrado na etapa &quot;Proposta enviada&quot;.
-            </p>
-            <span className="text-[10px] text-gray-400 block mt-2">
-              Dados ilustrativos do mockup.
-            </span>
-          </div>
-        </div>
-
-        {/* Insight 2 */}
-        <div className="bg-white rounded-2xl p-5 border border-gray-200 shadow-subtle flex items-start gap-3.5">
-          <div className="w-9 h-9 rounded-xl bg-purple-50 text-[#8B5CF6] flex items-center justify-center shrink-0">
-            <Sparkles className="w-5 h-5" />
-          </div>
-          <div>
-            <h4 className="text-xs font-bold text-[#0E1B3D] uppercase tracking-wider mb-1">
-              Insight Cogito
-            </h4>
-            <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-              Consultores com follow-up realizado até 48 horas após envio da proposta apresentam
-              melhor continuidade no funil.
-            </p>
-            <span className="text-[10px] text-gray-400 block mt-2">
-              Dados ilustrativos do mockup.
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 5. SLIDE-OVER DETAIL PANEL (~520px / Bottom sheet on mobile) */}
-      {/* ========================================================= */}
-      {detailOpen && (
+      {detailOpen && selectedCotacao && (
         <div className="fixed inset-0 z-50 overflow-hidden">
           {/* Backdrop */}
           <div
@@ -637,20 +717,23 @@ export default function Sales() {
           />
 
           <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div className="w-screen max-w-[520px] bg-white shadow-2xl flex flex-col justify-between overflow-y-auto animate-slide-up sm:animate-fade-in border-l border-gray-200">
-              {/* Panel Header */}
-              <div className="p-6 border-b border-gray-200 sticky top-0 bg-white z-10 flex items-center justify-between">
+            <div className="w-screen max-w-[560px] bg-white shadow-2xl flex flex-col justify-between overflow-y-auto border-l border-gray-200 animate-slide-up sm:animate-fade-in">
+              {/* Header do Drawer */}
+              <div className="p-5 border-b border-gray-200 sticky top-0 bg-white z-10 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
                     <Sparkles className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[#0E1B3D] leading-none">
-                      Análise Cogito
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono font-bold text-blue-700 bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200">
+                        {selectedCotacao.codigo}
+                      </span>
+                      <span className="text-xs text-gray-500">Etapa: {selectedCotacao.etapa}</span>
+                    </div>
+                    <h3 className="text-base font-bold text-[#0E1B3D] leading-tight mt-0.5">
+                      {selectedCotacao.lead}
                     </h3>
-                    <p className="text-xs text-gray-500 mt-0.5">
-                      Oportunidade: Carlos Henrique (R$ 3.480/ano)
-                    </p>
                   </div>
                 </div>
 
@@ -664,135 +747,241 @@ export default function Sales() {
                 </button>
               </div>
 
-              {/* Panel Content */}
-              <div className="p-6 space-y-6 flex-1">
-                {/* 1. Por que esta oportunidade foi priorizada? */}
-                <div className="space-y-2.5">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                    Por que esta oportunidade foi priorizada?
-                  </h4>
-                  <ul className="space-y-2 bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs sm:text-sm text-gray-700">
-                    <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                      <span>proposta enviada há 6 dias;</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                      <span>nenhuma interação registrada desde então;</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                      <span>não existe próxima atividade agendada;</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                      <span>valor acima da média das oportunidades do consultor.</span>
-                    </li>
-                  </ul>
+              {/* Corpo com os 7 Requisitos da Especificação */}
+              <div className="p-5 sm:p-6 space-y-6 flex-1 text-xs sm:text-sm">
+                {/* 1. Resumo da Situação */}
+                <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 space-y-1.5">
+                  <div className="flex items-center justify-between text-blue-900 font-bold uppercase tracking-wider text-[11px]">
+                    <span className="flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+                      1. Resumo da Situação
+                    </span>
+                    <span className="text-[10px] text-blue-700">Contexto Cogito</span>
+                  </div>
+                  <p className="text-gray-800 leading-relaxed">
+                    A cotação <strong>{selectedCotacao.codigo}</strong> refere-se ao veículo{' '}
+                    <strong>{selectedCotacao.veiculo}</strong>. Encontra-se na etapa de{' '}
+                    <strong>{selectedCotacao.etapa}</strong> sob responsabilidade comercial de{' '}
+                    <strong>{selectedCotacao.consultor}</strong> ({selectedCotacao.regiao}).
+                  </p>
+                  <div className="pt-2 border-t border-blue-200/60 grid grid-cols-2 gap-2 text-[11px]">
+                    <div>
+                      <span className="text-gray-500">Mensalidade potencial:</span>{' '}
+                      <strong className="text-gray-900">
+                        {selectedCotacao.mensalidadePotencial}
+                      </strong>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">Taxa de adesão:</span>{' '}
+                      <strong className="text-gray-900">{selectedCotacao.adesao}</strong>
+                    </div>
+                  </div>
                 </div>
 
-                {/* 2. Indicador pill: Potencial de recuperação: Alto */}
-                <div className="bg-emerald-50/70 border border-emerald-200 rounded-xl p-4 space-y-1">
+                {/* 2. Evidências Utilizadas */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-600">
+                    2. Evidências Utilizadas (Dados do CRM)
+                  </h4>
+                  <div className="p-3.5 bg-gray-50 rounded-xl border border-gray-200 space-y-2 text-xs">
+                    <div className="flex items-start justify-between border-b border-gray-200/60 pb-1.5">
+                      <span className="text-gray-500">Documentos do associado:</span>
+                      <span className="font-medium text-gray-800 text-right">
+                        {selectedCotacao.evidencias.statusAssociadoDocs}
+                      </span>
+                    </div>
+                    <div className="flex items-start justify-between border-b border-gray-200/60 pb-1.5">
+                      <span className="text-gray-500">Documentos do veículo:</span>
+                      <span className="font-medium text-gray-800 text-right">
+                        {selectedCotacao.evidencias.statusVeiculoDocs}
+                      </span>
+                    </div>
+                    <div className="flex items-start justify-between border-b border-gray-200/60 pb-1.5">
+                      <span className="text-gray-500">Status da vistoria:</span>
+                      <span className="font-medium text-gray-800 text-right">
+                        {selectedCotacao.evidencias.statusVistoria}
+                      </span>
+                    </div>
+                    <div className="flex items-start justify-between border-b border-gray-200/60 pb-1.5">
+                      <span className="text-gray-500">Assinatura eletrônica:</span>
+                      <span className="font-medium text-gray-800 text-right">
+                        {selectedCotacao.evidencias.statusAssinatura}
+                      </span>
+                    </div>
+                    <div className="flex items-start justify-between border-b border-gray-200/60 pb-1.5">
+                      <span className="text-gray-500">Análise operacional (sede):</span>
+                      <span className="font-medium text-gray-800 text-right">
+                        {selectedCotacao.evidencias.statusAnaliseOperacional}
+                      </span>
+                    </div>
+                    <div className="pt-1 text-[11px] text-gray-500 leading-snug">
+                      <strong>Rastreamento de datas:</strong>{' '}
+                      {selectedCotacao.evidencias.timestamps}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Pendências e Responsáveis */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-600">
+                    3. Pendências e Responsabilidades
+                  </h4>
+                  <div className="p-3.5 bg-amber-50/70 rounded-xl border border-amber-200 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-amber-900 text-xs">
+                        {selectedCotacao.tipoPendencia}
+                      </span>
+                      <span className="text-[11px] font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
+                        Responsável: {selectedCotacao.responsavelAcao}
+                      </span>
+                    </div>
+                    <p className="text-xs text-amber-950 leading-relaxed">
+                      {selectedCotacao.detalhePendencia}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 4. Explicação da Prioridade */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-600">
+                    4. Explicação da Prioridade
+                  </h4>
+                  <div className="p-3.5 bg-white rounded-xl border border-gray-200 text-xs text-gray-700 space-y-1.5">
+                    <p className="font-medium text-gray-900">{selectedCotacao.motivoPrioridade}</p>
+                    <ul className="list-disc list-inside text-gray-600 space-y-1 pt-1">
+                      <li>Última atualização registrada: {selectedCotacao.ultimaAtualizacao}.</li>
+                      <li>
+                        Status de compromisso na agenda: {selectedCotacao.proximoCompromisso}.
+                      </li>
+                      <li>Inércia no funil de vendas sem agendamento futuro de retorno.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* 5. Próximo Passo Recomendado */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-600">
+                    5. Próximo Passo Recomendado
+                  </h4>
+                  <div className="p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200 text-xs text-emerald-950 space-y-2">
+                    <p className="font-semibold">{selectedCotacao.proximaAcaoRecomendada}</p>
+                    <div className="flex flex-wrap items-center gap-2 pt-1">
+                      <button
+                        type="button"
+                        onClick={() => handleSimulateAction('Agendamento de compromisso no CRM')}
+                        className="px-3 py-1.5 rounded-lg bg-white border border-emerald-300 text-emerald-800 hover:bg-emerald-100 font-semibold transition-colors"
+                      >
+                        Registrar compromisso na agenda
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSimulateAction('Notificação interna da equipe')}
+                        className="px-3 py-1.5 rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
+                      >
+                        Notificar responsável
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 6. Acesso Conceitual ao Registro de Origem */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-600">
+                    6. Registro de Origem
+                  </h4>
+                  <div className="p-3 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-semibold text-gray-800">
+                        Registro nº {selectedCotacao.codigo} no CRM I3Tech
+                      </p>
+                      <p className="text-[11px] text-gray-500">
+                        Lead: {selectedCotacao.lead} · Consultor: {selectedCotacao.consultor}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleSimulateAction('Abertura do registro no CRM')}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
+                    >
+                      <span>Abrir no CRM</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* 7. Preparação de Mensagem para Revisão (Sem envio automático) */}
+                <div className="space-y-3 pt-2 border-t border-gray-200">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-emerald-800">
-                      Classificação Operacional
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-blue-600" />
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-gray-800">
+                        7. Preparação de Mensagem para Revisão
+                      </h4>
+                    </div>
+                    <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">
+                      Rascunho Sugerido
                     </span>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-[#10B981] border border-emerald-300">
-                      Potencial de recuperação: Alto
-                    </span>
                   </div>
-                  <p className="text-[11px] text-emerald-700/80 italic">
-                    Prioridade Alta — baseada em sinais operacionais ilustrativos (tempo parado e
-                    ausência de atividade).
+
+                  <p className="text-[11px] text-gray-500 leading-snug">
+                    O rascunho abaixo é uma <strong>sugestão editável gerada pela IA</strong> para o
+                    consultor revisar antes de enviar pelo canal de sua escolha. Nenhuma mensagem é
+                    disparada pelo Cogito.
                   </p>
-                </div>
 
-                {/* 3. Ação recomendada */}
-                <div className="space-y-3">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                    Ação recomendada
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-800 bg-white p-3.5 rounded-xl border border-gray-200 leading-relaxed">
-                    Entrar em contato hoje para confirmar se o cliente analisou a proposta e
-                    identificar eventual objeção.
-                  </p>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => handleActionClick('Geração de mensagem')}
-                      title="Demonstrativo: não altera dados nem envia mensagens"
-                      className="px-3.5 py-2 rounded-lg bg-[#0E1B3D] text-white text-xs font-semibold hover:bg-blue-600 transition-colors shadow-sm"
-                    >
-                      Gerar mensagem (demonstrativo)
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleActionClick('Criação de tarefa')}
-                      title="Demonstrativo: não altera dados nem cria registros no CRM"
-                      className="px-3.5 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 text-xs font-semibold hover:bg-gray-50 transition-colors"
-                    >
-                      Criar tarefa (demonstrativo)
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleActionClick('Histórico da oportunidade')}
-                      className="px-3.5 py-2 rounded-lg text-gray-600 hover:text-gray-900 text-xs font-medium hover:bg-gray-100 transition-colors"
-                    >
-                      Ver histórico (demonstrativo)
-                    </button>
-                  </div>
-                </div>
+                  <div className="space-y-2">
+                    <textarea
+                      value={editableMessage}
+                      onChange={(e) => {
+                        setEditableMessage(e.target.value)
+                        setIsEditingDraft(true)
+                      }}
+                      rows={4}
+                      className="w-full p-3 rounded-xl border border-gray-300 text-xs text-gray-800 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 leading-relaxed font-sans"
+                      placeholder="Edite a mensagem sugerida..."
+                    />
 
-                {/* 4. Mensagem sugerida pela IA */}
-                <div className="space-y-3 pt-2 border-t border-gray-100">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-blue-600" />
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-gray-700">
-                      Mensagem sugerida pela IA
-                    </h4>
-                  </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={handleCopyMessage}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors shadow-sm"
+                      >
+                        {copiedDraft ? (
+                          <Check className="w-3.5 h-3.5" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5" />
+                        )}
+                        <span>{copiedDraft ? 'Copiado!' : 'Copiar rascunho'}</span>
+                      </button>
 
-                  <blockquote className="p-4 rounded-xl bg-blue-50/50 border-l-4 border-l-blue-600 text-xs sm:text-sm text-gray-800 italic leading-relaxed">
-                    &quot;Olá, Carlos! Tudo bem? Vi que encaminhamos sua proposta há alguns dias e
-                    gostaria de saber se conseguiu analisá-la. Posso ajudar com alguma dúvida ou
-                    verificar alguma condição para avançarmos?&quot;
-                  </blockquote>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEditableMessage(selectedCotacao.mensagemSugerida)
+                          setIsEditingDraft(false)
+                          toast.info('Rascunho restaurado para a sugestão inicial.')
+                        }}
+                        className="px-3 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 text-xs font-medium hover:bg-gray-50 transition-colors"
+                      >
+                        Restaurar original
+                      </button>
 
-                  <div className="flex flex-wrap items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={handleUseMessage}
-                      title="Demonstrativo: copia o texto, não envia mensagem real"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors shadow-sm"
-                    >
-                      {copiedMessage ? (
-                        <Check className="w-3.5 h-3.5" />
-                      ) : (
-                        <MessageSquare className="w-3.5 h-3.5" />
-                      )}
-                      <span>{copiedMessage ? 'Copiado!' : 'Usar mensagem (demonstrativo)'}</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleActionClick('Edição de mensagem')}
-                      className="px-3.5 py-2 rounded-lg bg-white border border-gray-300 text-gray-700 text-xs font-semibold hover:bg-gray-50 transition-colors"
-                    >
-                      Editar (demonstrativo)
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleActionClick('Nova abordagem sugerida')}
-                      className="px-3.5 py-2 rounded-lg text-gray-600 hover:text-gray-900 text-xs font-medium hover:bg-gray-100 transition-colors"
-                    >
-                      Gerar outra abordagem (demonstrativo)
-                    </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSimulateAction('Preparação de abordagem alternativa')}
+                        className="px-3 py-2 text-gray-600 hover:text-gray-900 text-xs font-medium hover:bg-gray-100 rounded-lg transition-colors"
+                      >
+                        Gerar outra abordagem (demonstrativo)
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Panel Footer */}
+              {/* Footer do Drawer */}
               <div className="p-4 border-t border-gray-200 bg-gray-50 flex items-center justify-between text-xs text-gray-500">
-                <span>Origem: CRM I3Tech (dados ilustrativos)</span>
+                <span>Decisão supervisionada pelo consultor</span>
                 <button
                   type="button"
                   onClick={() => setDetailOpen(false)}
