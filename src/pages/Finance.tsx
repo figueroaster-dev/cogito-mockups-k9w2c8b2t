@@ -68,12 +68,12 @@ const filaExcecoesData: ItemFilaExcecao[] = [
     periodo: 'Competência Outubro/2024',
     valor: 'R$ 1.840,00 (estimado)',
     evidencias:
-      'Observado no ERP demonstrativo: contrato ativo; listado no relatório padrão de associados sem fatura no período. A ausência de fatura exige verificar vigência, periodicidade, transferência e exceções contratuais.',
+      'Neste cenário ilustrativo, o contrato consta como ativo e está listado no relatório padrão de associados sem fatura no período (recurso existente no ERP). Dados fictícios para demonstrar a experiência proposta. A ausência de fatura exige verificar vigência, periodicidade, transferência e exceções contratuais.',
     motivo: 'Possível ausência de faturamento no período de fechamento.',
     verificacoesNecessarias:
       'Conferir vigência, periodicidade acordada, eventual isenção ou carência antes de qualquer emissão manual.',
     proximoPasso: 'Conferir histórico financeiro e contrato no ERP.',
-    origem: 'ERP I3Tech (Relatório de Associados Sem Faturas)',
+    origem: 'Origem prevista: Relatório de associados sem faturas — integração a validar',
   },
   {
     id: 'exc-2',
@@ -85,14 +85,15 @@ const filaExcecoesData: ItemFilaExcecao[] = [
     periodo: 'Vencimento 25/10/2024',
     valor: 'R$ 215,00',
     evidencias:
-      'Observado no ERP: tela de faturas sem registro relacionada ao registro bancário de cobranças e a integrações. A confirmação do registro depende de retorno bancário ou conciliação.',
+      'Neste cenário ilustrativo, a fatura aparece sem confirmação de registro bancário (utilizando a capacidade observada de identificação de faturas sem registro). Dados fictícios para demonstrar a experiência proposta. A confirmação do registro depende de retorno bancário ou conciliação.',
     motivo:
       'Fatura emitida sem confirmação de registro bancário (não confundir com fatura não emitida ou não paga).',
     verificacoesNecessarias:
       'Confirmar retorno da remessa bancária no fluxo de retorno ou validar arquivo de remessa.',
     proximoPasso:
       'Consultar status do retorno bancário antes de orientar o associado sobre pagamento.',
-    origem: 'Módulo de Cobrança Bancária ERP',
+    origem:
+      'Origem prevista: Módulo de cobrança bancária (faturas sem registro) — integração a validar',
   },
   {
     id: 'exc-3',
@@ -104,13 +105,13 @@ const filaExcecoesData: ItemFilaExcecao[] = [
     periodo: 'Vencido em 10/10/2024 (Há 11 dias)',
     valor: 'R$ 280,00',
     evidencias:
-      'Observado no ERP: fatura registrada com vencimento em 10/10/2024 e saldo pendente no relatório de faturas.',
+      'Neste cenário ilustrativo, a fatura apresenta vencimento em 10/10/2024 e saldo pendente. Dados fictícios para demonstrar a experiência proposta.',
     motivo: 'Fatura vencida com saldo pendente de quitação.',
     verificacoesNecessarias:
       'Verificar se houve emissão de segunda via com nova data ou modo de quitação manual em andamento.',
     proximoPasso:
       'Acompanhar fluxo de cobrança operacional padrão do ERP (sem envio automático pelo Cogito).',
-    origem: 'Contas a Receber ERP',
+    origem: 'Origem prevista: Relatório de faturas / Contas a receber — integração a validar',
   },
   {
     id: 'exc-4',
@@ -122,13 +123,13 @@ const filaExcecoesData: ItemFilaExcecao[] = [
     periodo: 'Competência Setembro/2024',
     valor: 'R$ 690,00',
     evidencias:
-      'Exemplo ilustrativo: no demonstrativo há título em aberto. Não foi confirmada fonte independente de extratos ou conciliação bancária completa no ERP.',
+      'Neste cenário ilustrativo, há hipótese de título em aberto com pagamento alegado sem baixa correspondente. Dados fictícios para demonstrar a experiência proposta. Não foi confirmada fonte independente de extratos ou conciliação bancária completa no ERP.',
     motivo:
       'Hipótese de pagamento sem baixa — Cenário futuro — depende de acesso a uma fonte independente de pagamentos.',
     verificacoesNecessarias:
       'Verificar comprovante manual do associado ou conferência com tesouraria quando houver integração bancária.',
     proximoPasso: 'Aguardar validação da conciliação bancária com a I3Tech.',
-    origem: 'Exemplo ilustrativo de reconciliação futura',
+    origem: 'Origem prevista: Módulo de conciliação bancária e extratos — integração a validar',
     avisoCenarioFuturo:
       'Cenário futuro — depende de acesso a uma fonte independente de pagamentos. Não há afirmação de localização de créditos em extrato real.',
   },
@@ -142,13 +143,13 @@ const filaExcecoesData: ItemFilaExcecao[] = [
     periodo: 'Competência Outubro/2024',
     valor: 'R$ 240,00 (a confirmar)',
     evidencias:
-      'Observado no ERP: contrato atual e contrato encerrado vinculados ao mesmo veículo. Não há fatura gerada no lote mensal do contrato ativo.',
+      'Neste cenário ilustrativo, o veículo apresenta contrato atual e contrato encerrado vinculados ao mesmo cadastro, sem fatura gerada no lote mensal do contrato ativo. Dados fictícios para demonstrar a experiência proposta.',
     motivo:
       'Possível ausência de faturamento — requer verificação de duplicidade de contratos no mesmo veículo.',
     verificacoesNecessarias:
       'Confirmar se a vigência do contrato atual está ativa e se houve faturamento vinculado indevidamente ao encerrado.',
     proximoPasso: 'Conferir histórico de alterações de contrato e veículos no ERP.',
-    origem: 'ERP Cadastros de Contratos & Veículos',
+    origem: 'Origem prevista: Cadastro de contratos e veículos — integração a validar',
   },
 ]
 
@@ -426,7 +427,7 @@ export default function Finance() {
                 <div className="space-y-1">
                   <p className="font-semibold text-gray-900 flex items-center gap-1">
                     <Info className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                    <span>Evidências Observadas:</span>
+                    <span>Evidências do cenário ilustrativo:</span>
                   </p>
                   <p className="text-gray-600 leading-relaxed">{item.evidencias}</p>
                 </div>
@@ -457,7 +458,7 @@ export default function Finance() {
 
               {/* Ações Demonstrativas Manuais (Sem automação) */}
               <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-                <span className="text-[11px] text-gray-400">Origem: {item.origem}</span>
+                <span className="text-[11px] text-gray-400">{item.origem}</span>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -555,10 +556,11 @@ export default function Finance() {
               Em relação à pergunta <strong>&quot;{activeQuestion}&quot;</strong>:
             </p>
             <p>
-              Neste cenário ilustrativo, a resposta apresentaria a lista de contratos que constam no
-              relatório de associados sem faturas do ERP demonstrativo (competência de
-              Outubro/2024), indicando a necessidade de verificar vigência, periodicidade acordada e
-              duplicidade de contratos no mesmo veículo antes de qualquer ação.
+              Neste cenário ilustrativo, a resposta apresentaria a lista simulada de contratos que
+              constariam no relatório de associados sem faturas (usando a capacidade prevista no ERP
+              para a competência de Outubro/2024 com dados fictícios), indicando a necessidade de
+              verificar vigência, periodicidade acordada e duplicidade de contratos no mesmo veículo
+              antes de qualquer ação.
             </p>
             <div className="p-3 bg-white rounded-lg border border-blue-200 text-xs text-gray-600 space-y-1">
               <p>

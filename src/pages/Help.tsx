@@ -223,9 +223,7 @@ export default function Help() {
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-50 text-purple-800 border border-purple-100">
             Assistência Contextual de Uso
           </span>
-          <span className="text-xs text-gray-400">
-            Base em manuais oficiais Movidesk e documentação conhecida
-          </span>
+          <span className="text-xs text-gray-400">Fontes oficiais a validar com a I3Tech</span>
         </div>
 
         <h1 className="text-xl sm:text-2xl font-bold text-[#0E1B3D] tracking-tight">
