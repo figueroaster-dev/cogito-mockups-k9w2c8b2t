@@ -235,9 +235,8 @@ export default function Help() {
         </p>
         <p className="text-xs sm:text-sm text-gray-600 max-w-3xl leading-relaxed">
           Demonstração de assistência contextual orientada aos fluxos observados no CRM e ERP da
-          I3Tech. Foram observados acesso a manuais, tutorial em vídeo e widget Movidesk na
-          interface; o conteúdo desses materiais e as regras internas permanecem pendentes de
-          validação pela I3Tech.
+          I3Tech. Foram observados recursos de ajuda, manuais e tutoriais no sistema; as fontes
+          oficiais ainda precisam ser validadas com a I3Tech.
         </p>
 
         {/* Ciclo de Evolução Futura: Orientar → Preparar → Usuário revisar → Confirmar */}
@@ -385,17 +384,19 @@ export default function Help() {
           <p className="leading-relaxed">{activeTopic.efeitoAcao}</p>
         </div>
 
-        {/* Rodapé do Tópico: Fonte Oficial vs Conteúdo Não Validado */}
+        {/* Rodapé do Tópico: Base de Conhecimento vs Conteúdo Não Validado */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs border-t border-gray-100">
           <div className="p-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-700 space-y-1">
             <span className="font-bold text-[#0E1B3D] block flex items-center gap-1.5">
               <BookOpen className="w-3.5 h-3.5 text-purple-600" />
-              Fonte Oficial
+              Base de conhecimento
             </span>
-            <p className="text-gray-700 font-semibold text-[11px]">{activeTopic.fonteOficial}</p>
+            <p className="text-gray-700 font-semibold text-[11px]">
+              Conteúdo oficial da I3Tech a ser validado.
+            </p>
             <p className="text-gray-500 text-[10px]">
-              Foram observados acesso a manuais, tutorial em vídeo e widget Movidesk na interface; o
-              conteúdo não foi consultado ou homologado.
+              O Cogito poderá utilizar manuais, procedimentos, tutoriais e outras fontes homologadas
+              pela I3Tech para orientar o usuário de forma contextual.
             </p>
           </div>
 
@@ -421,10 +422,10 @@ export default function Help() {
           </button>
           <button
             type="button"
-            onClick={() => handleActionSimulate('Consulta ao suporte Movidesk')}
+            onClick={() => handleActionSimulate('Consulta ao procedimento')}
             className="px-4 py-2 rounded-xl bg-white border border-gray-300 text-gray-700 text-xs font-semibold hover:bg-gray-50 transition-colors"
           >
-            Ver artigo no Movidesk
+            Consultar procedimento
           </button>
         </div>
       </section>
