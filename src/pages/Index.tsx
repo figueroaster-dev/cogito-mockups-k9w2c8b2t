@@ -70,7 +70,7 @@ export default function Index() {
       setTimeout(() => navigate('/validacao'), 400)
     } else {
       setAskContextNote(
-        'Contexto considerado: Manuais de apoio e base Movidesk I3Tech (demonstrativo).',
+        'Contexto considerado: Manuais, procedimentos e fontes de conhecimento da I3Tech (a validar).',
       )
       toast.info('Consultando orientações de processos no Cogito Help...')
       setTimeout(() => navigate('/help'), 500)
@@ -88,7 +88,9 @@ export default function Index() {
       toast.success(`Pergunta selecionada: "${suggestion}"`)
       setTimeout(() => navigate('/sales'), 400)
     } else {
-      setAskContextNote('Contexto considerado: Manuais de Apoio Movidesk (demonstrativo).')
+      setAskContextNote(
+        'Contexto considerado: Manuais, procedimentos e fontes de conhecimento da I3Tech (a validar).',
+      )
       toast.success(`Pergunta selecionada: "${suggestion}"`)
       setTimeout(() => navigate('/help'), 400)
     }

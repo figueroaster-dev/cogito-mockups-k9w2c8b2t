@@ -93,7 +93,7 @@ const initiativesData: RoadmapInitiative[] = [
     resultadoEsperado:
       'Orientação rápida com passos numerados, fonte oficial indicada e transparência sobre regras ainda dependentes de validação.',
     dependencias:
-      'Mapeamento de manuais e artigos de suporte Movidesk existentes e alinhamento de processos padrão.',
+      'Mapeamento de conteúdos de suporte, manuais e procedimentos existentes na I3Tech e alinhamento de processos padrão (as fontes oficiais e o conteúdo que poderá ser utilizado pelo Cogito ainda precisam ser validados com a I3Tech).',
     metricaSucesso:
       'Queda em chamados de suporte interno para dúvidas básicas de navegação e preenchimento.',
     papelAutomacaoIA:

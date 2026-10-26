@@ -275,9 +275,9 @@ const questoesIniciaisData: QuestaoValidacao[] = [
     pergunta:
       'Quais manuais e conteúdos oficiais podem alimentar o Help e quem os mantém atualizados?',
     porQuePrecisamosEsclarecer:
-      'Alimentar a assistência contextual com conhecimento homologado, evitando inventar processos ou divulgar procedimentos desatualizados.',
+      'Alimentar a assistência contextual com conhecimento homologado, evitando inventar processos ou divulgar procedimentos desatualizados. É necessário confirmar quais fontes são oficiais, onde estão armazenadas, como poderão ser acessadas e quem será responsável por validar seu conteúdo.',
     evidenciaObservada:
-      'Existem acessos a manuais, vídeo e Movidesk; conteúdo, atualização e responsáveis não foram avaliados.',
+      'Há necessidade de acesso às fontes de conhecimento, manuais, tutoriais, vídeos e procedimentos homologados pela I3Tech; conteúdo, atualização e responsáveis não foram avaliados.',
     resposta: '',
     responsavel: 'A definir',
     status: 'Em aberto',
